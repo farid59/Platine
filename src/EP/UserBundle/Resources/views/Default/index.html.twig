@@ -1,1 +1,7 @@
-Hello {{ name }}!
+{% extends "EPUserBundle::layout.html.twig" %}
+
+{% block EPUserBundleBody %}
+
+	Hello {{ app.user.username }}
+
+{% endblock %}
