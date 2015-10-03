@@ -10,10 +10,19 @@
 
   {# On définit ce block, dans lequel vont venir s'insérer les autres vues du bundle #}
 
+  {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    Connecté en tant que {{ app.user.username }}
+    -
+    <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a><br/>
+{% else %}
+    <a href="{{ path('fos_user_security_login') }}">Connexion</a> | 
+    <a href="{{ path('fos_user_registration_register') }}">Enregistrement</a>
+{% endif %}
+
   {% block fos_user_content %}
   {% endblock fos_user_content %}
 
   {% block EPUserBundleBody %}
-  {% endblock %}
+  {% endblock EPUserBundleBody %}
 
 {% endblock %}
