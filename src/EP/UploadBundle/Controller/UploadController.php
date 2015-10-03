@@ -12,4 +12,15 @@ class UploadController extends Controller
         return $this->render('EPUploadBundle:Upload:index.html.twig', array('name' => 'farid'));
         // return new Response("Hello World !");
     }
+
+ //    public function uploadAction()
+ //    {
+	//     if ($form->isValid()) {
+	//         $someNewFilename = ...
+
+	//         $form['attachment']->getData()->move($dir, $someNewFilename);
+
+	//         // ...
+	//     }
+	// }
 }
