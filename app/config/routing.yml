@@ -1,0 +1,4 @@
+ep_user:
+    resource: "@EPUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
