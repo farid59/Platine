@@ -11,3 +11,4 @@
 /bin/
 /composer.phar
 libs/
+node_modules/
