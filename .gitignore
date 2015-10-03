@@ -15,3 +15,5 @@ node_modules/
 web/css/
 web/js/
 web/fonts/
+*.sublime-project
+*.sublime-workspace
