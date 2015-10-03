@@ -1,4 +1,8 @@
 ep_upload:
     resource: "@EPUploadBundle/Resources/config/routing.yml"
+    prefix: /upload
+
+ep_user:
+    resource: "@EPUserBundle/Resources/config/routing.yml"
     prefix:   /
 
