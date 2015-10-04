@@ -23,10 +23,13 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+        main_login:
+            pattern: ^/(login$)|register
+            anonymous: true
 
         main:
             pattern: ^/
-            anonymous: true
+            anonymous: false
             provider: main
             form_login:
                 login_path: fos_user_security_login
