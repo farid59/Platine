@@ -10,9 +10,6 @@
 
   {# On définit ce block, dans lequel vont venir s'insérer les autres vues du bundle #}
 
-    Connecté en tant que {{ app.user.username }}
-    -
-    <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a><br/>
 
   {% block EPUserBundleBody %}
   {% endblock EPUserBundleBody %}
