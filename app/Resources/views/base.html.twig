@@ -16,6 +16,14 @@
             <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a><br/>
         {% endif %}
 
+        {% for label, flashes in app.session.flashbag.all %}
+            {% for flash in flashes %}
+                <div class="alert alert-{{ label }}">
+                    {{ flash }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
         {% block body %}{% endblock %}
         {% block javascripts %}
         <script type="text/javascript" src="{{ asset('js/scripts.min.js') }}"></script>
