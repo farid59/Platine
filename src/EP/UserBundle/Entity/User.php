@@ -22,5 +22,61 @@ class User extends BaseUser
      */
     protected $id;
 
-}
+    /**
+     * @var EP\UserBundle\Entity\Association
+	 * 
+	 * @ORM\ManyToOne(targetEntity="EP\UserBundle\Entity\Association", cascade={"persist"})
+     */
+    protected $association = null;
 
+
+    /**
+     * Set association
+     *
+     * @param \EP\UserBundle\Entity\Association $association
+     *
+     * @return User
+     */
+    public function setAssociation(\EP\UserBundle\Entity\Association $association = null)
+    {
+        $this->association = $association;
+        return $this;
+    }
+
+    /**
+     * Get association
+     *
+     * @return \EP\UserBundle\Entity\Association
+     */
+    public function getAssociation()
+    {
+        return $this->association;
+    }
+
+    /*
+     * Permet de joindre une association avec le role donné
+     */
+    private function joinRoleAndAssociaiton(\EP\UserBundle\Entity\Association $association, String $role) {
+    	$this->setRoles(array($role));
+    	return $this->setAssociation($association);
+    }
+
+    /**
+     * setAdminOfAssociation
+     *
+     * @return User
+     */
+    public function setAdminOfAssociation(\EP\UserBundle\Entity\Association $association) {
+    	return $this->joinRoleAndAssociaiton($association, "ROLE_ADMIN");
+    }
+
+    /**
+     * setEmployeeOfAssociation
+     *
+     * @return User
+     */
+    public function setEmployeeOfAssociation(\EP\UserBundle\Entity\Association $association) {
+    	return $this->joinRoleAndAssociaiton($association, "ROLE_EMPLOYEE");
+    }
+
+}

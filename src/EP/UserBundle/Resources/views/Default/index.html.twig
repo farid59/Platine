@@ -3,5 +3,19 @@
 {% block EPUserBundleBody %}
 
 	Hello {{ app.user.username }}
-
+	
+	<br/>
+	
+	{% if app.user.association is null %}
+		Vous ne faites partie d'aucune association !<br/>
+		
+	{% else %}
+		{% if is_granted("ROLE_ADMIN") %}
+			Vous êtes gérant de {{app.user.association.name}}
+		{% else %}
+			Vous êtes employé de {{app.user.association.name}}
+		{% endif %}
+		
+	{% endif %}
+	
 {% endblock %}
