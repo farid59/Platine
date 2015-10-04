@@ -23,13 +23,9 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        main_login:
-            pattern: ^/(login$)|register
-            anonymous: true
-
         main:
             pattern: ^/
-            anonymous: false
+            anonymous: true
             provider: main
             form_login:
                 login_path: fos_user_security_login
@@ -41,4 +37,5 @@ security:
                 key: %secret%
 
     access_control:
-        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/(login$)|register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: ROLE_USER }
