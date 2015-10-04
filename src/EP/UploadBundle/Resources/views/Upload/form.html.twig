@@ -1,0 +1,24 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+<h1>Upload de fichier !</h1>
+<div class="well">
+	<img 
+	  src="{{ asset(file.webPath) }}"
+	  alt="{{ file.alt }}"
+	/>
+	<form method="post" {{ form_enctype(form) }} >
+		{{ form(form) }}
+	</form>
+</div> 
+
+
+
+<h1>Upload File</h1>
+<div class="well">
+<form action="#" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+
+    <input type="submit" value="Upload Document" />
+</form>      </div> 
+{% endblock %}

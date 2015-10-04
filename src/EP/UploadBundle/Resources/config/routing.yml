@@ -2,6 +2,6 @@ ep_upload_home:
     path:    /home
     defaults: { _controller:EPUploadBundle:Upload:index }
 
-# ep_upload_file:
-#     path: /home/{name}
-#     defaults: { _controller:EPUploadBundle:Upload:upload }
+ep_upload_file:
+    path: /file
+    defaults: { _controller:EPUploadBundle:Upload:upload }
