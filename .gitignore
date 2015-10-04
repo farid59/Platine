@@ -17,3 +17,4 @@ web/js/
 web/fonts/
 *.sublime-project
 *.sublime-workspace
+/web/uploads/*
