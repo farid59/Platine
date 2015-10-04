@@ -61,8 +61,9 @@ class User extends BaseUser
     /*
      * Permet de joindre une association avec le role donné
      */
-    private function joinRoleAndAssociaiton(\EP\UserBundle\Entity\Association $association, String $role) {
-    	$this->setRoles(array($role));
+    private function joinRoleAndAssociaiton(\EP\UserBundle\Entity\Association $association, $role) {
+        $this->addRole($role);
+        $this->removeRole("ROLE_EMPTY");
     	return $this->setAssociation($association);
     }
 
@@ -82,6 +83,11 @@ class User extends BaseUser
      */
     public function setEmployeeOfAssociation(\EP\UserBundle\Entity\Association $association) {
     	return $this->joinRoleAndAssociaiton($association, "ROLE_EMPLOYEE");
+    }
+
+    public function leaveAssociation() {
+        $this->setRoles(array("ROLE_EMPTY"));
+        return $this->setAssociation(null);
     }
 
 }
