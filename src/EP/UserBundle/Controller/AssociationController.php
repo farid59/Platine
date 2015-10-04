@@ -33,6 +33,9 @@ class AssociationController extends Controller
           );
           $this->container->get('security.context')->setToken($token);
 
+          $request->getSession()->getFlashBag()->add('notice', "Vous avez créé l'association ".$association->getName());
+          $request->getSession()->getFlashBag()->add('notice', "Vous êtes admin de l'association ".$association->getName());
+
           return $this->redirect($this->generateUrl('ep_user_homepage'));
         }
 
