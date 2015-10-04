@@ -10,26 +10,25 @@
 			</form>
 		</div>
 		<div class="col-sm-3">
-			<img 
+{# 			<img 
 			  src="{{ asset(file.webPath) }}"
 			  alt="{{ file.alt }}"
-			/> {# 
+			/> 
+ #}
+			{# 
 			<div style="height: 300px;width: auto;" class="">
 				<object data="{{ asset(file.webPath) }}" type="text/html" codetype="application/pdf" ></object>
 			</div> #}
 		</div>
-		<div class="col-sm-3">
+		{# <div class="col-sm-3">
 			<iframe src="{{ asset(file.webPath) }}" width="300" height="300" align="middle"></iframe>
-		</div>
+		</div> #}
 	</div> 
 </div>
 
-
-<h1>Upload File</h1>
-<div class="well">
-<form action="#" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-
-    <input type="submit" value="Upload Document" />
-</form>      </div> 
+<div class="row">
+	<div class="col-sm-3">
+		
+	</div>
+</div>
 {% endblock %}

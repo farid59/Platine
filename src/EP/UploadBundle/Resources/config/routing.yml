@@ -5,3 +5,9 @@ ep_upload_home:
 ep_upload_file:
     path: /file
     defaults: { _controller:EPUploadBundle:Upload:upload }
+
+ep_delete_file:
+    path: /delete/{id}
+    defaults: { _controller:EPUploadBundle:Upload:delete}
+    requirements:
+        id: \d+

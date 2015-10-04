@@ -21,7 +21,7 @@ class UploadController extends Controller
     $file = new Files();
     // On crée le FormBuilder grâce au service form factory
     // $form = $this->get('form.factory')->create(new FilesType,$file);
-	$form = $this->createForm(new FilesType(), $file);
+    $form = $this->createForm(new FilesType(), $file);
     // On fait le lien Requête <-> Formulaire
     // À partir de maintenant, la variable $file contient les valeurs entrées dans le formulaire par le visiteur
     $form->handleRequest($request);
@@ -34,7 +34,7 @@ class UploadController extends Controller
       $em->persist($file);
       $em->flush();
 
-      $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
+      $request->getSession()->getFlashBag()->add('info', 'Document bien enregistrée.');
 
       // On redirige vers la page de visualisation de l'annonce nouvellement créée
       // return $this->redirect($this->generateUrl('ep_upload_home', array('id' => $file->getId())));
@@ -50,4 +50,35 @@ class UploadController extends Controller
       'form' => $form->createView(),'file'=>$file
     ));
 	}
+
+  public function deleteAction($id, Request $request)
+  {
+    $em = $this->getDoctrine()->getManager();
+
+    // On récupère le document $id
+    $doc = $em->getRepository('EPUploadBundle:Files')->find($id);
+
+    if (null === $doc) {
+      throw new NotFoundHttpException("Le document d'id ".$id." n'existe pas.");
+    }
+
+    // On crée un formulaire vide, qui ne contiendra que le champ CSRF
+    // Cela permet de protéger la suppression d'annonce contre cette faille
+    $form = $this->createFormBuilder()->getForm();
+
+    if ($form->handleRequest($request)->isValid()) {
+      $em->remove($doc);
+      $em->flush();
+
+      $request->getSession()->getFlashBag()->add('info', "Le document a bien été supprimée.");
+
+      return $this->redirect($this->generateUrl('ep_upload_home'));
+    }
+
+    // Si la requête est en GET, on affiche une page de confirmation avant de supprimer
+    return $this->render('EPUploadBundle:Upload:delete.html.twig', array(
+      'doc' => $doc,
+      'form'   => $form->createView()
+    ));
+  }
 }
