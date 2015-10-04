@@ -22,6 +22,11 @@ class User extends BaseUser
      */
     protected $id;
 
+    public function __construct() {
+        parent::__construct();
+        $this->setRoles(array("ROLE_USER","ROLE_EMPTY"));
+    }
+
     /**
      * @var EP\UserBundle\Entity\Association
 	 * 

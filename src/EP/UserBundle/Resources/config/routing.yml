@@ -1,3 +1,15 @@
 ep_user_homepage:
     path:     /
     defaults: { _controller: EPUserBundle:Default:index }
+
+ep_association_create:
+    path:     /association/new
+    defaults: { _controller: EPUserBundle:Association:create }
+
+ep_association_join:
+    path:     /association/join
+    defaults: { _controller: EPUserBundle:Association:join }
+
+ep_association_leave:
+    path:     /association/leave
+    defaults: { _controller: EPUserBundle:Association:leave }
