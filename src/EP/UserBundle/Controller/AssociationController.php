@@ -16,24 +16,6 @@ class AssociationController extends Controller
 	 */
     public function createAction(Request $request)
     {
-    	// $association = new Association();
-    	// $association->setName("La petite marie");
-    	// $em = $this->getDoctrine()->getManager();
-    	// $em->persist($association);
-
-    	// $user = $this->container->get('security.context')->getToken()->getUser();
-    	// $user->setAdminOfAssociation($association);
-
-    	// $em->flush();
-
-    	// $token = new \Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken(
-     //      $user,
-     //      null,
-     //      'main',
-     //      $user->getRoles()
-     //    );
-     //    $this->container->get('security.context')->setToken($token);
-
         $association = new Association();
         $form = $this->get('form.factory')->create(new AssociationType(), $association);
 
