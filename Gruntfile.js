@@ -71,16 +71,22 @@ module.exports = function (grunt) {
         // configuration de la tache watch (a chaque modification de fichier,
         // on lance la tache default)
         watch: {
-            files:['**'],
-            tasks:['default']
+            files:[
+                'src/*/*Bundle/public/JS/*.js',
+                'src/*/*Bundle/public/LESS/*.less',
+                'src/*/*Bundle/public/LESS/*.css'
+            ],
+            tasks:['watch-src']
         }
     });
 
     // On n'oublie pas d'ajouter les modules configurés dans le tableau
     // ca sert à dire à grunt "pour la tache default, utilise les modules
     // que je t'indiques"
-    grunt.registerTask('default',['less','concat','uglify','cssmin','copy']);
+    grunt.registerTask('css', ['less','cssmin']);
+    grunt.registerTask('js', ['concat','uglify']);
+    grunt.registerTask('default',['css','js','copy']);
 
     // On n'oublie pas d'enregistrer la tache :
-    grunt.registerTask('watch-src', ['default','watch']);
+    grunt.registerTask('watch-src', ['css','js']);
 }
