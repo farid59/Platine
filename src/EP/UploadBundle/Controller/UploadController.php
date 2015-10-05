@@ -11,7 +11,7 @@ class UploadController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('EPUploadBundle:Upload:index.html.twig', array('name' => 'farid'));
+        return $this->render('EPUploadBundle::layout.html.twig', array('name' => 'farid'));
         // return new Response("Hello World !");
     }
 
@@ -40,14 +40,23 @@ class UploadController extends Controller
       // return $this->redirect($this->generateUrl('ep_upload_home', array('id' => $file->getId())));
     }
 
+        $repository = $this
+      ->getDoctrine()
+      ->getManager()
+      ->getRepository('EPUploadBundle:Files')
+    ;
+    $listDocs = $repository->findAll();
+
     // À ce stade, le formulaire n'est pas valide car :
     // - Soit la requête est de type GET, donc le visiteur vient d'arriver sur la page et veut voir le formulaire
     // - Soit la requête est de type POST, mais le formulaire contient des valeurs invalides, donc on l'affiche de nouveau
 
     // On passe la méthode createView() du formulaire à la vue
     // afin qu'elle puisse afficher le formulaire toute seule
-    return $this->render('EPUploadBundle:Upload:form.html.twig', array(
-      'form' => $form->createView(),'file'=>$file
+    return $this->render('EPUploadBundle:Upload:view.html.twig', array(
+      'form' => $form->createView(),
+      'file'=>$file, 
+      'docs'=>$listDocs
     ));
 	}
 
@@ -72,13 +81,30 @@ class UploadController extends Controller
 
       $request->getSession()->getFlashBag()->add('info', "Le document a bien été supprimée.");
 
-      return $this->redirect($this->generateUrl('ep_upload_home'));
+      return $this->redirect($this->generateUrl('ep_upload_file'));
     }
 
     // Si la requête est en GET, on affiche une page de confirmation avant de supprimer
     return $this->render('EPUploadBundle:Upload:delete.html.twig', array(
       'doc' => $doc,
       'form'   => $form->createView()
+    ));
+  }
+
+  public function viewAction(){
+    $repository = $this
+      ->getDoctrine()
+      ->getManager()
+      ->getRepository('EPUploadBundle:Files')
+    ;
+    $listDocs = $repository->findAll();
+    // foreach ($listDocs as $doc) {
+    //   // $advert est une instance de Advert
+    //   echo $doc->getContent();
+    // }
+    // return $this->redirect($this->generateUrl('ep_upload_file', array('docs' => $listDocs)));
+    return $this->render('EPUploadBundle:Upload:view.html.twig', array(
+      'docs' => $listDocs
     ));
   }
 }

@@ -1,0 +1,20 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+  Gérer vos document - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+
+{% block ep_upload_form %}
+{% endblock %}
+{# {{ include('EPUploadBundle:Upload:form.html.twig') }} #}
+
+
+ {# {{ render(controller("EPUploadBundle:Upload:view")) }} #}
+{# {{ include('EPUploadBundle:Upload:view.html.twig') }}        #}
+{# {% block ep_upload_view %}
+{% endblock %} #}
+
+{% endblock %}

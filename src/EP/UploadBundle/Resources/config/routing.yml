@@ -3,7 +3,7 @@ ep_upload_home:
     defaults: { _controller:EPUploadBundle:Upload:index }
 
 ep_upload_file:
-    path: /file
+    path: /
     defaults: { _controller:EPUploadBundle:Upload:upload }
 
 ep_delete_file:
@@ -11,3 +11,7 @@ ep_delete_file:
     defaults: { _controller:EPUploadBundle:Upload:delete}
     requirements:
         id: \d+
+
+ep_view_file:
+    path: /view
+    defaults: { _controller:EPUploadBundle:Upload:view }

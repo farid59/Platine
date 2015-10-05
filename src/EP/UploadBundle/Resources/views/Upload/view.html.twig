@@ -1,0 +1,21 @@
+{% extends "EPUploadBundle::layout.html.twig" %}
+
+{% block ep_upload_form %}
+
+{{ include('EPUploadBundle:Upload:form.html.twig') }}
+
+{% if docs is defined %}
+<div class="well">
+	<div class="row">
+		<div class="col-sm-12">
+			<ul>
+			  {% for doc in docs %}
+			    <li>{{ doc.alt }}</li>
+			  {% endfor %}
+			</ul>
+		</div>
+	</div>
+</div>
+{% endif %}
+
+{% endblock %}

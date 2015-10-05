@@ -1,15 +1,16 @@
-{% extends "::base.html.twig" %}
+{# {% extends "EPUploadBundle::layout.html.twig" %} #}
 
-{% block body %}
-<h1>Upload de fichier !</h1>
+{# {% block ep_upload_form %} #}
+
+
 <div class="well">
-	<div class="row">
-		<div class="col-sm-3">
-			<form method="post" {{ form_enctype(form) }} >
-				{{ form(form) }}
-			</form>
-		</div>
-		<div class="col-sm-3">
+<h2>Ajouter un document</h2>
+	<form method="post" {{ form_enctype(form) }} >
+		{{ form(form) }}
+	</form>
+</div>
+
+{# {% endblock %} #}
 {# 			<img 
 			  src="{{ asset(file.webPath) }}"
 			  alt="{{ file.alt }}"
@@ -19,16 +20,6 @@
 			<div style="height: 300px;width: auto;" class="">
 				<object data="{{ asset(file.webPath) }}" type="text/html" codetype="application/pdf" ></object>
 			</div> #}
-		</div>
 		{# <div class="col-sm-3">
 			<iframe src="{{ asset(file.webPath) }}" width="300" height="300" align="middle"></iframe>
 		</div> #}
-	</div> 
-</div>
-
-<div class="row">
-	<div class="col-sm-3">
-		
-	</div>
-</div>
-{% endblock %}
