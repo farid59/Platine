@@ -22,5 +22,9 @@
     {# Ceci va générer le champ CSRF #}
     {{ form_rest(form) }}
   </form>
-
+  <hr>
+  <a href="{{ path('ep_upload_file') }}" class="btn btn-default">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Retour 
+    </a>
 {% endblock %}

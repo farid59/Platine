@@ -102,7 +102,9 @@ class Files
         // On déplace le fichier envoyé dans le répertoire de notre choix
         $this->file->move(
           $this->getUploadRootDir(), // Le répertoire de destination
-          $this->id.'.'.$this->url   // Le nom du fichier à créer, ici « id.extension »
+          // $this->tempFilename
+          $this->id.'_'.$this->alt
+          // $this->id.'.'.$this->url   // Le nom du fichier à créer, ici « id.extension »
         );
     }
 
@@ -199,6 +201,6 @@ class Files
 
     public function getWebPath()
     {
-       return $this->getUploadDir().'/'.$this->getId().'.'.$this->getUrl();
+       return $this->getUploadDir().'/'.$this->getId().'_'.$this->getAlt().'.'.$this->getUrl();
     }
 }
