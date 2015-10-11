@@ -26,16 +26,23 @@ class Files
     /**
      * @var string
      *
-     * @ORM\Column(name="url", type="string", length=255)
+     * @ORM\Column(name="ext", type="string", length=255)
      */
-    private $url;
+    private $ext;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="alt", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      */
-    private $alt;
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="path", type="string", length=255)
+     */
+    private $path;
 
     private $file;
 
@@ -51,12 +58,13 @@ class Files
     {
         $this->file = $file;
         // On vérifie si on avait déjà un fichier pour cette entité
-        if (null !== $this->url) {
+        if (null !== $this->ext) {
           // On sauvegarde l'extension du fichier pour le supprimer plus tard
-          $this->tempFilename = $this->url;
-          // On réinitialise les valeurs des attributs url et alt
-          $this->url = null;
-          $this->alt = null;
+          $this->tempFilename = $this->ext;
+          // On réinitialise les valeurs des attributs ext et name
+          $this->ext = null;
+          $this->name = null;
+          $this->path = null;
         }
     }
 
@@ -72,11 +80,12 @@ class Files
         }
 
         // Le nom du fichier est son id, on doit juste stocker également son extension
-        // Pour faire propre, on devrait renommer cet attribut en « extension », plutôt que « url »
-        $this->url = $this->file->guessExtension();
+        $this->ext = $this->file->guessExtension();
 
-        // Et on génère l'attribut alt de la balise <img>, à la valeur du nom du fichier sur le PC de l'internaute
-        $this->alt = $this->file->getClientOriginalName();
+        // Et on génère l'attribut name de la balise <img>, à la valeur du nom du fichier sur le PC de l'internaute
+        $this->name = $this->file->getClientOriginalName();
+        $this->path = $this->getUploadRootDir().'/'.$this->getId().'_'.$this->getName();
+
     }
 
 
@@ -99,12 +108,15 @@ class Files
           }
         }
 
+        // Je doit le réécrire ici car sinon l'id n'est pas pris en compte
+        $this->path = $this->getUploadRootDir().'/'.$this->getId().'_'.$this->getName();
+
         // On déplace le fichier envoyé dans le répertoire de notre choix
         $this->file->move(
           $this->getUploadRootDir(), // Le répertoire de destination
           // $this->tempFilename
-          $this->id.'_'.$this->alt
-          // $this->id.'.'.$this->url   // Le nom du fichier à créer, ici « id.extension »
+          $this->id.'_'.$this->name
+          // $this->id.'.'.$this->ext   // Le nom du fichier à créer, ici « id.extension »
         );
     }
 
@@ -114,7 +126,7 @@ class Files
     public function preRemoveUpload()
     {
         // On sauvegarde temporairement le nom du fichier, car il dépend de l'id
-        $this->tempFilename = $this->getUploadRootDir().'/'.$this->id.'.'.$this->url;
+        $this->tempFilename = $this->getUploadRootDir().'/'.$this->getId().'_'.$this->getName();
     }
 
     /**
@@ -141,6 +153,32 @@ class Files
         return __DIR__.'/../../../../web/'.$this->getUploadDir();
     }
 
+
+    /**
+     * Get path
+     *
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     *
+     * @return Files     
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
     /**
      * Get id
      *
@@ -152,55 +190,55 @@ class Files
     }
 
     /**
-     * Set url
+     * Set ext
      *
-     * @param string $url
+     * @param string $ext
      *
      * @return Files
      */
-    public function setUrl($url)
+    public function setExt($ext)
     {
-        $this->url = $url;
+        $this->ext = $ext;
 
         return $this;
     }
 
     /**
-     * Get url
+     * Get ext
      *
      * @return string
      */
-    public function getUrl()
+    public function getExt()
     {
-        return $this->url;
+        return $this->ext;
     }
 
     /**
-     * Set alt
+     * Set name
      *
-     * @param string $alt
+     * @param string $name
      *
      * @return Files
      */
-    public function setAlt($alt)
+    public function setName($name)
     {
-        $this->alt = $alt;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get alt
+     * Get name
      *
      * @return string
      */
-    public function getAlt()
+    public function getName()
     {
-        return $this->alt;
+        return $this->name;
     }
 
     public function getWebPath()
     {
-       return $this->getUploadDir().'/'.$this->getId().'_'.$this->getAlt().'.'.$this->getUrl();
+       return $this->getUploadDir().'/'.$this->getId().'_'.$this->getName();
     }
 }

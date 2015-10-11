@@ -15,7 +15,7 @@
 			        <tr>
 			          <th>id</th>
 			          <th>Nom</th>
-			          <th>Date d'envoi</th>
+			          <th>Chemin</th>
 			          <th>Supprimer</th>
 			        </tr>
 			      </thead>
@@ -23,9 +23,12 @@
 				  {% for doc in docs %}
 			        <tr>
 			          <th scope="row">{{doc.id}}</th>
-			          <td>{{doc.alt}}</td>
-			          <td>En cours</td>
-			          <td><a href="{{ path('ep_delete_file',{'id':doc.id }) }}" class="btn btn-default">X</a></td>
+			          <td>{{doc.name}}</td>
+			          <td>{{doc.ext}}</td>
+			          <td>
+			          	<a href="{{ path('ep_delete_file',{'id':doc.id }) }}" class="btn btn-default">X</a>
+			          	<a href="{{ asset('uploads/img/34_Benali-Yahia-CV.pdf') }}" class="btn btn-default">U</a>
+			          </td>
 			        </tr>
 				  {% endfor %}
 			      </tbody>
