@@ -15,7 +15,8 @@
 			        <tr>
 			          <th>id</th>
 			          <th>Nom</th>
-			          <th>Chemin</th>
+			          <th>Extension</th>
+			          <th>Catégorie</th>			          
 			          <th>Supprimer</th>
 			        </tr>
 			      </thead>
@@ -25,6 +26,11 @@
 			          <th scope="row">{{doc.id}}</th>
 			          <td>{{doc.name}}</td>
 			          <td>{{doc.ext}}</td>
+			          {% if doc.category.name is defined %}
+			          <td>{{doc.category.name}}</td>	
+			          {% else %}
+			          <td>Catégorie non identifiée</td>
+			          {% endif %}		          
 			          <td>
 			          	<a href="{{ path('ep_delete_file',{'id':doc.id }) }}" class="btn btn-default">X</a>
 			          	<a href="{{ asset('uploads/img/34_Benali-Yahia-CV.pdf') }}" class="btn btn-default">U</a>

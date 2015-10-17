@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class FilesType extends AbstractType
+class CategoryType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,12 +15,7 @@ class FilesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('file','file')
-            ->add('category', 'entity', array(
-                'class'    => 'EPUploadBundle:Category',
-                'property' => 'name',
-                'multiple' => false))
-            ->add('save','submit')  
+            ->add('name')
         ;
     }
     
@@ -30,7 +25,7 @@ class FilesType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'EP\UploadBundle\Entity\Files'
+            'data_class' => 'EP\UploadBundle\Entity\Category'
         ));
     }
 
@@ -39,6 +34,6 @@ class FilesType extends AbstractType
      */
     public function getName()
     {
-        return 'ep_uploadbundle_files';
+        return 'ep_uploadbundle_category';
     }
 }

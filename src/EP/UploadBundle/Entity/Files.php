@@ -15,6 +15,12 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class Files
 {
     /**
+    * @ORM\ManyToOne(targetEntity="EP\UploadBundle\Entity\Category")
+    * 
+    */
+    private $category;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -38,6 +44,12 @@ class Files
     private $name;
 
     /**
+    * @ORM\Column(name="date", type="datetime")
+    * @ORM\JoinColumn(nullable=false)
+    */
+    private $date;
+    
+    /**
      * @var string
      *
      * @ORM\Column(name="path", type="string", length=255)
@@ -48,6 +60,12 @@ class Files
 
     // On ajoute cet attribut pour y stocker le nom du fichier temporairement
     private $tempFilename;
+
+
+    public function __construct()
+    {
+        $this->date = new \Datetime();
+    }
 
     public function getFile()
     {
@@ -240,5 +258,53 @@ class Files
     public function getWebPath()
     {
        return $this->getUploadDir().'/'.$this->getId().'_'.$this->getName();
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Files
+     */
+    public function setDate($date = null)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \EP\UploadBundle\Entity\Category $category
+     *
+     * @return Files
+     */
+    public function setCategory(Category $category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \EP\UploadBundle\Entity\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }
