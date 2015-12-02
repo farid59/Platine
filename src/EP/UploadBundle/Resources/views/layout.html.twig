@@ -4,6 +4,14 @@
   Gérer vos document - {{ parent() }}
 {% endblock %}
 
+{% block links %}
+    <li>
+        <a  href="{{ path('ep_upload_file')}}" class="active-menu">
+        	<i class="fa fa-dashboard fa-3x"></i> Gérer vos documents
+        </a>
+    </li>
+{% endblock %}
+
 {% block body %}
 
 

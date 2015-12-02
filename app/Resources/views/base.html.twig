@@ -5,26 +5,97 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
         <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/admin.css') }}">
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
 
-        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-            Connecté en tant que {{ app.user.username }}
-            -
-            <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a><br/>
-        {% endif %}
 
-        {% for label, flashes in app.session.flashbag.all %}
-            {% for flash in flashes %}
-                <div class="alert alert-{{ label }}">
-                    {{ flash }}
+    <div id="wrapper">
+        <nav class="navbar navbar-default navbar-inverse navbar-cls-top " role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Easy Platform</a> 
+            </div>
+            <div style="color: white;padding: 15px 50px 5px 50px;float: right;font-size: 16px;"> 
+                {# Last access : 30 May 2014 &nbsp;  #}
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    Connecté en tant que {{ app.user.username }}
+                    -
+                    {# <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a><br/> #}
+                    <a href="{{ path('fos_user_security_logout') }}" class="btn btn-danger square-btn-adjust">Déconnexion</a> 
+                {% endif %}
+                
+            </div>
+        </nav>   
+           <!-- /. NAV TOP  -->
+        <nav class="navbar-default navbar-inverse navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <li class="text-center">
+                      <img src="{{ asset('/img/find_user.png') }}" class="user-image img-responsive"/>
+                    </li>         
+                    {% block links %}                   
+                    
+                    {% endblock %}    
+                </ul>              
+            </div>
+        </nav>  
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper" >
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}  
+                     <h2>Gérer vos documents</h2> 
+                        <h5>Bienvenue {{ app.user.username }} , Heureux de vous revoir. </h5>
+                    {% endif %}
+                        {% for label, flashes in app.session.flashbag.all %}
+                            {% for flash in flashes %}
+                                <div class="alert alert-{{ label }}">
+                                    {{ flash }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+
+                        {% block body %}
+                        {% endblock %} 
+
+                    </div>
                 </div>
-            {% endfor %}
-        {% endfor %}
+                 <!-- /. ROW  -->
+                 <hr />
+               
+            </div>
+             <!-- /. PAGE INNER  -->
+        </div>
+         <!-- /. PAGE WRAPPER  -->
+    </div>
 
-        {% block body %}{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     </body>
 </html>
