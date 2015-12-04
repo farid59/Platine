@@ -12,9 +12,8 @@
 /composer.phar
 libs/
 node_modules/
-web/css/
-web/js/
-web/fonts/
+web/css/compiled/
+web/js/compiled/
 *.sublime-project
 *.sublime-workspace
 /web/uploads/*
