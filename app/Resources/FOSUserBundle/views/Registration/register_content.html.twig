@@ -1,0 +1,39 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{{ form_start(form, {'attr': {'class' : 'form-horizontal'}}) }}
+
+    {{ form_errors(form) }}
+
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        {{ form_row(form.username, {'label': false, 'attr' : {'class' : 'form-control', 'placeholder' : 'form.username' }}) }}
+    </div>
+
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+        {{ form_row(form.plainPassword.first, {'label': false, 'attr' : {'class' : 'form-control', 'placeholder' : 'form.password' }}) }}
+    </div>    
+
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+        {{ form_row(form.plainPassword.second, {'label': false, 'attr' : {'class' : 'form-control', 'placeholder' : 'form.password_confirmation' }}) }}
+    </div>    
+
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+        {{ form_row(form.email, {'label': false, 'attr' : {'class' : 'form-control', 'placeholder' : 'form.email' }}) }}
+    </div>               
+
+    <div class="form-group">
+        <!-- Button -->
+        <div class="col-sm-12 controls">
+            <button type="submit" href="#" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-log-in"></i> Log in</button>                          
+        </div>
+    </div>
+    
+    
+{{ form_end(form) }}
+{#
+#}
+
+
