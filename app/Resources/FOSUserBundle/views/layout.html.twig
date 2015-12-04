@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    {% stylesheets filter='cssrewrite' output='css/compiled/style'
+    {% stylesheets filter='cssrewrite' output='css/compiled/login'
         'css/bootstrap.min.css'
         'css/font-awesome.min.css'
         'css/login.css'
@@ -292,10 +292,11 @@
     </svg>
     -->
 
+    {% javascripts output='js/compiled/login'
+        'js/jquery.min.js'
+        'js/bootstrap.min.js'
+        'js/less.min.js'
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    {% javascripts output='js/compiled/script'
         'js/login.js'
     %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
