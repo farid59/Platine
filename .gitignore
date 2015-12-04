@@ -19,3 +19,4 @@ web/fonts/
 *.sublime-workspace
 /web/uploads/*
 src/*/*Bundle/Entity/*.php~
+.DS_Store
