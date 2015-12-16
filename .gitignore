@@ -19,3 +19,4 @@ web/js/compiled/
 /web/uploads/*
 src/*/*Bundle/Entity/*.php~
 .DS_Store
+/uploads
