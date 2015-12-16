@@ -15,4 +15,3 @@ ep_delete_file:
 ep_view_file:
     path: /view
     defaults: { _controller:EPUploadBundle:Upload:view }
-

@@ -109,23 +109,20 @@
                 </button>
                 <a class="navbar-brand" href="index.html">EASY Platform</a> 
             </div>
-  <div style="color: white;
-  margin-left: 250px;
-padding: 15px 50px 5px 50px;
-font-size: 24px;"> {% block pagetitle %}Titre de la page{% endblock %} </div>
+            {# <div > 
+                {% block pagetitle %}Titre de la page{% endblock %} 
+            </div> #}
         </nav>   
            <!-- /. NAV TOP  -->
-                <nav class="navbar-default navbar-side" role="navigation">
+        <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
                 <li class="text-center">
                     <img src="{{ asset('img/logo-notext.svg') }}" class="user-image img-responsive"/>
                     </li>
-                
+                {% block links %} {% endblock %}
                     
-                    <li>
-                        <a class="active-menu"  href="{{ path('ep_upload_file') }}"><i class="fa fa-file fa-2x"></i> Envoyer des fichiers</a>
-                    </li>
+                  
                      
                                        
                     <!-- <li>

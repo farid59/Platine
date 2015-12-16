@@ -53,7 +53,7 @@ class UploadController extends Controller
 
     // On passe la méthode createView() du formulaire à la vue
     // afin qu'elle puisse afficher le formulaire toute seule
-    return $this->render('EPUploadBundle:Upload:view.html.twig', array(
+    return $this->render('EPUploadBundle:Upload:upload.html.twig', array(
       'form' => $form->createView(),
       'file'=>$file, 
       'docs'=>$listDocs

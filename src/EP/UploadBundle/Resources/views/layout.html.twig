@@ -5,18 +5,22 @@
 {% endblock %}
 
 {% block links %}
+
     <li>
-        <a  href="{{ path('ep_upload_file')}}" class="active-menu">
-        	<i class="fa fa-dashboard fa-3x"></i> Gérer vos documents
-        </a>
+        <a class="active-menu"  href="{{ path('ep_upload_file') }}"><i class="fa fa-file fa-2x"></i> Envoyer des fichiers</a>
     </li>
+    <li>
+        <a class="active"  href="{{ path('ep_view_file') }}"><i class="fa fa-file fa-2x"></i> Mes fichiers</a>
+    </li>
+    <li>
+        {{ app.request.attributes.get('_route') }}
+    </li>  
 {% endblock %}
 
 {% block body %}
 
 
-{% block ep_upload_form %}
-{% endblock %}
+
 {# {{ include('EPUploadBundle:Upload:form.html.twig') }} #}
 
 
