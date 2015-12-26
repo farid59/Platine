@@ -20,7 +20,7 @@ class FilesType extends AbstractType
                 'class'    => 'EPUploadBundle:Category',
                 'property' => 'name',
                 'multiple' => false))
-            ->add('save','submit')  
+            ->add('Envoyer','submit')  
         ;
     }
     

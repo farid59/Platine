@@ -10,10 +10,12 @@
 		{# {{ form(form) }} #}
 	{# </form>  #}
 </div>
+
 <form method="post" {{ form_enctype(form) }} >
-<div class="container">
+{# <div class="container"> #}
     <div class="row">    
-        <div class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">  
+        {# <div class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">   #}
+           <div class="col-md-4 border">
             <!-- image-preview-filename input [CUT FROM HERE]-->
             <div class="input-group image-preview">
                 <input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
@@ -31,15 +33,15 @@
                     </div>
                 </span>
             </div><!-- /input-group image-preview [TO HERE]--> 
-                  {{ form_label(form.category, "Veuillez choisir la catégorie du fichier", {'label_attr': {'class': 'control-label'}}) }}
+                  {{ form_label(form.category, "Veuillez choisir la catégorie du fichier", {'label_attr': {'class': 'control-label marg'}}) }}
                      {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
-        </div>
-        
-            	{{ form_widget(form.save, {'attr': {'class': 'btn btn-success'}}) }}
-        {{ form(form) }}
-    </div>
 
-</div>
+                     {{ form_widget(form.Envoyer, {'attr': {'class': 'btn btn-success save'}}) }}
+        {{ form(form) }} 
+        </div>
+
+    </div>
+{# </div> #}
 {# {% endblock %} #}
 {# 			<img 
 			  src="{{ asset(file.webPath) }}"

@@ -1,20 +1,17 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}
-  Gérer vos document - {{ parent() }}
+  Gérer vos documents - {{ parent() }}
 {% endblock %}
 
 {% block links %}
 
     <li>
-        <a class="active-menu"  href="{{ path('ep_upload_file') }}"><i class="fa fa-file fa-2x"></i> Envoyer des fichiers</a>
+        <a class="{{ app.request.attributes.get('_route')=='ep_upload_file'?'active-menu':''}}"  href="{{ path('ep_upload_file') }}"><i class="fa fa-file fa-2x"></i> Envoyer des fichiers</a>
     </li>
     <li>
-        <a class="active"  href="{{ path('ep_view_file') }}"><i class="fa fa-file fa-2x"></i> Mes fichiers</a>
+        <a class="{{ app.request.attributes.get('_route')=='ep_view_file'?'active-menu':''}}"  href="{{ path('ep_view_file') }}"><i class="fa fa-file fa-2x"></i> Mes fichiers</a>
     </li>
-    <li>
-        {{ app.request.attributes.get('_route') }}
-    </li>  
 {% endblock %}
 
 {% block body %}

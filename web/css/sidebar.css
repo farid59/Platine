@@ -180,3 +180,18 @@ body {
 .image-preview-input-title {
     margin-left:2px;
 }
+
+.save {
+  margin-top:13px;
+  float:right;
+}
+
+.border {
+    padding: 16px;
+    border: 2px outset grey;
+    margin-left: 16px;
+}
+
+.marg{
+    margin-top:17px;
+}
