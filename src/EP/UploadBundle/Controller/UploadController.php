@@ -116,7 +116,7 @@ class UploadController extends Controller
     //   echo $doc->getContent();
     // }
     // return $this->redirect($this->generateUrl('ep_upload_file', array('docs' => $listDocs)));
-    return $this->render('EPUploadBundle:Upload:view.html.twig', array(
+    return $this->render('EPUploadBundle:Upload:view_list.html.twig', array(
       'docs' => $listDocs
     ));
 
