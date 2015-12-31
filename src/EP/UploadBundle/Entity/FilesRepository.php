@@ -10,16 +10,30 @@ namespace EP\UploadBundle\Entity;
  */
 class FilesRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findAllWithParameters($search = null, $orderby = "name", $filers = array()) 
+    public function findAllWithParameters($search = "", $orderby = "name", $categoryFilter = "", $extFilter = "") 
     {
         $queryBuilder = $this->createQueryBuilder('f');
+        $parameters = array();
 
-        if (null !== $search) {
-            $queryBuilder->where("f.name LIKE :name")
-                ->setParameter('name', '%'.$search.'%');
+        if ("" !== $search) {
+            $queryBuilder->andwhere("f.name LIKE :name");
+                // ->setParameter('name', '%'.$search.'%');
+            $parameters['name'] = '%'.$search.'%';
         }
 
-        
+        if ("" !== $categoryFilter) {
+            $queryBuilder->andwhere("f.category = :category");
+                // ->setParameter('category', $categoryFilter);
+            $parameters['category'] = $categoryFilter;
+        }
+
+        if ("" !== $extFilter) {
+            $queryBuilder->andwhere("f.ext = :ext");
+                // ->setParameter('ext', $extFilter);
+            $parameters['ext'] = $extFilter;
+        }
+
+        $queryBuilder->setParameters($parameters);
 
         $queryBuilder->orderBy("f.".$orderby);
 

@@ -98,17 +98,24 @@ class UploadController extends Controller
       ->getRepository('EPUploadBundle:Files')
     ;
 
+    $categories = $this->getDoctrine()->getManager()->getRepository('EPUploadBundle:Category')->findAll();
+    $extensions = ['jpeg','pdf','doc','docx','ppt','pptx','xls','xlsx','txt'];
+    $sortType = array(
+      array("field" => "name", "name" => "nom"),
+      array("field" => "category", "name" => "catégorie"),
+      array("field" => "ext", "name" => "extension"),
+    );
+
     // on parse la requête pour savoir s'il y a des paramètres
     // de tri, de recherche, etc.
-    $search = $request->query->get('search');
-    $orderby = $request->query->get('orderby');
-    if (null === $orderby) {
-      $orderby = "name";
-    }
+    $search = $request->query->get('search') or $search = "";
+    $orderby = $request->query->get('orderby') or $orderby = "name";
+    $categoryFilter = $request->query->get("categoryFilter") or $categoryFilter = "";
+    $extFilter = $request->query->get("extFilter") or $extFilter = "";
     
     // on utilise la fonction de recherche permettant de récupérer
     // les fichiers en fonction de tout ces paramètres
-    $listDocs = $repository->findAllWithParameters($search, $orderby);
+    $listDocs = $repository->findAllWithParameters($search, $orderby, $categoryFilter, $extFilter);
 
 
     // foreach ($listDocs as $doc) {
@@ -117,7 +124,14 @@ class UploadController extends Controller
     // }
     // return $this->redirect($this->generateUrl('ep_upload_file', array('docs' => $listDocs)));
     return $this->render('EPUploadBundle:Upload:view_list.html.twig', array(
-      'docs' => $listDocs
+      'docs' => $listDocs,
+      'search' => $search,
+      'orderby' => $orderby,
+      'categoryFilter' => $categoryFilter,
+      'extFilter' => $extFilter,
+      'categories' => $categories,
+      'extensions' => $extensions,
+      'sortType' => $sortType
     ));
 
   }
