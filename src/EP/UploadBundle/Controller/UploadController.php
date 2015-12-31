@@ -105,6 +105,7 @@ class UploadController extends Controller
       array("field" => "category", "name" => "catégorie"),
       array("field" => "ext", "name" => "extension"),
     );
+    $nbPerPagePossibilities = [5, 10, 15, 20, 25];
 
     // on parse la requête pour savoir s'il y a des paramètres
     // de tri, de recherche, etc.
@@ -112,10 +113,18 @@ class UploadController extends Controller
     $orderby = $request->query->get('orderby') or $orderby = "name";
     $categoryFilter = $request->query->get("categoryFilter") or $categoryFilter = "";
     $extFilter = $request->query->get("extFilter") or $extFilter = "";
+    $nbPerPage = $request->query->get("nbPerPage") or $nbPerPage = 3;
     
     // on utilise la fonction de recherche permettant de récupérer
     // les fichiers en fonction de tout ces paramètres
-    $listDocs = $repository->findAllWithParameters($search, $orderby, $categoryFilter, $extFilter);
+    
+    $query = $repository->getSearchQuery($search, $orderby, $categoryFilter, $extFilter);
+    // $listDocs = $repository->findAllWithParameters($search, $orderby, $categoryFilter, $extFilter);
+    $listDocs = $this->get('knp_paginator')->paginate(
+        $query, /* query NOT result */
+        $request->query->getInt('page', 1)/*page number*/,
+        $nbPerPage/*limit per page*/
+    );
 
 
     // foreach ($listDocs as $doc) {
@@ -131,7 +140,9 @@ class UploadController extends Controller
       'extFilter' => $extFilter,
       'categories' => $categories,
       'extensions' => $extensions,
-      'sortType' => $sortType
+      'sortType' => $sortType,
+      'nbPerPagePossibilities' => $nbPerPagePossibilities,
+      'nbPerPage' => $nbPerPage
     ));
 
   }

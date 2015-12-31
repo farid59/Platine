@@ -10,7 +10,7 @@ namespace EP\UploadBundle\Entity;
  */
 class FilesRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findAllWithParameters($search = "", $orderby = "name", $categoryFilter = "", $extFilter = "") 
+    public function getSearchQuery($search = "", $orderby = "name", $categoryFilter = "", $extFilter = "") 
     {
         $queryBuilder = $this->createQueryBuilder('f');
         $parameters = array();
@@ -38,7 +38,7 @@ class FilesRepository extends \Doctrine\ORM\EntityRepository
         $queryBuilder->orderBy("f.".$orderby);
 
         $query = $queryBuilder->getQuery();
-        $results = $query->getResult();
-        return $results;
+
+        return $query;
     }
 }
