@@ -91,7 +91,7 @@ class UploadController extends Controller
     ));
   }
 
-  public function viewAction(){
+  public function listAction(){
     $repository = $this
       ->getDoctrine()
       ->getManager()
