@@ -4,28 +4,31 @@
       <div class="row">
           <div class="col-sm-12">
                 <div class="bs-example" >
-                  <table class="table table-bordered">
+                  <table class="table table-striped">
                     <thead>
                       <tr>
-                        <th>id</th>
+                        <th >Extension</th>
+                        <th class="col-xs-1">Catégorie</th>                      
                         <th>Nom</th>
-                        <th>Extension</th>
-                        <th>Catégorie</th>                      
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
                     {% for doc in docs %}
                       <tr>
-                        <th scope="row">{{doc.id}}</th>
-                        <td>{{doc.name}}</td>
-                        <td>{{doc.ext}}</td>
+                        <td style="width: 50px;">
+                          <img src="{{ asset('img/file_icons/' ~ doc.ext ~ '.png') }}" height="50px">
+                        </td>
+
+
                         {% if doc.category.name is defined %}
-                        <td>{{doc.category.name}}</td>    
+                          <td class="col-xs-1" style="vertical-align: middle">{{doc.category.name}}</td>    
                         {% else %}
-                        <td>Catégorie non identifiée</td>
-                        {% endif %}                 
-                        <td>
+                          <td class="col-xs-1" style="vertical-align: middle">Catégorie non identifiée</td>
+                        {% endif %}      
+                                   
+                        <td style="vertical-align: middle">{{doc.name}}</td>
+                        <td style="vertical-align: middle">
                           <a href="{{ path('ep_delete_file',{'id':doc.id }) }}" class="btn btn-default">X</a>
                           <a href="{{ asset('uploads/img/34_Benali-Yahia-CV.pdf') }}" class="btn btn-default">U</a>
                         </td>
