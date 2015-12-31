@@ -4,22 +4,22 @@
 
     {{ form_errors(form) }}
 
-    <div class="input-group">
+    <div class="input-group" style="margin-bottom: 25px">
         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
         {{ form_row(form.username, {'label': false, 'attr' : {'class' : 'form-control', 'placeholder' : 'form.username' }}) }}
     </div>
 
-    <div class="input-group">
+    <div class="input-group" style="margin-bottom: 25px">
         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
         {{ form_row(form.plainPassword.first, {'label': false, 'attr' : {'class' : 'form-control', 'placeholder' : 'form.password' }}) }}
     </div>    
 
-    <div class="input-group">
+    <div class="input-group" style="margin-bottom: 25px">
         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
         {{ form_row(form.plainPassword.second, {'label': false, 'attr' : {'class' : 'form-control', 'placeholder' : 'form.password_confirmation' }}) }}
     </div>    
 
-    <div class="input-group">
+    <div class="input-group" style="margin-bottom: 25px">
         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
         {{ form_row(form.email, {'label': false, 'attr' : {'class' : 'form-control', 'placeholder' : 'form.email' }}) }}
     </div>               
@@ -27,9 +27,11 @@
     <div class="form-group">
         <!-- Button -->
         <div class="col-sm-12 controls">
-            <button type="submit" href="#" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-log-in"></i> Log in</button>                          
+            <button type="submit" href="#" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-log-in"></i> S'enregistrer</button>                          
         </div>
     </div>
+
+<p>Vous avez un compte ? Alors il ne vous reste qu'a <a href="{{ path('fos_user_security_login') }}">vous connecter</a> avec !<p>
     
     
 {{ form_end(form) }}
