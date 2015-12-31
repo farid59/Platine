@@ -91,13 +91,26 @@ class UploadController extends Controller
     ));
   }
 
-  public function listAction(){
+  public function listAction(Request $request){
     $repository = $this
       ->getDoctrine()
       ->getManager()
       ->getRepository('EPUploadBundle:Files')
     ;
-    $listDocs = $repository->findAll();
+
+    // on parse la requête pour savoir s'il y a des paramètres
+    // de tri, de recherche, etc.
+    $search = $request->query->get('search');
+    $orderby = $request->query->get('orderby');
+    if (null === $orderby) {
+      $orderby = "name";
+    }
+    
+    // on utilise la fonction de recherche permettant de récupérer
+    // les fichiers en fonction de tout ces paramètres
+    $listDocs = $repository->findAllWithParameters($search, $orderby);
+
+
     // foreach ($listDocs as $doc) {
     //   // $advert est une instance de Advert
     //   echo $doc->getContent();
@@ -106,5 +119,6 @@ class UploadController extends Controller
     return $this->render('EPUploadBundle:Upload:view.html.twig', array(
       'docs' => $listDocs
     ));
+
   }
 }
