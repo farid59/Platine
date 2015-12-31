@@ -113,7 +113,7 @@ class UploadController extends Controller
     $orderby = $request->query->get('orderby') or $orderby = "name";
     $categoryFilter = $request->query->get("categoryFilter") or $categoryFilter = "";
     $extFilter = $request->query->get("extFilter") or $extFilter = "";
-    $nbPerPage = $request->query->get("nbPerPage") or $nbPerPage = 3;
+    $nbPerPage = $request->query->get("nbPerPage") or $nbPerPage = 5;
     
     // on utilise la fonction de recherche permettant de récupérer
     // les fichiers en fonction de tout ces paramètres
