@@ -45,7 +45,7 @@ class UploadController extends Controller
       ->getManager()
       ->getRepository('EPUploadBundle:Files')
     ;
-    $listDocs = $repository->findAll();
+    $listDocs = $repository->findLast();
 
     // À ce stade, le formulaire n'est pas valide car :
     // - Soit la requête est de type GET, donc le visiteur vient d'arriver sur la page et veut voir le formulaire

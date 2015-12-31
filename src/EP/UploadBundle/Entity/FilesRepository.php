@@ -41,4 +41,12 @@ class FilesRepository extends \Doctrine\ORM\EntityRepository
 
         return $query;
     }
+
+    public function findLast()
+    {
+        $queryBuilder = $this->createQueryBuilder('f')
+            ->setMaxResults(5);
+
+        return $queryBuilder->getQuery()->getResult();
+    }
 }
