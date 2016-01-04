@@ -68,6 +68,13 @@ class Files
      */
     private $owner;
 
+    /**
+     * @var \Date
+     *
+     * @ORM\Column(name="treated", type="datetime", nullable=true)
+     */
+    private $treated;
+
     public function __construct()
     {
         $this->date = new \Datetime();
@@ -336,5 +343,29 @@ class Files
     public function getOwner()
     {
         return $this->owner;
+    }
+
+    /**
+     * Set treated
+     *
+     * @param \DateTime $treated
+     *
+     * @return Files
+     */
+    public function setTreated()
+    {
+        $this->treated = new \Datetime();
+
+        return $this;
+    }
+
+    /**
+     * Get treated
+     *
+     * @return \DateTime
+     */
+    public function getTreated()
+    {
+        return $this->treated;
     }
 }

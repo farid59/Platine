@@ -4,6 +4,7 @@ namespace EP\UploadBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use EP\UploadBundle\Entity\Files;
 use EP\UploadBundle\Form\FilesType;
 
@@ -143,5 +144,28 @@ class UploadController extends Controller
       'extensions' => $extensions
     ));
 
+  }
+
+  public function downloadAction($fileId, Request $request)
+  {
+    $em = $this->getDoctrine()->getManager();
+    $file = $em->getRepository("EPUploadBundle:Files")->findOneById($fileId);
+    
+
+    $fichier = $file->getName();
+    $chemin = $file->getPath(); // emplacement de votre fichier .pdf
+
+    if ($this->get('security.authorization_checker')->isGranted("ROLE_ADMIN")) {
+      $file->setTreated();
+      $em->persist($file);
+      $em->flush();
+    }
+
+    $response = new Response();
+    $response->setContent(file_get_contents($file->getWebPath()));
+    $response->headers->set('Content-Type', 'application/force-download'); // modification du content-type pour forcer le téléchargement (sinon le navigateur internet essaie d'afficher le document)
+    $response->headers->set('Content-disposition', 'filename='. $fichier);
+
+    return $response;
   }
 }

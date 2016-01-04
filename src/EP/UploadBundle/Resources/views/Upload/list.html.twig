@@ -29,8 +29,16 @@
                                    
                         <td style="vertical-align: middle">{{doc.name}}</td>
                         <td style="vertical-align: middle">
-                          <a href="{{ path('ep_delete_file',{'id':doc.id }) }}" class="btn btn-default">X</a>
-                          <a href="{{ asset('uploads/img/34_Benali-Yahia-CV.pdf') }}" class="btn btn-default">U</a>
+
+                          {% if (is_granted('ROLE_ADMIN')) %}
+                            <a href="{{ path('ep_delete_file',{'id':doc.id }) }}" class="btn btn-default">X</a>
+                          {% elseif doc.treated is null %}
+                            <a href="{{ path('ep_delete_file',{'id':doc.id }) }}" class="btn btn-default">X</a>
+                          {% else %}
+                            traité le {{ doc.treated|date("Y-m-d") }}
+                          {% endif %}
+
+                          <a href="{{ path('ep_download_file', {'fileId':doc.id}) }}" class="btn btn-default">U</a>
                         </td>
                       </tr>
                     {% endfor %}

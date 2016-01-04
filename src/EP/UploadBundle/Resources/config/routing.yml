@@ -15,3 +15,9 @@ ep_delete_file:
 ep_view_file:
     path: /list
     defaults: { _controller:EPUploadBundle:Upload:list }
+
+ep_download_file:
+    path: /download/{fileId}
+    defaults: { _controller:EPUploadBundle:Upload:download }
+    requirements:
+        fileId: \d+
