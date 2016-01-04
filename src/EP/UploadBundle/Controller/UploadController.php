@@ -13,9 +13,10 @@ class UploadController extends Controller
     {
         $authChecker = $this->get('security.authorization_checker');
         if ($authChecker->isGranted("ROLE_ADMIN")) {
-          return $this->forward("EPAdminBundle:Default:index");
+          // return $this->forward("EPAdminBundle:Default:index");
+          return $this->redirectToRoute('ep_admin_homepage');
         } else {
-          return $this->forward("EPUploadBundle:Upload:upload");
+          return $this->redirectToRoute('ep_upload_file');
         }
 
         // return $this->render('EPUploadBundle::layout.html.twig', array('name' => 'farid'));
