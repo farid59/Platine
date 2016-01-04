@@ -5,7 +5,7 @@ app:
 
 ep_upload:
     resource: "@EPUploadBundle/Resources/config/routing.yml"
-    prefix: /upload
+    prefix: /
 
 # ==============================================================================
 # FOSUserBundle routes
