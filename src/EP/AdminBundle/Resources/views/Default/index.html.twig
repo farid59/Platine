@@ -1,0 +1,17 @@
+{% extends "EPAdminBundle::layout.html.twig" %}
+
+{% block body %}
+    
+    {% for user in users %}
+        
+        <a href="{{ path('ep_admin_user_files', {'username' : user.username}) }}">
+            <div class="col-lg-2" style="background-color: pink; border: solid 1px black; border-radius: 10px; text-align: center;">
+
+                {{ user }}
+            
+            </div>
+        </a>
+
+    {% endfor %}
+
+{% endblock %}

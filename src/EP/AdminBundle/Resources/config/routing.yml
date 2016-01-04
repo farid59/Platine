@@ -1,0 +1,7 @@
+ep_admin_homepage:
+    path:     /
+    defaults: { _controller: EPAdminBundle:Default:index }
+
+ep_admin_user_files:
+    path:       /files/{username}
+    defaults: { _controller: EPAdminBundle:Default:user }

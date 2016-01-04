@@ -1,0 +1,26 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+  Gérer vos documents - {{ parent() }}
+{% endblock %}
+
+{% block links %}
+
+    <li>
+        <a class="{{ app.request.attributes.get('_route')=='ep_view_file'?'active-menu':''}}"  href="{{ path('ep_admin_homepage') }}"><i class="fa fa-file fa-2x"></i> Mes clients</a>
+    </li>
+{% endblock %}
+
+{% block body %}
+
+
+
+{# {{ include('EPUploadBundle:Upload:form.html.twig') }} #}
+
+
+ {# {{ render(controller("EPUploadBundle:Upload:view")) }} #}
+{# {{ include('EPUploadBundle:Upload:view.html.twig') }}        #}
+{# {% block ep_upload_view %}
+{% endblock %} #}
+
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends "EPAdminBundle::layout.html.twig" %}
+
+{% block body %}
+    <h2>Fichiers de {{ user.username }}</h2>
+    {% include "EPUploadBundle:Upload:navbar.html.twig" %}
+
+    {% include 'EPUploadBundle:Upload:list.html.twig' with { 'docs' : docs, } %}
+{% endblock %}
