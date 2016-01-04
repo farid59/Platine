@@ -11,7 +11,14 @@ class UploadController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('EPUploadBundle::layout.html.twig', array('name' => 'farid'));
+        $authChecker = $this->get('security.authorization_checker');
+        if ($authChecker->isGranted("ROLE_ADMIN")) {
+          return $this->forward("EPAdminBundle:Default:index");
+        } else {
+          return $this->forward("EPUploadBundle:Upload:upload");
+        }
+
+        // return $this->render('EPUploadBundle::layout.html.twig', array('name' => 'farid'));
         // return new Response("Hello World !");
     }
 
@@ -101,12 +108,8 @@ class UploadController extends Controller
 
     $categories = $this->getDoctrine()->getManager()->getRepository('EPUploadBundle:Category')->findAll();
     $extensions = ['jpeg','pdf','doc','docx','ppt','pptx','xls','xlsx','txt'];
-    $sortType = array(
-      array("field" => "name", "name" => "nom"),
-      array("field" => "category", "name" => "catégorie"),
-      array("field" => "ext", "name" => "extension"),
-    );
-    $nbPerPagePossibilities = [5, 10, 15, 20, 25];
+
+    // $nbPerPagePossibilities = [5, 10, 15, 20, 25];
 
     // on parse la requête pour savoir s'il y a des paramètres
     // de tri, de recherche, etc.
@@ -135,15 +138,8 @@ class UploadController extends Controller
     // return $this->redirect($this->generateUrl('ep_upload_file', array('docs' => $listDocs)));
     return $this->render('EPUploadBundle:Upload:view_list.html.twig', array(
       'docs' => $listDocs,
-      'search' => $search,
-      'orderby' => $orderby,
-      'categoryFilter' => $categoryFilter,
-      'extFilter' => $extFilter,
       'categories' => $categories,
-      'extensions' => $extensions,
-      'sortType' => $sortType,
-      'nbPerPagePossibilities' => $nbPerPagePossibilities,
-      'nbPerPage' => $nbPerPage
+      'extensions' => $extensions
     ));
 
   }
