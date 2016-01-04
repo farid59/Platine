@@ -61,6 +61,12 @@ class Files
     // On ajoute cet attribut pour y stocker le nom du fichier temporairement
     private $tempFilename;
 
+    /**
+     * @var AppBundle\Entity\User
+     *
+     * @ORM\ManyToOne( targetEntity="AppBundle\Entity\User", cascade={"persist"} )
+     */
+    private $owner;
 
     public function __construct()
     {
@@ -306,5 +312,29 @@ class Files
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set owner
+     *
+     * @param \AppBundle\Entity\User $owner
+     *
+     * @return Files
+     */
+    public function setOwner(\AppBundle\Entity\User $owner = null)
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * Get owner
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getOwner()
+    {
+        return $this->owner;
     }
 }

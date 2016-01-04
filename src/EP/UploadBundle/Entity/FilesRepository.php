@@ -10,10 +10,13 @@ namespace EP\UploadBundle\Entity;
  */
 class FilesRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function getSearchQuery($search = "", $orderby = "name", $categoryFilter = "", $extFilter = "") 
+    public function getSearchQuery($user, $search = "", $orderby = "name", $categoryFilter = "", $extFilter = "") 
     {
         $queryBuilder = $this->createQueryBuilder('f');
         $parameters = array();
+
+        $queryBuilder->andwhere("f.owner = :owner");
+        $parameters["owner"] = $user;
 
         if ("" !== $search) {
             $queryBuilder->andwhere("f.name LIKE :name");
@@ -42,9 +45,11 @@ class FilesRepository extends \Doctrine\ORM\EntityRepository
         return $query;
     }
 
-    public function findLast()
+    public function findLast($user)
     {
         $queryBuilder = $this->createQueryBuilder('f')
+            ->andwhere("f.owner = :owner")
+            ->setParameter("owner",$user)
             ->setMaxResults(5);
 
         return $queryBuilder->getQuery()->getResult();

@@ -31,6 +31,7 @@ class UploadController extends Controller
     if ($form->isValid()) {
       // On l'enregistre notre objet $advert dans la base de données, par exemple
       $em = $this->getDoctrine()->getManager();
+      $file->setOwner($this->container->get('security.context')->getToken()->getUser());
       $em->persist($file);
       $em->flush();
 
@@ -45,7 +46,7 @@ class UploadController extends Controller
       ->getManager()
       ->getRepository('EPUploadBundle:Files')
     ;
-    $listDocs = $repository->findLast();
+    $listDocs = $repository->findLast($this->container->get('security.context')->getToken()->getUser());
 
     // À ce stade, le formulaire n'est pas valide car :
     // - Soit la requête est de type GET, donc le visiteur vient d'arriver sur la page et veut voir le formulaire
@@ -118,7 +119,7 @@ class UploadController extends Controller
     // on utilise la fonction de recherche permettant de récupérer
     // les fichiers en fonction de tout ces paramètres
     
-    $query = $repository->getSearchQuery($search, $orderby, $categoryFilter, $extFilter);
+    $query = $repository->getSearchQuery($this->container->get('security.context')->getToken()->getUser(), $search, $orderby, $categoryFilter, $extFilter);
     // $listDocs = $repository->findAllWithParameters($search, $orderby, $categoryFilter, $extFilter);
     $listDocs = $this->get('knp_paginator')->paginate(
         $query, /* query NOT result */
