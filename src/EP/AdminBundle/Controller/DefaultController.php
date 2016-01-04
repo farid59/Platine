@@ -11,6 +11,17 @@ class DefaultController extends Controller
     {
         // Je récupère l'ensemble des utilisateurs
         $users = $this->container->get("fos_user_.user_manager")->findUsers();
+        $count = $this->getDoctrine()->getManager()->getRepository('AppBundle:User')->countUntreated();
+
+        $untreated = array();
+        foreach ($users as $key => $user) {
+            $untreated[$user->getUsername()] = 0;
+        }
+
+        foreach($count as $c) {
+            $untreated[$c['username']] = $c[1];
+        }
+
 
         // Je retire les utilisateurs qui sont administrateurs
         foreach ($users as $key => $user) {
@@ -20,6 +31,7 @@ class DefaultController extends Controller
         }
 
         return $this->render("EPAdminBundle:Default:index.html.twig", array(
+            "count" => $untreated,
             "users" => $users
         ));
     }

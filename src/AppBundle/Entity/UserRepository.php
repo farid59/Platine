@@ -10,4 +10,14 @@ namespace AppBundle\Entity;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function countUntreated() 
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('u.username, COUNT(f.id)')
+            ->join('EPUploadBundle:Files','f', 'WITH','f.owner = u')
+            ->where('f.treated IS NULL')
+            ->groupBy('f.owner');
+
+        return $qb->getQuery()->getResult();
+    }
 }
