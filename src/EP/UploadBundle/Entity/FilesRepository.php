@@ -50,6 +50,7 @@ class FilesRepository extends \Doctrine\ORM\EntityRepository
         $queryBuilder = $this->createQueryBuilder('f')
             ->andwhere("f.owner = :owner")
             ->setParameter("owner",$user)
+            ->orderby("f.date","DESC")
             ->setMaxResults(5);
 
         return $queryBuilder->getQuery()->getResult();
