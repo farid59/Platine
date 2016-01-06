@@ -84,6 +84,7 @@ class UploadController extends Controller
     // On crée un formulaire vide, qui ne contiendra que le champ CSRF
     // Cela permet de protéger la suppression d'annonce contre cette faille
     $form = $this->createFormBuilder()->getForm();
+    $session = $this->getRequest()->getSession();
 
     if ($form->handleRequest($request)->isValid()) {
       $em->remove($doc);
@@ -91,7 +92,17 @@ class UploadController extends Controller
 
       $request->getSession()->getFlashBag()->add('info', "Le document a bien été supprimée.");
 
-      return $this->redirect($this->generateUrl('ep_upload_file'));
+      // return $this->redirect($this->generateUrl('ep_upload_file'));
+      // 
+      if ($session->get('referer') === null) {
+        return $this->redirect($request->headers->get('referer'));
+      } else {
+        $referer = $session->get('referer');
+        $session->remove('referer');
+        return $this->redirect($referer);
+      }
+    } else {
+      $session->set('referer', $request->headers->get('referer'));
     }
 
     // Si la requête est en GET, on affiche une page de confirmation avant de supprimer
