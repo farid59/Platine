@@ -16,10 +16,10 @@
         <a class="{{ app.request.attributes.get('_route')=='ep_edit_fact'?'active-menu':''}}"  href="{{ path('ep_edit_fact') }}"><i class="fa fa-pencil-square fa-2x"></i> Editer une facture</a>
     </li>       
     <li>
-        <a class="{{ app.request.attributes.get('_route')=='ep_show_client'?'active-menu':''}}"  href="{{ path('ep_show_client') }}"><i class="fa fa-users fa-2x"></i> Mes clients</a>
+        <a class="{{ (app.request.attributes.get('_route')=='ep_show_client' or app.request.attributes.get('_route')=='ep_edit_client')?'active-menu':''}}"  href="{{ path('ep_show_client') }}"><i class="fa fa-users fa-2x"></i> Mes clients</a>
     </li>   
     <li>
-        <a class="{{ app.request.attributes.get('_route')=='ep_show_produit'?'active-menu':''}}"  href="{{ path('ep_show_produit') }}"><i class="fa fa-cube fa-2x"></i> Mes produits</a>
+        <a class="{{ (app.request.attributes.get('_route')=='ep_show_produit' or app.request.attributes.get('_route')=='ep_edit_produit')?'active-menu':''}}"  href="{{ path('ep_show_produit') }}"><i class="fa fa-cube fa-2x"></i> Mes produits</a>
     </li>    
 {% endblock %}
 

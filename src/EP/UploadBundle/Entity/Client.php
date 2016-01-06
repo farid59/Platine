@@ -36,9 +36,9 @@ class Client
     private $prenom;
 
     /**
-     * @var binary
+     * @var boolean
      *
-     * @ORM\Column(name="Civilite", type="binary")
+     * @ORM\Column(name="Civilite", type="boolean")
      */
     private $civilite;
 
@@ -133,7 +133,13 @@ class Client
      */
     private $conditionPaiement;
 
-
+    /**
+     * @var AppBundle\Entity\User
+     *
+     * @ORM\ManyToOne( targetEntity="AppBundle\Entity\User", cascade={"persist"} )
+     */
+    private $owner;
+    
     /**
      * Get id
      *
@@ -192,29 +198,7 @@ class Client
         return $this->prenom;
     }
 
-    /**
-     * Set civilite
-     *
-     * @param binary $civilite
-     *
-     * @return Client
-     */
-    public function setCivilite($civilite)
-    {
-        $this->civilite = $civilite;
 
-        return $this;
-    }
-
-    /**
-     * Get civilite
-     *
-     * @return binary
-     */
-    public function getCivilite()
-    {
-        return $this->civilite;
-    }
 
     /**
      * Set email
@@ -527,5 +511,52 @@ class Client
     {
         return $this->conditionPaiement;
     }
-}
 
+    /**
+     * Set owner
+     *
+     * @param \AppBundle\Entity\User $owner
+     *
+     * @return Client
+     */
+    public function setOwner(\AppBundle\Entity\User $owner = null)
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * Get owner
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+
+    /**
+     * Set civilite
+     *
+     * @param boolean $civilite
+     *
+     * @return Client
+     */
+    public function setCivilite($civilite)
+    {
+        $this->civilite = $civilite;
+
+        return $this;
+    }
+
+    /**
+     * Get civilite
+     *
+     * @return boolean
+     */
+    public function getCivilite()
+    {
+        return $this->civilite;
+    }
+}

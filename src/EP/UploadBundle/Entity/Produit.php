@@ -42,6 +42,12 @@ class Produit
      */
     private $montantUnitaireHT;
 
+    /**
+     * @var AppBundle\Entity\User
+     *
+     * @ORM\ManyToOne( targetEntity="AppBundle\Entity\User", cascade={"persist"} )
+     */
+    private $owner;
 
     /**
      * Get id
@@ -124,5 +130,28 @@ class Produit
     {
         return $this->montantUnitaireHT;
     }
-}
 
+    /**
+     * Set owner
+     *
+     * @param \AppBundle\Entity\User $owner
+     *
+     * @return Produit
+     */
+    public function setOwner(\AppBundle\Entity\User $owner = null)
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * Get owner
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+}

@@ -6,6 +6,41 @@
 
 <h2>Mes clients</h2>
 
-tatatatat
+<a href="{{path("ep_edit_client")}}" class="btn btn-red pull-right" ><i class="fa fa-plus"></i> Nouveau client</a>
+{% if clients is defined %}
 
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-sm-12">
+                <div class="bs-example" >
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th class="col-xs-1">Société</th>
+                        <th class="col-xs-1">Prénom</th>                      
+                        <th class="col-xs-7">Nom</th>
+                        <th class="col-xs-1">Téléphone</th>
+                        <th class="col-xs-1">Mobile</th>
+                        <th class="col-xs-1">Email</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for client in clients %}
+                      <tr>
+                      	<td>{{ client.societe }}</td>
+                      	<td>{{ client.prenom }}</td>
+                      	<td>{{ client.nom }}</td>
+                      	<td>{{ client.telephone }}</td>
+                      	<td>{{ client.mobile }}</td>
+                      	<td>{{ client.email }}</td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+          </div>
+      </div>
+  </div>
+
+{% endif %}
 {% endblock %}

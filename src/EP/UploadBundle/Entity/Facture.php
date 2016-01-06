@@ -105,6 +105,12 @@ class Facture
      */
     private $commentaires;
 
+    /**
+     * @var AppBundle\Entity\User
+     *
+     * @ORM\ManyToOne( targetEntity="AppBundle\Entity\User", cascade={"persist"} )
+     */
+    private $owner;
 
     /**
      * Get id
@@ -403,5 +409,28 @@ class Facture
     {
         return $this->commentaires;
     }
-}
 
+    /**
+     * Set owner
+     *
+     * @param \AppBundle\Entity\User $owner
+     *
+     * @return Facture
+     */
+    public function setOwner(\AppBundle\Entity\User $owner = null)
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * Get owner
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+}

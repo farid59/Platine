@@ -17,7 +17,15 @@ class ClientType extends AbstractType
         $builder
             ->add('nom')
             ->add('prenom')
-            ->add('civilite')
+            ->add('civilite', 'choice', array(
+                    'choices' => array(
+                        'Mr' => true,
+                        'Mme' => false,
+                    ),
+                    'expanded' => true,
+                    'multiple' => false,
+                    'choices_as_values' => true,
+                ))
             ->add('email')
             ->add('societe')
             ->add('destinataire')
@@ -31,6 +39,7 @@ class ClientType extends AbstractType
             ->add('tva')
             ->add('reference')
             ->add('conditionPaiement')
+            ->add('valider','submit')
         ;
     }
     
