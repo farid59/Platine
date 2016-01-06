@@ -163,7 +163,7 @@ class UploadController extends Controller
 
     $response = new Response();
     $response->setContent(file_get_contents($file->getWebPath()));
-    $response->headers->set('Content-Type', 'application/force-download'); // modification du content-type pour forcer le téléchargement (sinon le navigateur internet essaie d'afficher le document)
+    $response->headers->set('Content-Type', 'application/force-download');
     $response->headers->set('Content-disposition', 'filename='. $fichier);
 
     return $response;

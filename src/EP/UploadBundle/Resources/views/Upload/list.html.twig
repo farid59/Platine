@@ -7,10 +7,11 @@
                   <table class="table table-striped">
                     <thead>
                       <tr>
-                        <th >Extension</th>
+                        <th class="col-xs-1">Extension</th>
                         <th class="col-xs-1">Catégorie</th>                      
-                        <th>Nom</th>
-                        <th>Action</th>
+                        <th class="col-xs-8">Nom</th>
+                        <th class="col-xs-1">Status</th>
+                        <th class="col-xs-1">Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -28,17 +29,31 @@
                         {% endif %}      
                                    
                         <td style="vertical-align: middle">{{doc.name}}</td>
+                        
+                        <td style="vertical-align: middle">
+                          
+                          {% if doc.treated is null %}
+                            <span class="label label-info col-xs-10 col-xs-push-1">En attente</span>
+                          {% else %}
+                            <span class="label label-success col-xs-10 col-xs-push-1">Traité<br/>le {{ doc.treated|date("Y-m-d") }}</span>
+
+                          {% endif %}
+
+                        </td>
+
+
                         <td style="vertical-align: middle">
 
                           {% if (is_granted('ROLE_ADMIN')) %}
-                            <a href="{{ path('ep_delete_file',{'id':doc.id }) }}" class="btn btn-default">X</a>
+                            <a title="supprimer" href="{{ path('ep_delete_file',{'id':doc.id }) }}" class="btn btn-default"><i class="fa fa-trash-o"></i></a>
                           {% elseif doc.treated is null %}
-                            <a href="{{ path('ep_delete_file',{'id':doc.id }) }}" class="btn btn-default">X</a>
+                            <a title="supprimer" href="{{ path('ep_delete_file',{'id':doc.id }) }}" class="btn btn-default"><i class="fa fa-trash-o"></i></a>
                           {% else %}
-                            traité le {{ doc.treated|date("Y-m-d") }}
+                            <button disabled="disabled" class="btn btn-default" title="Ce document a été traîté. Pour le supprimer, contactez votre comptable."><i class="fa fa-trash-o"></i></button>
+                            <!-- traité le {{ doc.treated|date("Y-m-d") }} -->
                           {% endif %}
 
-                          <a href="{{ path('ep_download_file', {'fileId':doc.id}) }}" class="btn btn-default">U</a>
+                          <a title="télécharger" href="{{ path('ep_download_file', {'fileId':doc.id}) }}" class="btn btn-default"><i class="fa fa-download"></i></a>
                         </td>
                       </tr>
                     {% endfor %}
