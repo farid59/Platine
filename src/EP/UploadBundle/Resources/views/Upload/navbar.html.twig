@@ -31,6 +31,7 @@
                         <option value="name" {% if app.request.get('orderby') == "name" %}selected="selected"{% endif %}>trier par nom</option>
                         <option value="category" {% if app.request.get('orderby') == "category" %}selected="selected"{% endif %}>trier par catégorie</option>
                         <option value="ext" {% if app.request.get('orderby') == "ext" %}selected="selected"{% endif %}>trier par extension</option>
+                        <option value="date" {% if app.request.get('orderby') == "date" %}selected="selected"{% endif %}>trier par date d'envoi</option>
                     
                 </select>
             </div>
