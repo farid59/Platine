@@ -21,3 +21,23 @@ ep_download_file:
     defaults: { _controller:EPUploadBundle:Upload:download }
     requirements:
         fileId: \d+
+
+ep_edit_fact:
+    path: /edit
+    defaults: { _controller:EPUploadBundle:Facture:edit }
+
+ep_show_client:
+    path: /clients
+    defaults: { _controller:EPUploadBundle:Client:show }
+
+ep_edit_client:
+    path: /client/new
+    defaults: { _controller:EPUploadBundle:Client:edit }
+
+ep_show_produit:
+    path: /produits
+    defaults: { _controller:EPUploadBundle:Produit:show }
+
+ep_edit_produit:
+    path: /produit/new
+    defaults: { _controller:EPUploadBundle:Produit:edit }
