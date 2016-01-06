@@ -23,7 +23,7 @@
     {{ form_rest(form) }}
   </form>
   <hr>
-  <a href="{{ path('ep_upload_file') }}" class="btn btn-default">
+  <a href="{{ app.request.headers.get('referer') }}" class="btn btn-default">
         <i class="glyphicon glyphicon-chevron-left"></i>
         Retour 
     </a>
