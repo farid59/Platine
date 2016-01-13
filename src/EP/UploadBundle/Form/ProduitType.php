@@ -15,9 +15,10 @@ class ProduitType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('designation')
-            ->add('reference')
-            ->add('montantUnitaireHT')
+            ->add('designation','text')
+            ->add('reference','text')
+            ->add('montantUnitaireHT','number')
+            ->add('valider','submit')
         ;
     }
     

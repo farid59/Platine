@@ -1,0 +1,42 @@
+{% extends "EPUploadBundle::layout.html.twig" %}
+
+{% block body %}
+
+{# {{ include('EPUploadBundle:Upload:form.html.twig') }} #}
+
+<h2>Mes produits</h2>
+
+<a href="{{path("ep_edit_produit")}}" class="btn btn-red pull-right" ><i class="fa fa-plus"></i> Nouveau produitt</a>
+{% if produits is defined %}
+
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-sm-12">
+                <div class="bs-example" >
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th class="col-xs-4">Désignation</th>
+                        <th class="col-xs-4">Prix unitaire H.T</th>                      
+{#                         <th class="col-xs-3">Unité</th>
+ #}                        <th class="col-xs-4">Référence</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for produit in produits %}
+                      <tr>
+                      	<td>{{ produit.designation }}</td>
+                      	<td>{{ produit.montantUnitaireHT }}</td>
+{#                       	<td>{{ unite }}</td>
+ #}                      	<td>{{ produit.reference }}</td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+          </div>
+      </div>
+  </div>
+
+{% endif %}
+{% endblock %}
