@@ -19,14 +19,15 @@ class ClientType extends AbstractType
             ->add('prenom')
             ->add('civilite', 'choice', array(
                     'choices' => array(
-                        'Mr' => true,
-                        'Mme' => false,
+                        'Mr' => 'Mr',
+                        'Mme' => 'Mme',
+                        'Mlle' => 'Mlle',
                     ),
                     'expanded' => true,
                     'multiple' => false,
                     'choices_as_values' => true,
                 ))
-            ->add('email')
+            ->add('email', 'email')
             ->add('societe')
             ->add('destinataire')
             ->add('adresse')
