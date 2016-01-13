@@ -22,9 +22,8 @@ class Facture
     private $id;
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="Client", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="EP\UploadBundle\Entity\Client")
      */
     private $client;
 
@@ -113,6 +112,11 @@ class Facture
     private $owner;
 
     /**
+     * @ORM\OneToMany(targetEntity="EP\UploadBundle\Entity\FactureProduit", mappedBy="facture")
+     */
+    private $produits;
+
+    /**
      * Get id
      *
      * @return integer
@@ -120,6 +124,13 @@ class Facture
     public function getId()
     {
         return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     /**
@@ -432,5 +443,46 @@ class Facture
     public function getOwner()
     {
         return $this->owner;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->produits = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add produit
+     *
+     * @param \EP\UploadBundle\Entity\Facture $produit
+     *
+     * @return Facture
+     */
+    public function addProduit(\EP\UploadBundle\Entity\FactureProduit $produit)
+    {
+        $this->produits[] = $produit;
+
+        return $this;
+    }
+
+    /**
+     * Remove produit
+     *
+     * @param \EP\UploadBundle\Entity\Facture $produit
+     */
+    public function removeProduit(\EP\UploadBundle\Entity\FactureProduit $produit)
+    {
+        $this->produits->removeElement($produit);
+    }
+
+    /**
+     * Get produits
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProduits()
+    {
+        return $this->produits;
     }
 }
