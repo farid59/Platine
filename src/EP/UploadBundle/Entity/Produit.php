@@ -43,6 +43,13 @@ class Produit
     private $montantUnitaireHT;
 
     /**
+     * @var float
+     *
+     * @ORM\Column(name="TVA", type="float")
+     */
+    private $tva;
+
+    /**
      * @var AppBundle\Entity\User
      *
      * @ORM\ManyToOne( targetEntity="AppBundle\Entity\User", cascade={"persist"} )
@@ -153,5 +160,34 @@ class Produit
     public function getOwner()
     {
         return $this->owner;
+    }
+
+    /**
+     * Set tva
+     *
+     * @param float $tva
+     *
+     * @return Produit
+     */
+    public function setTva($tva)
+    {
+        $this->tva = $tva;
+
+        return $this;
+    }
+
+    /**
+     * Get tva
+     *
+     * @return float
+     */
+    public function getTva()
+    {
+        return $this->tva;
+    }
+
+    public function getMontantUnitaireTTC()
+    {
+        return $this->montantUnitaireHT * (100 + $this->getTva()) / 100;
     }
 }

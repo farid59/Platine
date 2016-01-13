@@ -40,4 +40,12 @@ ep_show_produit:
 
 ep_edit_produit:
     path: /produit/new
-    defaults: { _controller:EPUploadBundle:Produit:edit }
+    defaults: { _controller:EPUploadBundle:Produit:create }
+
+ep_delete_produit:
+    path: /produit/delete/{id}
+    defaults: { _controller: EPUploadBundle:Produit:delete }
+
+ep_modify_produit:
+    path: /produit/edit/{id}
+    defaults: { _controller: EPUploadBundle:Produit:edit }

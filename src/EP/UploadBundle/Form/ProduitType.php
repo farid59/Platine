@@ -18,6 +18,16 @@ class ProduitType extends AbstractType
             ->add('designation','text')
             ->add('reference','text')
             ->add('montantUnitaireHT','number')
+            ->add('tva', 'choice', array(
+                'choices' => array(
+                    '20' => 20.0,
+                    '10' => 10.0,
+                    '5,5' => 5.5,
+                    '2,1' => 2.1,
+                ),
+                'multiple' => false,
+                'expanded' => false,
+            ))
             ->add('valider','submit')
         ;
     }

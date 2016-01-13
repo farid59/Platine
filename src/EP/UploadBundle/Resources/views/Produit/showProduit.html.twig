@@ -16,19 +16,27 @@
                   <table class="table table-striped">
                     <thead>
                       <tr>
-                        <th class="col-xs-4">Désignation</th>
-                        <th class="col-xs-4">Prix unitaire H.T</th>                      
-{#                         <th class="col-xs-3">Unité</th>
- #}                        <th class="col-xs-4">Référence</th>
+                        <th class="col-xs-1">Référence</th>
+                        <th class="col-xs-7">Désignation</th>
+                        <th class="col-xs-1">Prix H.T</th>                      
+                        <th class="col-xs-1">TVA</th>                      
+                        <th class="col-xs-1">Prix TTC</th>   
+                        <th class="col-xs-1"></th>                   
                       </tr>
                     </thead>
                     <tbody>
                     {% for produit in produits %}
                       <tr>
-                      	<td>{{ produit.designation }}</td>
-                      	<td>{{ produit.montantUnitaireHT }}</td>
-{#                       	<td>{{ unite }}</td>
- #}                      	<td>{{ produit.reference }}</td>
+                      	<td>{{ produit.reference }}</td>
+                        <td>{{ produit.designation }}</td>
+                        <td>{{ produit.montantUnitaireHT|number_format(2,'.') }} €</td>
+                        <td>{{ produit.tva }} %</td>
+                        <td>{{ produit.montantUnitaireTTC|number_format(2,'.') }} €</td>
+                        <td>
+                          <a title="Supprimer" href="{{ path('ep_delete_produit', { 'id' : produit.id }) }}" class="btn btn-default"><i class="fa fa-trash-o"></i></a>
+                          <a title="Modifier" href="{{ path('ep_modify_produit', {'id' : produit.id }) }}" class="btn btn-default"><i class="fa fa-edit"></i></a>
+
+                        </td>
                       </tr>
                     {% endfor %}
                     </tbody>

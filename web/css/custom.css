@@ -424,3 +424,7 @@ input[type="checkbox"], input[type="radio"] {
 .encadre {
 
 }
+
+td {
+    vertical-align: middle !important;
+}
