@@ -32,7 +32,15 @@ ep_show_client:
 
 ep_edit_client:
     path: /client/new
-    defaults: { _controller:EPUploadBundle:Client:edit }
+    defaults: { _controller:EPUploadBundle:Client:create }
+
+ep_delete_client:
+    path: /client/delete/{id}
+    defaults: { _controller: EPUploadBundle:Client:delete }
+
+ep_modify_client:
+    path: /client/edit/{id}
+    defaults: { _controller: EPUploadBundle:Client:edit }
 
 ep_show_produit:
     path: /produits

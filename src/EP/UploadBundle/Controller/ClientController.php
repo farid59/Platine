@@ -19,7 +19,7 @@ class ClientController extends Controller
         ));      
     }
 
-    public function editAction(Request $request){
+    public function createAction(Request $request){
       $client = new Client();
       $form = $this->createForm(new ClientType(),$client);
       $form->handleRequest($request);
@@ -34,6 +34,48 @@ class ClientController extends Controller
       return $this->render('EPUploadBundle:Client:newClient.html.twig', array(
         "form" => $form->createView()
         ));      
+    }
+
+    public function deleteAction($id, Request $request)
+    {
+      $client = $this->getDoctrine()->getManager()->getRepository("EPUploadBundle:Client")->findOneById($id);
+
+      $em = $this->getDoctrine()->getManager();
+
+      if ($this->getRequest()->isMethod('POST')) {
+        $em->remove($client);
+        $em->flush();
+
+        $request->getSession()->getFlashBag()->add('info', "Le client a bien été supprimé.");
+
+        return $this->redirectToRoute('ep_show_client');
+      }
+
+      return $this->render("EPUploadBundle:Client:deleteClient.html.twig", array(
+        "client" => $client,
+        // on ajoute un formulaire vide, qui contiendra automatiquement un champ csrf, 
+        // pour protéger la suppression contre cette faille
+        "form" => $this->createFormBuilder()->getForm()->createView()
+      ));
+    }
+
+    public function editAction($id, Request $request)
+    {
+      $client = $this->getDoctrine()->getManager()->getRepository("EPUploadBundle:Client")->findOneById($id);
+
+      $form = $this->createForm(new ClientType(),$client);
+      $form->handleRequest($request);
+
+      if($form->isValid()){
+        $em = $this->getDoctrine()->getManager();
+        $client->setOwner($this->container->get('security.context')->getToken()->getUser());
+        $em->persist($client);
+        $em->flush();
+        return $this->redirectToRoute("ep_show_client");
+      }
+      return $this->render('EPUploadBundle:Client:newClient.html.twig', array(
+        "form" => $form->createView()
+      ));      
     }
 
 }

@@ -18,10 +18,11 @@
                       <tr>
                         <th class="col-xs-1">Société</th>
                         <th class="col-xs-1">Prénom</th>                      
-                        <th class="col-xs-7">Nom</th>
+                        <th class="col-xs-6">Nom</th>
                         <th class="col-xs-1">Téléphone</th>
                         <th class="col-xs-1">Mobile</th>
                         <th class="col-xs-1">Email</th>
+                        <th class="col-xs-1"></th>   
                       </tr>
                     </thead>
                     <tbody>
@@ -33,6 +34,11 @@
                       	<td>{{ client.telephone }}</td>
                       	<td>{{ client.mobile }}</td>
                       	<td>{{ client.email }}</td>
+                        <td>
+                          <a title="Supprimer" href="{{ path('ep_delete_client', { 'id' : client.id }) }}" class="btn btn-default"><i class="fa fa-trash-o"></i></a>
+                          <a title="Modifier" href="{{ path('ep_modify_client', {'id' : client.id }) }}" class="btn btn-default"><i class="fa fa-edit"></i></a>
+
+                        </td>
                       </tr>
                     {% endfor %}
                     </tbody>

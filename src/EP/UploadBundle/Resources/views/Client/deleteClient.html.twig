@@ -1,0 +1,26 @@
+{% extends "EPUploadBundle::layout.html.twig" %}
+
+{% block body %}
+
+
+  <h2>Supprimer un client</h2>
+
+  <p>
+    Etes-vous certain de vouloir supprimer le client "{{ client.nom }} {{ client.prenom }}" ?
+  </p>
+
+  {# On met l'id de l'annonce dans la route de l'action du formulaire #}
+  <form action="{{ path('ep_delete_client', {'id': client.id}) }}" method="post">
+
+    {# Ici j'ai écrit le bouton de soumission à la main #}
+    <input type="submit" value="Supprimer" class="btn btn-danger" />
+    {# Ceci va générer le champ CSRF #}
+    {{ form_rest(form) }}
+  </form>
+  <hr>
+  <a href="{{ app.request.headers.get('referer') }}" class="btn btn-default">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Retour 
+    </a>
+
+{% endblock %}
