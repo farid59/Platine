@@ -123,7 +123,7 @@
               <div class="form-group">
                   {{ form_label(form.pourcentage, "Remise", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
                   <div class="col-md-8">
-                    {{ form_widget(form.pourcentage, {'attr': {'class': 'form-control input-md', 'min' : '0', 'max' : '100', 'value' : '0'}}) }}
+                    {{ form_widget(form.pourcentage, {'attr': {'class': 'form-control input-md', 'min' : '0', 'max' : '100', 'value' : '0', 'onchange' : 'updatePrices()'}}) }}
                   </div>
               </div>
               
@@ -296,7 +296,7 @@
         var prixHT = 0;
         var TVA = 0;
         var prixTTC = 0;
-        var remise = 0;
+        var remise = remiseInput.val();
         var prixFinal = 0;
 
         $(".new_product").each(function(){
