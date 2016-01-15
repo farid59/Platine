@@ -109,7 +109,7 @@
               <div class="form-group">
                   {{ form_label(form.pourcentage, "Remise", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
                   <div class="col-md-8">
-                    {{ form_widget(form.pourcentage, {'attr': {'class': 'form-control input-md', 'min' : '0', 'max' : '100'}}) }}
+                    {{ form_widget(form.pourcentage, {'attr': {'class': 'form-control input-md', 'min' : '0', 'max' : '100', 'value' : '0'}}) }}
                   </div>
               </div>
               
@@ -181,6 +181,9 @@
       });
     }
 
+
+    
+
     // La fonction qui ajoute un formulaire Categorie
     function addProduit($container) {
       // Dans le contenu de l'attribut « data-prototype », on remplace :
@@ -222,8 +225,6 @@
           {% endfor %}
       };
 
-      console.log(produits);
-
       $prototype.find("option").each(function(){
           var option = $(this);
           option.attr("data-prix", produits[$(this).attr("value")]["prix"]);
@@ -239,6 +240,8 @@
 
       // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
       index++;
+
+      updatePrices();
     }
 
     // La fonction qui ajoute un lien de suppression d'une catégorie
@@ -252,10 +255,57 @@
       // Ajout du listener sur le clic du lien
       $deleteLink.click(function(e) {
         $prototype.remove();
+        updatePrices();
         e.preventDefault(); // évite qu'un # apparaisse dans l'URL
         return false;
       });
     }
+
+
+
+
+
   });
+</script>
+
+
+
+<script type="text/javascript">
+  // Fonction de mise à jour des prix
+    function updatePrices() {
+        var prixHTInput = $("#ep_uploadbundle_facture_totalHT");
+        var TVAInput = $("#ep_uploadbundle_facture_montantTVA");
+        var prixTTCInput = $("#ep_uploadbundle_facture_totalTTC");
+        var remiseInput = $("#ep_uploadbundle_facture_pourcentage");
+        var prixFinalInput = $("#ep_uploadbundle_facture_totalFacture");
+
+        var prixHT = 0;
+        var TVA = 0;
+        var prixTTC = 0;
+        var remise = 0;
+        var prixFinal = 0;
+
+        $(".new_product").each(function(){
+            var select = $(this).find("select");
+            var qte = $(this).find("input").val();
+            var product_price = parseInt(select.find("option[value='"+select.val()+"']").attr("data-prix"));
+            var product_tva = parseInt(select.find("option[value='"+select.val()+"']").attr("data-tva"));
+            var product_price_tva = product_price * (product_tva) / 100;
+
+            prixHT += product_price * qte;
+            TVA += product_price_tva * qte;
+
+        });
+
+        prixTTC = prixHT + TVA;
+        prixFinal = prixTTC - (prixTTC * remise / 100);
+
+        prixHTInput.val(prixHT);
+        TVAInput.val(TVA);
+        prixTTCInput.val(prixTTC);
+        prixFinalInput.val(prixFinal);
+
+    }
+
 </script>
 {% endblock %}
