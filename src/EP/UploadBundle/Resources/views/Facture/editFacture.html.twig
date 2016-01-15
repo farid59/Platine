@@ -11,11 +11,6 @@
 
 {# Le formulaire reste inchangé #}
 <div class="well">
-    {#
-    {{form_start(form)}}
-    {{form_end(form)}}
-    #}
-    
     {{ form_start(form) }}
     <div class="col-lg-3">
         <div class="panel panel-success">
@@ -337,6 +332,54 @@
         prixTTCInput.val(prixTTC);
         prixFinalInput.val(prixFinal);
 
+    }
+
+</script>
+
+
+<script type="text/javascript">
+    
+    $(document).ready(function(){
+
+        var clients = {
+            {% for client in clients %}
+              "{{ client.id }}" : {
+                  "destinataire" : "{{ client.destinataire }}",
+                  "conditionPaiement" : "{{ client.conditionPaiement }}"
+              }
+
+
+              {% if loop.index != loop.last %}
+              ,
+              {% endif %}
+            {% endfor %}            
+        };
+
+
+
+        var select = $("#ep_uploadbundle_facture_client");
+        select.find("option").each(function(){
+            $(this).attr("data-destinataire", clients[$(this).attr("value")]["destinataire"]);
+            $(this).attr("data-conditionPaiement", clients[$(this).attr("value")]["conditionPaiement"]);
+        });
+
+        $("#ep_uploadbundle_facture_client").change(function(){
+            updateClientFields();
+        });
+
+        updateClientFields();
+    });
+
+    function updateClientFields()
+    {
+        var select = $("select#ep_uploadbundle_facture_client");
+        var option = select.find("option[value='" + select.val() + "']");
+
+        // console.log(option);
+        // console.log("conditions paiement : "+option.attr("data-conditionPaiement"));
+        $("#ep_uploadbundle_facture_destinataire").val(option.attr("data-destinataire"));
+
+        $("#ep_uploadbundle_facture_conditionPaiement").val(option.attr("data-conditionPaiement"));
     }
 
 </script>

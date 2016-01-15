@@ -15,7 +15,8 @@ class FactureController extends Controller
     public function editAction(Request $request) {
     	$facture = new Facture();
     	$form = $this->createForm(new FactureType(),$facture,array("csrf_protection"=>false));
-    	$produits = $this->getDoctrine()->getManager()->getRepository("EPUploadBundle:Produit")->findAll();
+        $produits = $this->getDoctrine()->getManager()->getRepository("EPUploadBundle:Produit")->findAll();
+    	$clients = $this->getDoctrine()->getManager()->getRepository("EPUploadBundle:Client")->findAll();
 
     	if($this->getRequest()->isMethod('POST')) {
 
@@ -52,7 +53,8 @@ class FactureController extends Controller
 
     	return $this->render('EPUploadBundle:Facture:editFacture.html.twig', array(
     		'form'=> $form->createView(),
-    		'produits' => $produits
+            'produits' => $produits,
+    		'clients' => $clients
     	));
     }
 
