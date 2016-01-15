@@ -33,6 +33,7 @@ class FactureController extends Controller
 		        foreach ($facture->getProduits() as $p){
 		        	$facture->removeProduit($p);
 		        }
+                
 		        $em->persist($facture);
 		        
 		        foreach ($listProduits as $p){
