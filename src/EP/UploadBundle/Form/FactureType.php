@@ -15,10 +15,15 @@ class FactureType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('client', 'entity', array(
+                "class" => "EPUploadBundle:Client",
+                "choice_label" => "displayName",
+                'by_reference' => true ,
+            ))    
             ->add('destinataire','text')
             ->add('objet')
             ->add('conditionPaiement')
-            ->add('date')
+            // ->add('date')
             ->add('totalHT')
             ->add('montantTVA')
             ->add('totalTTC')
@@ -26,11 +31,6 @@ class FactureType extends AbstractType
             ->add('totalFacture')
             ->add('echeance')
             ->add('commentaires')
-            ->add('client', 'entity', array(
-                "class" => "EPUploadBundle:Client",
-                "choice_label" => "displayName",
-                'by_reference' => true ,
-            ))            
             ->add('produits', 'collection', array(
                 'type' => new FactureProduitType(),
                 'allow_add' => true,

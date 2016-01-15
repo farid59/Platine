@@ -1,0 +1,21 @@
+{% block form_row %}
+{% spaceless %}
+        
+        <div class="row" style="margin-bottom: 10px">
+
+            {{ form_label(form.produit, "Produit", {'label_attr': {'class': 'col-md-2 control-label'}}) }}
+            <div class="col-md-4">
+                {{ form_widget(form.produit, { 'attr' : {'class' : 'input-md form-control'}}) }}
+            </div>
+
+            
+            {{ form_label(form.quantite, "Quantité", {'label_attr': {'class': 'col-md-2 control-label'}}) }}
+            <div class="col-md-3">
+                {{ form_widget(form.quantite, { 'attr' : {'class' : 'input-md form-control'}}) }}
+            </div>
+            
+        </div>
+
+
+{% endspaceless %}
+{% endblock form_row %}

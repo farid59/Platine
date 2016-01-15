@@ -1,4 +1,5 @@
 {% extends "EPUploadBundle::layout.html.twig" %}
+{% form_theme form 'EPUploadBundle:Facture:formProduit.html.twig' %}
 
 {% block body %}
 
@@ -10,11 +11,141 @@
 
 {# Le formulaire reste inchangé #}
 <div class="well">
-{#   {{ form_start(form) }}
-    {{ form_rest(form) }}
-  {{ form_end(form) }} #}
-{{form(form)}}
+    {#
+    {{form_start(form)}}
+    {{form_end(form)}}
+    #}
+    
+    {{ form_start(form) }}
+    <div class="col-lg-3">
+        <div class="panel panel-success">
+            <div class="panel-heading">Client</div>
+            <div class="panel-body">
+                
+                <div class="form-group">
+                  {{ form_label(form.client, "Client", {'label_attr': {'class': 'col-md-12 control-label'}}) }}
+                  <div class="col-md-12">
+                    {{ form_widget(form.client, {'attr': {'class': 'form-control input-md','placeholder':'ex: Dupont'}}) }}
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  {{ form_label(form.destinataire, "Destinataire", {'label_attr': {'class': 'col-md-12 control-label'}}) }}
+                  <div class="col-md-12">
+                    {{ form_widget(form.destinataire, {'attr': {'class': 'form-control input-md','placeholder':'ex: Dupont'}}) }}
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  {{ form_label(form.objet, "Objet", {'label_attr': {'class': 'col-md-12 control-label'}}) }}
+                  <div class="col-md-12">
+                    {{ form_widget(form.objet, {'attr': {'class': 'form-control input-md','placeholder':'ex: Dupont'}}) }}
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  {{ form_label(form.conditionPaiement, "Conditions de paiement", {'label_attr': {'class': 'col-md-12 control-label'}}) }}
+                  <div class="col-md-12">
+                    {{ form_widget(form.conditionPaiement, {'attr': {'class': 'form-control input-md','placeholder':'ex: Dupont'}}) }}
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  {{ form_label(form.commentaires, "Commentaires", {'label_attr': {'class': 'col-md-12 control-label'}}) }}
+                  <div class="col-md-12">
+                    {{ form_widget(form.commentaires, {'attr': {'class': 'form-control input-md','placeholder':'ex: Dupont'}}) }}
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  {{ form_label(form.echeance, "Echéance", {'label_attr': {'class': 'col-md-12 control-label'}}) }}
+                  <div class="col-md-12">
+                    {{ form_widget(form.echeance, {'attr': {'class': 'input-md','placeholder':'ex: Dupont'}}) }}
+                  </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                Produits
+                
+                <a href="#" id="add_produit" class="btn btn-success pull-right">Ajouter un produit</a>
+                <div class="clearfix"></div>
+            </div>
+            <div class="panel-body">
+                {{ form_widget(form.produits) }}
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="panel panel-success">
+            <div class="panel-heading">Prix</div>
+            <div class="panel-body">
+              
+              <div class="form-group">
+                  {{ form_label(form.totalHT, "Prix HT", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                  <div class="col-md-8">
+                    {{ form_widget(form.totalHT, {'attr': {'class': 'form-control input-md', 'disabled' : 'disabled'}}) }}
+                  </div>
+              </div>
+              
+              <div class="form-group">
+                  {{ form_label(form.montantTVA, "TVA", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                  <div class="col-md-8">
+                    {{ form_widget(form.montantTVA, {'attr': {'class': 'form-control input-md', 'disabled' : 'disabled'}}) }}
+                  </div>
+              </div>
+              
+              <div class="form-group">
+                  {{ form_label(form.totalTTC, "Prix TTC", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                  <div class="col-md-8">
+                    {{ form_widget(form.totalTTC, {'attr': {'class': 'form-control input-md', 'disabled' : 'disabled'}}) }}
+                  </div>
+              </div>
+              
+              <div class="form-group">
+                  {{ form_label(form.pourcentage, "Remise", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                  <div class="col-md-8">
+                    {{ form_widget(form.pourcentage, {'attr': {'class': 'form-control input-md', 'min' : '0', 'max' : '100'}}) }}
+                  </div>
+              </div>
+              
+              <div class="form-group">
+                  {{ form_label(form.totalFacture, "Prix final", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                  <div class="col-md-8">
+                    {{ form_widget(form.totalFacture, {'attr': {'class': 'form-control input-md', 'disabled' : 'disabled'}}) }}
+                  </div>
+              </div>
+
+            </div>
+        </div>
+    </div>
+  
+    <div class="clearfix"></div>
+
+    {{ form_end(form) }}
+
+
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 {# On charge la bibliothèque jQuery. Ici, je la prends depuis le CDN google
    mais si vous l'avez en local, changez simplement l'adresse. #}
@@ -27,8 +158,8 @@
     var $container = $('div#ep_uploadbundle_facture_produits');
 
     // On ajoute un lien pour ajouter une nouvelle catégorie
-    var $addLink = $('<a href="#" id="add_produit" class="btn btn-default">Ajouter un produit</a>');
-    $container.append($addLink);
+    var $addLink = $('#add_produit');
+    // $container.append($addLink);
 
     // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
     $addLink.click(function(e) {
@@ -55,22 +186,49 @@
       // Dans le contenu de l'attribut « data-prototype », on remplace :
       // - le texte "__name__label__" qu'il contient par le label du champ
       // - le texte "__name__" qu'il contient par le numéro du champ
-      var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Produit n°' + (index+1))
+      var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g,(index+1) + " : ")
           .replace(/__name__/g, index));
-/*
-      var label = $("<label>Produit</label>");
-      $prototype.append(label);
 
-      var select = $("<select required='required' name='ep_uploadbundle_facture[produits][" + index + "][produit]'></select>");
 
-      {% for produit in produits %}
+      // $prototype.find("label").each(function(index){
+      //     if (index !== 0) {
+      //         $(this).addClass("form-label");
+      //         $(this).addClass("col-md-2");
+      //     } else {
+      //         $(this).addClass("form-label");
+      //         $(this).addClass("col-md-1");
+      //     }
+      // });
 
-      	select.append($("<option value='{{ produit.id }}'>{{ produit.designation }}</option>"))
+      // $prototype.find("input").each(function(index){
+      //     if (index !== 0) {
+      //         $(this).addClass("form-control");
+      //         $(this).addClass("col-md-2");
+      //     }
+      // });
 
-      {% endfor %}
 
-      $prototype.append(select);
-*/
+
+
+      var produits = {
+          {% for produit in produits %}
+              "{{ produit.id }}" : {
+                  "prix" : "{{ produit.montantUnitaireHT }}",
+                  "tva" : "{{ produit.tva }}"
+              }
+              {% if loop.index != loop.last %}
+              ,
+              {% endif %}
+          {% endfor %}
+      };
+
+      console.log(produits);
+
+      $prototype.find("option").each(function(){
+          var option = $(this);
+          option.attr("data-prix", produits[$(this).attr("value")]["prix"]);
+          option.attr("data-tva", produits[$(this).attr("value")]["tva"]);
+      });
 
 
       // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
@@ -86,7 +244,7 @@
     // La fonction qui ajoute un lien de suppression d'une catégorie
     function addDeleteLink($prototype) {
       // Création du lien
-      $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');
+      $deleteLink = $('<a href="#" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>');
 
       // Ajout du lien
       $prototype.append($deleteLink);

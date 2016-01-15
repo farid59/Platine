@@ -53,7 +53,7 @@ class FactureController extends Controller
     	return $this->render('EPUploadBundle:Facture:editFacture.html.twig', array(
     		'form'=> $form->createView(),
     		'produits' => $produits
-    		));
+    	));
     }
 
     // TODO DownloadAction
