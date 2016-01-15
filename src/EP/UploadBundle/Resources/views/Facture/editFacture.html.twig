@@ -102,35 +102,50 @@
               <div class="form-group">
                   {{ form_label(form.totalHT, "Prix HT", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
                   <div class="col-md-8">
-                    {{ form_widget(form.totalHT, {'attr': {'class': 'form-control input-md', 'disabled' : 'disabled'}}) }}
+                    <div class="input-group">
+                      {{ form_widget(form.totalHT, {'attr': {'class': 'form-control input-md', 'disabled' : 'disabled'}}) }}
+                      <span class="input-group-addon">€</span>
+                    </div>
                   </div>
               </div>
               
               <div class="form-group">
                   {{ form_label(form.montantTVA, "TVA", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
                   <div class="col-md-8">
-                    {{ form_widget(form.montantTVA, {'attr': {'class': 'form-control input-md', 'disabled' : 'disabled'}}) }}
+                    <div class="input-group">
+                      {{ form_widget(form.montantTVA, {'attr': {'class': 'form-control input-md', 'disabled' : 'disabled'}}) }}
+                      <span class="input-group-addon">€</span>
+                    </div>
                   </div>
               </div>
               
               <div class="form-group">
                   {{ form_label(form.totalTTC, "Prix TTC", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
                   <div class="col-md-8">
-                    {{ form_widget(form.totalTTC, {'attr': {'class': 'form-control input-md', 'disabled' : 'disabled'}}) }}
+                    <div class="input-group">
+                      {{ form_widget(form.totalTTC, {'attr': {'class': 'form-control input-md', 'disabled' : 'disabled'}}) }}
+                      <span class="input-group-addon">€</span>
+                    </div>
                   </div>
               </div>
               
               <div class="form-group">
                   {{ form_label(form.pourcentage, "Remise", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
                   <div class="col-md-8">
-                    {{ form_widget(form.pourcentage, {'attr': {'class': 'form-control input-md', 'min' : '0', 'max' : '100', 'value' : '0', 'onchange' : 'updatePrices()'}}) }}
+                    <div class="input-group">
+                      {{ form_widget(form.pourcentage, {'attr': {'class': 'form-control input-md', 'min' : '0', 'max' : '100', 'value' : '0', 'onchange' : 'updatePrices()'}}) }}
+                      <span class="input-group-addon">%</span>
+                    </div>
                   </div>
               </div>
               
               <div class="form-group">
                   {{ form_label(form.totalFacture, "Prix final", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
                   <div class="col-md-8">
-                    {{ form_widget(form.totalFacture, {'attr': {'class': 'form-control input-md', 'disabled' : 'disabled'}}) }}
+                    <div class="input-group">
+                      {{ form_widget(form.totalFacture, {'attr': {'class': 'form-control input-md', 'disabled' : 'disabled'}}) }}
+                      <span class="input-group-addon">€</span>
+                    </div>
                   </div>
               </div>
 
