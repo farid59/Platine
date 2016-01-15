@@ -10,4 +10,21 @@ namespace EP\UploadBundle\Entity;
  */
 class ClientRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findByField($field, $value, $user)
+    {
+        $qb = $this->createQueryBuilder('c');
+        $parameters = array();
+
+        $qb->andwhere("c.owner = :owner");
+        $parameters["owner"] = $user;
+
+        if (null !== $field && null !== $value) {
+            $qb->andwhere("c.".$field." LIKE :value");
+            $parameters["value"] = "%".$value."%";
+        }
+
+        $qb->setParameters($parameters);
+
+        return $qb->getQuery()->getResult();
+    }
 }

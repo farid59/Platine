@@ -13,7 +13,16 @@ class ClientController extends Controller
     public function showAction() 
     {
       $repository = $this->getDoctrine()->getManager()->getRepository('EPUploadBundle:Client');
-      $clients = $repository->findByOwner($this->container->get('security.context')->getToken()->getUser());
+
+      $field = null;
+      $value = null;
+      $user = $this->container->get('security.context')->getToken()->getUser();
+
+      $field = $this->getRequest()->query->get("type");
+      $value = $this->getRequest()->query->get("search");
+
+      $clients = $repository->findByField($field, $value, $user);
+
       return $this->render('EPUploadBundle:Client:showClient.html.twig',array(
           'clients' => $clients
         ));      

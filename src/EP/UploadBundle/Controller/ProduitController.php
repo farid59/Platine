@@ -14,7 +14,17 @@ class ProduitController extends Controller
 {
     public function showAction() {
       $repository = $this->getDoctrine()->getManager()->getRepository('EPUploadBundle:Produit');
-      $produits = $repository->findByOwner($this->container->get('security.context')->getToken()->getUser());
+      
+      $field = null;
+      $value = null;
+      $user = $this->container->get('security.context')->getToken()->getUser();
+
+      $field = $this->getRequest()->query->get("type");
+      $value = $this->getRequest()->query->get("search");
+
+      
+      $produits = $repository->findByField($field, $value, $user);
+
       return $this->render('EPUploadBundle:Produit:showProduit.html.twig',array(
           'produits' => $produits
         )); 
