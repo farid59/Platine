@@ -450,6 +450,7 @@ class Facture
     public function __construct()
     {
         $this->produits = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->date = new \Datetime();
     }
 
     /**
