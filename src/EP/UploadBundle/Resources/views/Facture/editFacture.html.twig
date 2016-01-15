@@ -76,7 +76,21 @@
                 <div class="clearfix"></div>
             </div>
             <div class="panel-body">
-                {{ form_widget(form.produits) }}
+                    <div class="row">
+                        
+                        <div class="col-md-5">Produit</div>
+                        <div class="col-md-2">Quantité</div>
+                        <div class="col-md-2">Prix HT</div>
+                        <div class="col-md-2">Prix TTC</div>
+
+                    </div>
+                    <hr />
+                
+                      {{ form_widget(form.produits) }}
+                  
+
+
+
             </div>
         </div>
     </div>
@@ -294,6 +308,9 @@
 
             prixHT += product_price * qte;
             TVA += product_price_tva * qte;
+
+            $(this).find(".prixht").text(product_price * qte);
+            $(this).find(".prixttc").text((product_price * (product_tva + 100) / 100 ) * qte);
 
         });
 
