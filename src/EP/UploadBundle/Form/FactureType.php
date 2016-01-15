@@ -28,7 +28,7 @@ class FactureType extends AbstractType
             ->add('commentaires')
             ->add('client', 'entity', array(
                 "class" => "EPUploadBundle:Client",
-                "choice_label" => "nom",
+                "choice_label" => "displayName",
                 'by_reference' => true ,
             ))            
             ->add('produits', 'collection', array(

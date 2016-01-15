@@ -573,6 +573,16 @@ class Client
     }
 
     /**
+     * Get displayName
+     *
+     * @return string
+     */
+    public function getDisplayName()
+    {
+        return $this->nom.", ".$this->prenom;
+    }
+
+    /**
      * @Assert\Callback
      */
     public function validateTva(ExecutionContextInterface $context)
