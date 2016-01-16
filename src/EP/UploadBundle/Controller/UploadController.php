@@ -17,11 +17,27 @@ class UploadController extends Controller
           // return $this->forward("EPAdminBundle:Default:index");
           return $this->redirectToRoute('ep_admin_homepage');
         } else {
-          return $this->redirectToRoute('ep_upload_file');
+          return $this->redirectToRoute('ep_user_homepage');
         }
 
         // return $this->render('EPUploadBundle::layout.html.twig', array('name' => 'farid'));
         // return new Response("Hello World !");
+    }
+
+    public function homeAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->container->get('security.context')->getToken()->getUser();
+
+        $clients = $em->getRepository("EPUploadBundle:Client")->findLast($user);
+        $produits = $em->getRepository("EPUploadBundle:Produit")->findLast($user);
+        $fichiers = $em->getRepository("EPUploadBundle:Files")->findLast($user);
+
+        return $this->render("EPUploadBundle:Upload:home.html.twig", array(
+            "clients" => $clients,
+            "produits" => $produits,
+            "fichiers" => $fichiers
+        ));
     }
 
     public function uploadAction(Request $request)
@@ -128,6 +144,7 @@ class UploadController extends Controller
     // de tri, de recherche, etc.
     $search = $request->query->get('search') or $search = "";
     $orderby = $request->query->get('orderby') or $orderby = "name";
+    $order = $request->query->get('order') or $order = "ASC";
     $categoryFilter = $request->query->get("categoryFilter") or $categoryFilter = "";
     $extFilter = $request->query->get("extFilter") or $extFilter = "";
     $nbPerPage = $request->query->get("nbPerPage") or $nbPerPage = 5;
@@ -135,7 +152,7 @@ class UploadController extends Controller
     // on utilise la fonction de recherche permettant de récupérer
     // les fichiers en fonction de tout ces paramètres
     
-    $query = $repository->getSearchQuery($this->container->get('security.context')->getToken()->getUser(), $search, $orderby, $categoryFilter, $extFilter);
+    $query = $repository->getSearchQuery($this->container->get('security.context')->getToken()->getUser(), $search, $orderby, $order, $categoryFilter, $extFilter);
     // $listDocs = $repository->findAllWithParameters($search, $orderby, $categoryFilter, $extFilter);
     $listDocs = $this->get('knp_paginator')->paginate(
         $query, /* query NOT result */

@@ -42,6 +42,7 @@ class DefaultController extends Controller
 
         $search = $request->query->get('search') or $search = "";
         $orderby = $request->query->get('orderby') or $orderby = "name";
+        $order = $request->query->get('order') or $order = "ASC";
         $categoryFilter = $request->query->get("categoryFilter") or $categoryFilter = "";
         $extFilter = $request->query->get("extFilter") or $extFilter = "";
         $nbPerPage = $request->query->get("nbPerPage") or $nbPerPage = 5;
@@ -53,7 +54,7 @@ class DefaultController extends Controller
             ->getDoctrine()
             ->getManager()
             ->getRepository('EPUploadBundle:Files')
-            ->getSearchQuery($user, $search, $orderby, $categoryFilter, $extFilter);
+            ->getSearchQuery($user, $search, $orderby, $order, $categoryFilter, $extFilter);
 
         $listDocs = $this->get('knp_paginator')->paginate(
             $query, /* query NOT result */

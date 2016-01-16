@@ -10,7 +10,7 @@ namespace EP\UploadBundle\Entity;
  */
 class FilesRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function getSearchQuery($user, $search = "", $orderby = "name", $categoryFilter = "", $extFilter = "") 
+    public function getSearchQuery($user, $search = "", $orderby = "name", $order = "ASC", $categoryFilter = "", $extFilter = "") 
     {
         $queryBuilder = $this->createQueryBuilder('f');
         $parameters = array();
@@ -38,7 +38,7 @@ class FilesRepository extends \Doctrine\ORM\EntityRepository
 
         $queryBuilder->setParameters($parameters);
 
-        $queryBuilder->orderBy("f.".$orderby);
+        $queryBuilder->orderBy("f.".$orderby, $order);
 
         $query = $queryBuilder->getQuery();
 

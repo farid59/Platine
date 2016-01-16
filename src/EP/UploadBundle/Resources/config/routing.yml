@@ -1,6 +1,10 @@
 ep_upload_home:
-    path:    /
+    path:    /dispatch
     defaults: { _controller:EPUploadBundle:Upload:index }
+
+ep_user_homepage:
+    path:    /
+    defaults: { _controller:EPUploadBundle:Upload:home }
 
 ep_upload_file:
     path: /upload

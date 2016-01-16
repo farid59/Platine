@@ -35,6 +35,14 @@
                     
                 </select>
             </div>
+            <div class="input-group">
+                <select name="order">
+
+                        <option value="ASC" {% if app.request.get('order') == "ASC" %}selected="selected"{% endif %}>croissant(e)</option>
+                        <option value="DESC" {% if app.request.get('order') == "DESC" %}selected="selected"{% endif %}>décroissant(e)</option>
+                    
+                </select>
+            </div>
             
             <div class="navbar-right">
                 <div class="input-group">

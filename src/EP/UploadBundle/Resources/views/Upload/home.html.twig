@@ -1,0 +1,134 @@
+{% extends "EPUploadBundle::layout.html.twig" %}
+
+{% block body %}
+    
+    <h2>Accueil</h2>
+
+    <div class="row">
+        
+        <div class="col-xs-4">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    Vos derniers clients
+                    <a href="{{ path('ep_show_client') }}" class="btn btn-success pull-right">Voir plus</a>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-8">Nom, Prénom</th>
+                                <th class="col-xs-4">Société</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for client in clients %}
+                                <tr>
+                                    <td>{{ client.nom }}, {{ client.prenom }}</td>
+                                    <td>{{ client.societe }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xs-4">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    Vos derniers produits
+                    <a href="{{ path('ep_show_produit') }}" class="btn btn-success pull-right">Voir plus</a>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-1">référence</th>
+                                <th class="col-xs-8">désignation</th>
+                                <th class="col-xs-3">prix HT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for produit in produits %}
+                                <tr>
+                                    <td>{{ produit.reference }}</td>
+                                    <td>{{ produit.designation }}</td>
+                                    <td>{{ produit.montantUnitaireHT }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xs-4">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    Vos derniers fichiers
+                    <a href="{{ path('ep_view_file') }}" class="btn btn-success pull-right">Voir plus</a>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-7">nom</th>
+                                <th class="col-xs-2">catégorie</th>
+                                <th class="col-xs-3">etat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for fichier in fichiers %}
+                                <tr>
+                                    <td class="col-xs-7">{{ fichier.name|truncate(25, false, '...') }}</td>
+                                    <td class="col-xs-2">{{ fichier.category.name }}</td>
+                                    <td class="col-xs-3">
+
+                                        {% if fichier.treated is null %}
+                                            <span class="label label-info col-xs-10 col-xs-push-1">En attente</span>
+                                        {% else %}
+                                            <span class="label label-success col-xs-10 col-xs-push-1">Traité<br/>le {{ fichier.treated|date("Y-m-d") }}</span>
+                                        {% endif %}
+
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        
+        <div class="col-xs-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    tab 4
+                </div>
+                <div class="panel-body">
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xs-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    tab 5
+                </div>
+                <div class="panel-body">
+                    
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

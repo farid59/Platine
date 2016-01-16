@@ -27,4 +27,14 @@ class ProduitRepository extends \Doctrine\ORM\EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function findLast($user)
+    {
+        $queryBuilder = $this->createQueryBuilder('p')
+            ->andwhere("p.owner = :owner")
+            ->setParameter("owner",$user)
+            ->setMaxResults(5);
+
+        return $queryBuilder->getQuery()->getResult();
+    }
 }

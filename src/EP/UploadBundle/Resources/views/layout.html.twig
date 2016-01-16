@@ -7,6 +7,9 @@
 {% block links %}
 
     <li>
+        <a class="{{ app.request.attributes.get('_route')=='ep_user_homepage'?'active-menu':''}}"  href="{{ path('ep_user_homepage') }}"><i class="fa fa-home fa-2x"></i></i> Accueil</a>
+    </li>
+    <li>
         <a class="{{ app.request.attributes.get('_route')=='ep_upload_file'?'active-menu':''}}"  href="{{ path('ep_upload_file') }}"><i class="fa fa-upload fa-2x"></i></i> Envoyer des fichiers</a>
     </li>
     <li>
