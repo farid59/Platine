@@ -14,7 +14,7 @@ class FactureController extends Controller
 {
     public function editAction(Request $request) {
     	$facture = new Facture();
-    	$form = $this->createForm(new FactureType()),$facture);
+    	$form = $this->createForm(new FactureType(),$facture);
         $produits = $this->getDoctrine()->getManager()->getRepository("EPUploadBundle:Produit")->findAll();
     	$clients = $this->getDoctrine()->getManager()->getRepository("EPUploadBundle:Client")->findAll();
 
