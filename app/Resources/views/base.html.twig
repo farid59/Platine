@@ -1,190 +1,79 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}
- 
-            {% stylesheets filter='cssrewrite' output='css/compiled/style'
-                'css/bootstrap.min.css'
-                'css/font-awesome.min.css'
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
 
-                'css/sidebar.css'
-                'css/custom.css'
-            %}
-                <link rel="stylesheet" href="{{ asset_url }}" />
-            {% endstylesheets %}
+        {% stylesheets filter='cssrewrite' output='css/compiled/style'
+            'css/bootstrap.min.css'
+            'css/style.min.css'
+            'css/retina.min.css'
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
 
-        {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-    <!--
-    <div class="navbar navbar-inverse navbar-twitch" role="navigation">
-        <div class="container">
-            <div class="">
-                <ul class="nav navbar-nav">
-                    <li class="navbar-twitch-toggle">
-                        <a href="">
-                            <span class="small-nav" data-toggle="tooltip" data-placement="right"  title="Agrandir le menu"> 
-                                <img src="{{ asset('img/logo-notext.svg') }}">
-                            </span>
-                            <span class="full-nav"> EASY-Platform <img src="{{ asset('img/logo-notext.svg') }}"> </span>
-                        </a>
-                    </li>
-                    <li class="active">
-                        <a href="#">
-                            <span class="small-nav" data-toggle="tooltip" data-placement="right" title="Home"> 
-                                <span class="glyphicon glyphicon-home"></span> 
-                            </span>
-                            <span class="full-nav"> <span class="glyphicon glyphicon-home"></span>  Accueil </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#about-us">
-                            <span class="small-nav" data-toggle="tooltip" data-placement="right" title="About Us"> 
-                                <span class="fa fa-users"></span> 
-                            </span>
-                            <span class="full-nav"> <span class="fa fa-users"></span>  A Propos </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#contact-us">
-                            <span class="small-nav" data-toggle="tooltip" data-placement="right" title="Contact Us"> 
-                                <span class="glyphicon glyphicon-comment"></span> 
-                            </span>
-                            <span class="full-nav"> <span class="glyphicon glyphicon-comment"></span>  Contact </span>
-                        </a>
-                    </li>
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
 
-                    <li style="position: absolute; bottom: 25px">
-                        <a href="{{ path('fos_user_security_logout') }}">
-                            <span class="small-nav" data-toggle="tooltip" data-placement="right" title="Déconnexion"> 
-                                <i class="fa fa-power-off"></i>
-                            </span>
-                            <span class="full-nav"><i class="fa fa-power-off"></i> Déconnexion </span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="container-fluid">
-   {#     {% block body %}
-        {% endblock %} #}
-    </div>
--->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div id="wrapper">
-        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">EASY Platform</a> 
-            </div>
-            {# <div > 
-                {% block pagetitle %}Titre de la page{% endblock %} 
-            </div> #}
-        </nav>   
-           <!-- /. NAV TOP  -->
-        <nav class="navbar-default navbar-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav" id="main-menu">
-                <li class="text-center">
-                    <img src="{{ asset('img/logo-notext.svg') }}" class="user-image img-responsive"/>
-                    </li>
-                {% block links %} {% endblock %}
-                    
-                  
-                     
-                                       
-                    <!-- <li>
-                        <a href="#"><i class="fa fa-sitemap fa-2x"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">Second Level Link</a>
-                            </li>
-                            <li>
-                                <a href="#">Second Level Link</a>
-                            </li>
-                            <li>
-                                <a href="#">Second Level Link<span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
-
-                                </ul>
-                               
-                            </li>
-                        </ul>
-                      </li>   -->
-                    <li>
-                        <a  href="{{ path("fos_user_security_logout") }}"><i class="fa fa-power-off fa-2x"></i> Déconnexion</a>
-                    </li>   
-                </ul>
-               
-            </div>
+    {% include "::topbar.html.twig" %}
+    
+    <div class="container">
+        <div class="row">
             
-        </nav>  
-        <!-- /. NAV SIDE  -->
-        
-        <div id="page-wrapper" >
-            <div id="page-inner">
-                {% block body %}
-                {% endblock %}
+            <div id="sidebar-left" class="col-sm-1">
+                <div class="nav-collapse sidebar-nav collapse navbar-collapse bs-navbar-collapse">
+                    <ul class="nav nav-tabs nav-stacked main-menu">
+                        <li class="hidden-xs hidden-sm hidden-md show-lg"><img src="{{ asset('logo/logo-notext.svg') }}" width="100px" style="margin-bottom: 15px; margin-top:15px"></li>
+                        <li class="hidden-xs hidden-sm show-md hidden-lg"><img src="{{ asset('logo/logo-notext.svg') }}" width="75px" style="margin-bottom: 10px; margin-top:10px"></li>
+                        <li class="hidden-xs show-sm hidden-md hidden-lg"><img src="{{ asset('logo/logo-notext.svg') }}" width="50" style="margin-bottom: 5px; margin-top:5px"></li>
+
+                        {% block menu %}
+                        {% endblock %}
+                        
+                    </ul>
+                </div>
+            </div>
+            <a id="main-menu-toggle" class="hidden-xs open"><i class="fa fa-bars"></i></a>
+
+            <div id="content" class="col-sm-11">
+                <div class="row">
+                    {% block layout_body %}
+                    {% endblock %}
+                </div>
             </div>
         </div>
-        
+    </div>
+    
+    {% include "::footer.html.twig" %}
 
-        </div>
-     <!-- /. WRAPPER  -->
 
+{% javascripts output='js/compiled/script'
+'js/jquery-2.1.0.min.js'
 
-    {% javascripts output='js/compiled/script'
-        'js/jquery.min.js'
-        'js/bootstrap.min.js'
-        'js/less.min.js'
+'js/jquery-migrate-1.2.1.min.js'
+'js/bootstrap.min.js'
 
-        'js/jquery.metisMenu.js'
-        'js/sidebar.js'
-        'js/custom.js'
-    %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+'js/jquery-ui-1.10.3.custom.min.js'
+'js/jquery.sparkline.min.js'
+'js/jquery.flot.min.js'
+'js/jquery.flot.pie.min.js'
+'js/jquery.flot.stack.min.js'
+'js/jquery.flot.resize.min.js'
+'js/jquery.flot.time.min.js'
+'js/retina.min.js'
+'js/raphael.min.js'
+'js/justgage.1.0.1.min.js'
 
-    </body>
+'js/custom.min.js'
+'js/core.min.js'
+
+'js/pages/index.js'
+%}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+</body>
 </html>

@@ -1,41 +1,13 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}
-  Gérer vos documents - {{ parent() }}
 {% endblock %}
 
-{% block links %}
-
-    <li>
-        <a class="{{ app.request.attributes.get('_route')=='ep_user_homepage'?'active-menu':''}}"  href="{{ path('ep_user_homepage') }}"><i class="fa fa-home fa-2x"></i></i> Accueil</a>
-    </li>
-    <li>
-        <a class="{{ app.request.attributes.get('_route')=='ep_upload_file'?'active-menu':''}}"  href="{{ path('ep_upload_file') }}"><i class="fa fa-upload fa-2x"></i></i> Envoyer des fichiers</a>
-    </li>
-    <li>
-        <a class="{{ app.request.attributes.get('_route')=='ep_view_file'?'active-menu':''}}"  href="{{ path('ep_view_file') }}"><i class="fa fa-file fa-2x"></i> Mes fichiers</a>
-    </li>
-    <li>
-        <a class="{{ app.request.attributes.get('_route')=='ep_edit_fact'?'active-menu':''}}"  href="{{ path('ep_edit_fact') }}"><i class="fa fa-pencil-square fa-2x"></i> Editer une facture</a>
-    </li>       
-    <li>
-        <a class="{{ (app.request.attributes.get('_route')=='ep_show_client' or app.request.attributes.get('_route')=='ep_edit_client')?'active-menu':''}}"  href="{{ path('ep_show_client') }}"><i class="fa fa-users fa-2x"></i> Mes clients</a>
-    </li>   
-    <li>
-        <a class="{{ (app.request.attributes.get('_route')=='ep_show_produit' or app.request.attributes.get('_route')=='ep_edit_produit')?'active-menu':''}}"  href="{{ path('ep_show_produit') }}"><i class="fa fa-cube fa-2x"></i> Mes produits</a>
-    </li>    
+{% block menu %}
+    {% include "::menu-user.html.twig" %}
 {% endblock %}
 
-{% block body %}
-
-
-
-{# {{ include('EPUploadBundle:Upload:form.html.twig') }} #}
-
-
- {# {{ render(controller("EPUploadBundle:Upload:view")) }} #}
-{# {{ include('EPUploadBundle:Upload:view.html.twig') }}        #}
-{# {% block ep_upload_view %}
-{% endblock %} #}
-
+{% block layout_body %}
+    {% block body %}
+    {% endblock %}
 {% endblock %}
