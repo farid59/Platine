@@ -7,34 +7,39 @@
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
 
-<form name="form" id="form" class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{ path("fos_user_security_check") }}">
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
-    <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-        <input id="username" name="_username" value="{{ last_username }}" 
-            required="required" type="text" class="form-control" placeholder="{{ 'security.login.username'|trans }}">                                        
-    </div>
 
-    <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-        <input id="password" type="password" class="form-control" name="_password" placeholder="{{ 'security.login.password'|trans }}" required="required">
-    </div>    
 
-    <div class="input-group">
-        <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-        <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
-    </div>                                                                 
 
-    <div class="form-group">
-        <!-- Button -->
-        <div class="col-sm-12 controls">
-            <button type="submit" href="#" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-log-in"></i> {{ 'security.login.submit'|trans }}</button>                          
-        </div>
-    </div>
 
-</form>    
 
-<p>Vous n'avez pas de compte ? vous pouvez <a href="{{ path('fos_user_registration_register') }}">en créer un</a> très facilement !</p>
+
+    <h2>Connexion</h2>
+    <form name="form" id="form" class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{ path("fos_user_security_check") }}">
+        <fieldset>
+            <div class="input-wrap">
+            <div class="input-prepend input-group" title="Username">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                <input id="username" name="_username" value="{{ last_username }}" required="required" type="text" class="form-control" placeholder="{{ 'security.login.username'|trans }}">
+            </div>
+            </div>
+            <div class="input-wrap">
+            <div class="input-prepend input-group" title="Password">
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                <input id="password" type="password" class="form-control" name="_password" placeholder="{{ 'security.login.password'|trans }}" required="required">
+            </div>
+            </div>
+            <label class="remember" for="remember_me"> <input type="checkbox" id="remember_me remember" name="_remember_me" value="on" />{{ 'security.login.remember_me'|trans }}</label>
+
+            <div class="button-login">  
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+            <div class="clearfix"></div>
+    </form>
+    <hr>
+    <h3>Pas de compte ?</h3>
+    <p>
+        Pas de problème ! <a href="{{ path('fos_user_registration_register') }}">Cliquez ici</a> pour en créer un.
+    </p>
 
 {% endblock fos_user_content %}

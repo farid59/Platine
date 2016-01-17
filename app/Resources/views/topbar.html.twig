@@ -14,12 +14,12 @@
                     <!-- start: User Dropdown -->
                     <li class="dropdown">
                         <a class="btn dropdown-toggle" data-toggle="dropdown" href="index.html#">
-                            <i class="halflings user white"></i> Username
+                            <i class="halflings user white"></i> {{ app.user.username }}
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- <li><a href="index.html"><i class="halflings user white"></i> Profile</a></li> -->
-                            <li><a href="{{ path('fos_user_security_logout') }}"><i class="halflings off white"></i> Logout</a></li>
+                            <li><a href="{{ path('fos_user_security_logout') }}"><i class="halflings off white"></i> Déconnexion</a></li>
                         </ul>
                     </li>
                     <!-- end: User Dropdown -->
