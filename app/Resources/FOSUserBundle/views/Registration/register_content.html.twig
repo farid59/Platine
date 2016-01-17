@@ -2,27 +2,33 @@
 
 <h2>Enregistrement</h2>
 {{ form_start(form, {'attr': {'class' : 'form-horizontal'}}) }}
-
-    {{ form_errors(form) }}
+    
+    <div class="container">
+        {{ form_errors(form) }}
+        {{ form_errors(form.username) }}
+        {{ form_errors(form.plainPassword.first) }}
+        {{ form_errors(form.plainPassword.second) }}
+        {{ form_errors(form.email) }}
+    </div>
 
     <div class="input-group" style="margin-bottom: 25px">
         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-        {{ form_row(form.username, {'label': false, 'attr' : {'class' : 'form-control', 'placeholder' : 'form.username' }}) }}
+        {{ form_widget(form.username, {'label': false, 'attr' : {'class' : 'form-control', 'placeholder' : 'form.username' }}) }}
     </div>
 
     <div class="input-group" style="margin-bottom: 25px">
         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-        {{ form_row(form.plainPassword.first, {'label': false, 'attr' : {'class' : 'form-control', 'placeholder' : 'form.password' }}) }}
+        {{ form_widget(form.plainPassword.first, {'label': false, 'attr' : {'class' : 'form-control', 'placeholder' : 'form.password' }}) }}
     </div>    
 
     <div class="input-group" style="margin-bottom: 25px">
         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-        {{ form_row(form.plainPassword.second, {'label': false, 'attr' : {'class' : 'form-control', 'placeholder' : 'form.password_confirmation' }}) }}
+        {{ form_widget(form.plainPassword.second, {'label': false, 'attr' : {'class' : 'form-control', 'placeholder' : 'form.password_confirmation' }}) }}
     </div>    
 
     <div class="input-group" style="margin-bottom: 25px">
         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-        {{ form_row(form.email, {'label': false, 'attr' : {'class' : 'form-control', 'placeholder' : 'form.email' }}) }}
+        {{ form_widget(form.email, {'label': false, 'attr' : {'class' : 'form-control', 'placeholder' : 'form.email' }}) }}
     </div>               
 
     <div class="form-group">
