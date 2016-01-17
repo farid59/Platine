@@ -59,14 +59,14 @@
 
         <div class="funkyradio">
             {% for choix in form.category %}
-                <div class="funkyradio-success {% if loop.index == 1 %}funkyradio-first{% endif %}">
+                <div class="funkyradio-danger {% if loop.index == 1 %}funkyradio-first{% endif %}">
                     {{ form_widget(choix) }}
                     {{ form_label(choix) }}
                 </div>
             {% endfor %}
         </div>
 
-        {{ form_widget(form.Envoyer, { 'attr' : { 'class' : 'btn btn-success btn-block'}}) }}
+        {{ form_widget(form.Envoyer, { 'attr' : { 'class' : 'btn btn-customRed btn-block'}}) }}
     {{ form_end(form) }}
 </div>
 

@@ -1,0 +1,5 @@
+*[data-rel="tooltip"] {
+    cursor: pointer !important;
+}
+
+.btn-customRed { background-color: hsl(0, 100%, 22%) !important; background-repeat: repeat-x; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ea0000", endColorstr="#700000"); background-image: -khtml-gradient(linear, left top, left bottom, from(#ea0000), to(#700000)); background-image: -moz-linear-gradient(top, #ea0000, #700000); background-image: -ms-linear-gradient(top, #ea0000, #700000); background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ea0000), color-stop(100%, #700000)); background-image: -webkit-linear-gradient(top, #ea0000, #700000); background-image: -o-linear-gradient(top, #ea0000, #700000); background-image: linear-gradient(#ea0000, #700000); border-color: #700000 #700000 hsl(0, 100%, 16%); color: #fff !important; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.39); -webkit-font-smoothing: antialiased; }

@@ -35,7 +35,7 @@
                           {% if doc.treated is null %}
                             <span class="label label-info col-xs-10 col-xs-push-1">En attente</span>
                           {% else %}
-                            <span class="label label-success col-xs-10 col-xs-push-1">Traité<br/>le {{ doc.treated|date("Y-m-d") }}</span>
+                            <span class="label label-success col-xs-10 col-xs-push-1" data-rel="tooltip" title="Traité le {{ doc.treated|date("d/m/Y à H:m") }}">Traité</span>
 
                           {% endif %}
 
