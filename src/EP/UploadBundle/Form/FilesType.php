@@ -15,11 +15,11 @@ class FilesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('file','file')
             ->add('category', 'entity', array(
                 'class'    => 'EPUploadBundle:Category',
                 'property' => 'name',
-                'multiple' => false))
+                'multiple' => false,
+                'expanded' => true))
             ->add('Envoyer','submit')  
         ;
     }

@@ -2,19 +2,14 @@
 
 {# {% block ep_upload_form %} #}
 
-
+{#
 <div class="well">
 <h2>Ajouter un document</h2>
 
- 	{# <form method="post" {{ form_enctype(form) }} > #}
-		{# {{ form(form) }} #}
-	{# </form>  #}
 </div>
 
 <form method="post" {{ form_enctype(form) }} >
-{# <div class="container"> #}
     <div class="row">    
-        {# <div class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">   #}
            <div class="col-md-4 border">
             <!-- image-preview-filename input [CUT FROM HERE]-->
             <div class="input-group image-preview">
@@ -28,7 +23,7 @@
                     <div class="btn btn-default image-preview-input">
                         <span class="glyphicon glyphicon-folder-open"></span>
                         <span class="image-preview-input-title">Browse</span>
-                       	{{ form_widget(form.file, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_widget(form.file, {'attr': {'class': 'form-control'}}) }}
                         <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/> <!-- rename it -->
                     </div>
                 </span>
@@ -41,17 +36,16 @@
         </div>
 
     </div>
-{# </div> #}
-{# {% endblock %} #}
-{# 			<img 
-			  src="{{ asset(file.webPath) }}"
-			  alt="{{ file.alt }}"
-			/> 
- #}
-			{# 
-			<div style="height: 300px;width: auto;" class="">
-				<object data="{{ asset(file.webPath) }}" type="text/html" codetype="application/pdf" ></object>
-			</div> #}
-		{# <div class="col-sm-3">
-			<iframe src="{{ asset(file.webPath) }}" width="300" height="300" align="middle"></iframe>
-		</div> #}
+#}
+
+<div class="form-group">
+    <label class="control-label">File Upload</label>
+    <div class="controls">
+        {{ form(form) }}
+        <div id="dropzone">
+            <form action="{{ app.request.uri }}" method="POST" class="dropzone">
+
+            </form>
+        </div>
+    </div>
+</div>

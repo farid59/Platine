@@ -175,7 +175,7 @@ class Files
     public function getUploadDir()
     {
         // On retourne le chemin relatif vers l'image pour un navigateur (relatif au répertoire /web donc)
-        return '../uploads/img/'.$this->category->getName();
+        return '../uploads/files';
     }
 
     protected function getUploadRootDir()

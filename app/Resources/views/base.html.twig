@@ -49,31 +49,32 @@
     
     {% include "::footer.html.twig" %}
 
+{% block javascripts %}
+    {% javascripts output='js/compiled/script'
+    'js/jquery-2.1.0.min.js'
 
-{% javascripts output='js/compiled/script'
-'js/jquery-2.1.0.min.js'
+    'js/jquery-migrate-1.2.1.min.js'
+    'js/bootstrap.min.js'
 
-'js/jquery-migrate-1.2.1.min.js'
-'js/bootstrap.min.js'
+    'js/jquery-ui-1.10.3.custom.min.js'
+    'js/jquery.sparkline.min.js'
+    'js/jquery.flot.min.js'
+    'js/jquery.flot.pie.min.js'
+    'js/jquery.flot.stack.min.js'
+    'js/jquery.flot.resize.min.js'
+    'js/jquery.flot.time.min.js'
+    'js/retina.min.js'
+    'js/raphael.min.js'
+    'js/justgage.1.0.1.min.js'
 
-'js/jquery-ui-1.10.3.custom.min.js'
-'js/jquery.sparkline.min.js'
-'js/jquery.flot.min.js'
-'js/jquery.flot.pie.min.js'
-'js/jquery.flot.stack.min.js'
-'js/jquery.flot.resize.min.js'
-'js/jquery.flot.time.min.js'
-'js/retina.min.js'
-'js/raphael.min.js'
-'js/justgage.1.0.1.min.js'
+    'js/custom.min.js'
+    'js/core.min.js'
 
-'js/custom.min.js'
-'js/core.min.js'
-
-'js/pages/index.js'
-%}
-<script type="text/javascript" src="{{ asset_url }}"></script>
-{% endjavascripts %}
+    'js/pages/index.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
 
 </body>
 </html>

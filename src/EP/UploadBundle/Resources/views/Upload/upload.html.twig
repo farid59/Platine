@@ -10,6 +10,21 @@
 
 {% endblock %}
 
-{# {% block javascripts %}
-	<script type="text/javascript" src="{{ asset('js/scripts.min.js') }}"></script>
-{% endblock %} #}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{asset('js/dropzone.min.js')}}"></script>
+    <!-- // <script src="assets/js/pages/form-dropzone.js"></script> -->
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            /*------ Dropzone Init ------*/
+            $(".dropzone").dropzone({
+                "uploadMultiple" : false,
+                "maxFiles" : 1,
+            });
+        });
+    </script>
+
+{% endblock %}
