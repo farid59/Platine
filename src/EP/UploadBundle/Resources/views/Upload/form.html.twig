@@ -38,14 +38,36 @@
     </div>
 #}
 
-<div class="form-group">
-    <label class="control-label">File Upload</label>
-    <div class="controls">
-        {{ form(form) }}
-        <div id="dropzone">
-            <form action="{{ app.request.uri }}" method="POST" class="dropzone">
 
-            </form>
+<div class="col-xs-10">
+    <div class="form-group">
+        <label class="control-label">Fichier</label>
+        <div class="controls">
+            <div id="dropzone">
+                <form action="{{ app.request.uri }}" method="POST" class="dropzone">
+
+                </form>
+            </div>
         </div>
     </div>
 </div>
+
+<div class="col-xs-2">
+    {{ form_start(form) }}
+        
+        {{ form_label(form.category, "Catégorie") }}
+
+        <div class="funkyradio">
+            {% for choix in form.category %}
+                <div class="funkyradio-success {% if loop.index == 1 %}funkyradio-first{% endif %}">
+                    {{ form_widget(choix) }}
+                    {{ form_label(choix) }}
+                </div>
+            {% endfor %}
+        </div>
+
+        {{ form_widget(form.Envoyer, { 'attr' : { 'class' : 'btn btn-success btn-block'}}) }}
+    {{ form_end(form) }}
+</div>
+
+<div class="clearfix"></div>

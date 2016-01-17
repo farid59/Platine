@@ -28,3 +28,9 @@
     </script>
 
 {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/funkyradio.css') }}">
+{% endblock %}
