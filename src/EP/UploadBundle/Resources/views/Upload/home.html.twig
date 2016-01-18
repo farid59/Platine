@@ -1,6 +1,114 @@
 {% extends "EPUploadBundle::layout.html.twig" %}
 
 {% block body %}
+    <div class="col-lg-4">
+        <div class="box">
+            <div class="box-header">
+                <h2><i class="fa fa-user"></i><span class="break"></span>Derniers clients</h2>
+                <div class="box-icon">
+                    <a href="{{ path('ep_show_client') }}" data-rel="tooltip" title="Voir plus"><i class="fa fa-eye"></i></a>
+                </div>
+            </div>
+            <div class="box-content">
+                <table class="table table-bordered table-striped table-condensed">
+                      <thead>
+                            <tr>
+                                <th class="col-xs-8">Nom, Prénom</th>
+                                <th class="col-xs-4">Société</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for client in clients %}
+                                <tr>
+                                    <td>{{ client.nom }}, {{ client.prenom }}</td>
+                                    <td>{{ client.societe }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                 </table>       
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="box">
+            <div class="box-header">
+                <h2><i class="fa fa-user"></i><span class="break"></span>Derniers produits</h2>
+                <div class="box-icon">
+                    <a href="{{ path('ep_show_produit') }}" data-rel="tooltip" title="Voir plus"><i class="fa fa-eye"></i></a>
+                </div>
+            </div>
+            <div class="box-content">
+                <table class="table table-bordered table-striped table-condensed">
+                      <thead>
+                            <tr>
+                                <th class="col-xs-1">référence</th>
+                                <th class="col-xs-8">désignation</th>
+                                <th class="col-xs-3">prix HT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for produit in produits %}
+                                <tr>
+                                    <td>{{ produit.reference }}</td>
+                                    <td>{{ produit.designation }}</td>
+                                    <td>{{ produit.montantUnitaireHT }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                 </table>       
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="box">
+            <div class="box-header">
+                <h2><i class="fa fa-user"></i><span class="break"></span>Derniers fichiers</h2>
+                <div class="box-icon">
+                    <a href="{{ path('ep_view_file') }}" data-rel="tooltip" title="Voir plus"><i class="fa fa-eye"></i></a>
+                </div>
+            </div>
+            <div class="box-content">
+                <table class="table table-bordered table-striped table-condensed">
+                      <thead>
+                            <tr>
+                                <th class="col-xs-7">nom</th>
+                                <th class="col-xs-2">catégorie</th>
+                                <th class="col-xs-3">etat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for fichier in fichiers %}
+                                <tr>
+                                    <td class="col-xs-7">
+                                        <span class="show-xs hidden-sm hidden-md hidden-lg">{{ fichier.name|truncate(30, false, '...') }}</span>
+                                        <span class="hidden-xs show-sm hidden-md hidden-lg">{{ fichier.name|truncate(40, false, '...') }}</span>
+                                        <span class="hidden-xs hidden-sm show-md hidden-lg">{{ fichier.name|truncate(60, false, '...') }}</span>
+                                        <span class="hidden-xs hidden-sm hidden-md show-lg">{{ fichier.name|truncate(30, false, '...') }}</span>
+                                    </td>
+                                    <td class="col-xs-2">{{ fichier.category.name }}</td>
+                                    <td class="col-xs-3">
+
+                                        {% if fichier.treated is null %}
+                                            <span class="label label-info col-xs-10 col-xs-push-1">En attente</span>
+                                        {% else %}
+                                            <span class="label label-success col-xs-10 col-xs-push-1">Traité</span>
+                                        {% endif %}
+
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                 </table>       
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+{% block old_body %}
     
     <h2>Accueil</h2>
 

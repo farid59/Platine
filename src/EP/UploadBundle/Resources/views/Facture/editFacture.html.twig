@@ -157,25 +157,11 @@
 
 </div>
 
+{% endblock %}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{# On charge la bibliothèque jQuery. Ici, je la prends depuis le CDN google
-   mais si vous l'avez en local, changez simplement l'adresse. #}
-<script src="{{ asset('js/jquery.min.js') }}"></script>
+{% block javascripts %}
+{{ parent() }}
 
 {# Voici le script en question : #}
 <script type="text/javascript">
@@ -292,11 +278,7 @@
 
 
   });
-</script>
 
-
-
-<script type="text/javascript">
   // Fonction de mise à jour des prix
     function updatePrices() {
         var prixHTInput = $("#ep_uploadbundle_facture_totalHT");
@@ -340,10 +322,6 @@
 
     }
 
-</script>
-
-
-<script type="text/javascript">
     
     $(document).ready(function(){
 
@@ -389,4 +367,6 @@
     }
 
 </script>
+
+
 {% endblock %}
