@@ -10,3 +10,16 @@ div.dz-default.dz-message {
     width: 591px !important;
     margin-left: -300px !important;
 }
+
+.halflings.file.file-unknown:before {
+    font-size: 25px;
+}
+
+.halflings.file.file-unknown {
+    vertical-align: top !important;
+}
+
+.filetype {
+    vertical-align: top;
+}
+
