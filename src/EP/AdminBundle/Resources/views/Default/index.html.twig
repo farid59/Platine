@@ -4,16 +4,17 @@
     
     {% for user in users %}
         
-        <a href="{{ path('ep_admin_user_files', {'username' : user.username}) }}">
-            <div class="col-lg-2" style="background-color: pink; border: solid 1px black; border-radius: 10px; text-align: center;">
-
-                {{ user }} 
+        <div class="col-sm-2">
+            
+            <a class="quick-button" href="{{ path('ep_admin_user_files', {'username' : user.username}) }}">
+                <i class="fa fa-user fa-3x"></i>
+                <p>{{ user }}</p>
                 {% if count[ user.username ] > 0 %}
-                    <span class="badge" style="float: right; margin-right: -15px">{{ count[ user.username ] }}</span>
+                    <span class="notification blue">{{ count[ user.username ] }}</span>
                 {% endif %}
+            </a>
 
-            </div>
-        </a>
+        </div>
 
     {% endfor %}
 
