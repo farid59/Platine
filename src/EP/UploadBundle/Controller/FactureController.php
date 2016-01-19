@@ -9,6 +9,11 @@ use EP\UploadBundle\Entity\FactureProduit;
 use EP\UploadBundle\Form\FactureProduitType;
 use EP\UploadBundle\Entity\Facture;
 use EP\UploadBundle\Form\FactureType;
+use EP\UploadBundle\Entity\Files;
+
+
+use Knp\Snappy\Pdf;
+
 
 class FactureController extends Controller
 {
@@ -44,11 +49,9 @@ class FactureController extends Controller
 		        	$em->persist($p);
 		        }
 		        $em->flush();
-
-
+		        $this->generatePdf($facture,$listProduits);
 		        return $this->redirectToRoute("ep_show_client");
 		    } else {
-		    	var_dump($request->request);
 		    	return new Response("<body></body>");
 		    }
     	}
@@ -59,8 +62,47 @@ class FactureController extends Controller
     		'clients' => $clients
     	));
     }
-
-    // TODO DownloadAction
     
+    public function generatePdf($facture , $listProduits){
+        $category_comptable = $this->getDoctrine()->getManager()->getRepository("EPUploadBundle:Category")->findOneByName('Comptable');
+
+    	$file = new Files();
+    	$file->setOwner($this->container->get('security.context')->getToken()->getUser());
+    	$file->setCategory($category_comptable);
+		$html = $this->renderView('EPUploadBundle:Facture:facturePDF.html.twig',
+		        array(
+		            'facture' => $facture,
+		            'produits' => $listProduits		        
+		            ));
+		$dat = $facture->getDate()->format('Y-m-d');
+		$path = $file->getUploadRootDir().'/';
+		// $path = '../uploads/tmp/'.$facture->getId().'_facture_'.$dat.'.pdf';
+		$fileName = $facture->getId().'_facture_'.$dat.'.pdf';
+        $this->get('knp_snappy.pdf')->generateFromHtml(
+		    $html,
+		    $path.$fileName
+		);
+		
+		$file->setName($fileName);
+        $file->setExt('pdf');
+
+    	$em = $this->getDoctrine()->getManager();
+    	$em->persist($file);
+    	$em->flush();
+
+
+		// $response =  new Response(
+		//     $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+		//     200,
+		//     array(
+		//         'Content-Type'          => 'application/pdf',
+		//         'Content-Disposition'   => 'attachment; filename='.$path2
+		//     )
+		// );
+		// $pdf = $this->get('knp_snappy.pdf')->getOutputFromHtml($html);
+		
+		// return $response;
+		//$file->setFile($fichier);
+    }
 
 }

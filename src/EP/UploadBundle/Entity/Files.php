@@ -107,7 +107,9 @@ class Files
     {
         // Si jamais il n'y a pas de fichier (champ facultatif)
         if (null === $this->file) {
-          return;
+            $this->path = $this->getUploadRootDir().'/'.$this->getId().'_'.$this->getName();
+            die($this->path);
+            return;
         }
 
         // Le nom du fichier est son id, on doit juste stocker également son extension
@@ -175,13 +177,13 @@ class Files
     public function getUploadDir()
     {
         // On retourne le chemin relatif vers l'image pour un navigateur (relatif au répertoire /web donc)
-        return '../uploads/files';
+        return 'uploads/files';
     }
 
-    protected function getUploadRootDir()
+    public function getUploadRootDir()
     {
         // On retourne le chemin relatif vers l'image pour notre code PHP
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+        return __DIR__.'/../../../../'.$this->getUploadDir();
     }
 
 
