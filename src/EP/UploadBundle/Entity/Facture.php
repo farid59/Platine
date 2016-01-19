@@ -91,9 +91,9 @@ class Facture
     private $totalFacture;
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
-     * @ORM\Column(name="echeance", type="datetime")
+     * @ORM\Column(name="echeance", type="date")
      */
     private $echeance;
 
@@ -376,7 +376,7 @@ class Facture
     /**
      * Set echeance
      *
-     * @param \DateTime $echeance
+     * @param \Date $echeance
      *
      * @return Facture
      */
@@ -390,7 +390,7 @@ class Facture
     /**
      * Get echeance
      *
-     * @return \DateTime
+     * @return \Date
      */
     public function getEcheance()
     {
