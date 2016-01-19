@@ -32,5 +32,22 @@ class User extends BaseUser
     {
         return $this->id;
     }
+
+
+    public function getCanEditFacture()
+    {
+        return in_array("ACCESS_EDIT_FACTURE", $this->getRoles());
+    }
+
+    public function setCanEditFacture($canEditFacture)
+    {
+        if ($canEditFacture) {
+            $this->addRole("ACCESS_EDIT_FACTURE");
+        } else {
+            $this->removeRole("ACCESS_EDIT_FACTURE");
+        }
+
+        return $this;
+    }
 }
 

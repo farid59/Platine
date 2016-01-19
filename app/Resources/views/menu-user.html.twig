@@ -1,6 +1,9 @@
 <li><a href="{{ path('ep_user_homepage') }}"><i class="fa fa-home"></i><span class="hidden-sm"> Accueil</span></a></li>
 <li><a href="{{ path('ep_upload_file') }}"><i class="fa fa-upload"></i><span class="hidden-sm"> Envoyer des fichiers</span></a></li>
 <li><a href="{{ path('ep_view_file') }}"><i class="fa fa-file"></i><span class="hidden-sm"> Mes fichiers</span></a></li>
-<li><a href="{{ path('ep_edit_fact') }}"><i class="fa fa-pencil-square"></i><span class="hidden-sm"> Editer une facture</span></a></li>
-<li {% if app.request.get('_route') == 'ep_edit_client' %}class="active"{% endif %}><a href="{{ path('ep_show_client') }}"><i class="fa fa-users"></i><span class="hidden-sm"> Mes clients</span></a></li>
-<li {% if app.request.get('_route') == 'ep_edit_produit' %}class="active"{% endif %}><a href="{{ path('ep_show_produit') }}"><i class="fa fa-barcode"></i><span class="hidden-sm"> Mes produits</span></a></li>
+
+{% if app.user.canEditFacture %}
+    <li><a href="{{ path('ep_edit_fact') }}"><i class="fa fa-pencil-square"></i><span class="hidden-sm"> Editer une facture</span></a></li>
+    <li {% if app.request.get('_route') == 'ep_edit_client' %}class="active"{% endif %}><a href="{{ path('ep_show_client') }}"><i class="fa fa-users"></i><span class="hidden-sm"> Mes clients</span></a></li>
+    <li {% if app.request.get('_route') == 'ep_edit_produit' %}class="active"{% endif %}><a href="{{ path('ep_show_produit') }}"><i class="fa fa-barcode"></i><span class="hidden-sm"> Mes produits</span></a></li>
+{% endif %}

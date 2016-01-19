@@ -4,6 +4,7 @@ namespace EP\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Form\UserGrantsType;
 
 class DefaultController extends Controller
 {
@@ -38,7 +39,13 @@ class DefaultController extends Controller
 
     public function userAction($username, Request $request)
     {
-        $user = $users = $this->container->get("fos_user_.user_manager")->findUserByUsername($username);
+        $user = $this->container->get("fos_user_.user_manager")->findUserByUsername($username);
+        $userForm = $this->createForm(new UserGrantsType(), $user);
+
+        if ($userForm->handleRequest($request)->isValid()) {
+            $this->getDoctrine()->getManager()->persist($user);
+            $this->getDoctrine()->getManager()->flush();
+        }
 
         $search = $request->query->get('search') or $search = "";
         $orderby = $request->query->get('orderby') or $orderby = "name";
@@ -66,7 +73,8 @@ class DefaultController extends Controller
             "user" => $user,
             "docs" => $listDocs,
             'categories' => $categories,
-            'extensions' => $extensions
+            'extensions' => $extensions,
+            'userForm' => $userForm->createView()
         ));
     }
 }
