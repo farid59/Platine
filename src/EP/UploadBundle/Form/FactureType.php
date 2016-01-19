@@ -29,7 +29,9 @@ class FactureType extends AbstractType
             ->add('totalTTC', 'hidden')
             ->add('pourcentage')
             ->add('totalFacture', 'hidden')
-            ->add('echeance')
+            ->add('echeance', 'date', array(
+                'widget' => 'single_text'
+            ))
             ->add('commentaires')
             ->add('produits', 'collection', array(
                 'type' => new FactureProduitType(),
