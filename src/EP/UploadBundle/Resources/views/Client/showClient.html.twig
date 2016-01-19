@@ -2,11 +2,94 @@
 
 {% block body %}
 
-{# {{ include('EPUploadBundle:Upload:form.html.twig') }} #}
-
 <h2>Mes clients</h2>
 
+<div class="box">
+  
+  <div class="box-header">
+    Mes clients
+    <div class="box-icon">
+        <a href="{{ path('ep_edit_client') }}"><i class="fa fa-plus"></i> Ajouter un client</a>
+    </div>
+  </div>
+  <div class="box-content">
 
+      <div class="row">
+        <form class="col-lg-12">
+        
+          <div class="col-lg-2">
+          <div class="form-group">
+              <div class="col-md-12">
+              <select name="type" class="form-control">
+                  <option value="nom" {% if app.request.query.get('type') == "nom" %}selected="selected"{% endif %}>Rechercher par nom</option>
+                  <option value="prenom" {% if app.request.query.get('type') == "prenom" %}selected="selected"{% endif %}>Rechercher par prénom</option>
+                  <option value="societe" {% if app.request.query.get('type') == "societe" %}selected="selected"{% endif %}>Rechercher par société</option>
+                  <option value="telephone" {% if app.request.query.get('type') == "telephone" %}selected="selected"{% endif %}>Rechercher par téléphone</option>
+                  <option value="mobile" {% if app.request.query.get('type') == "mobile" %}selected="selected"{% endif %}>Rechercher par mobile</option>
+                  <option value="email" {% if app.request.query.get('type') == "email" %}selected="selected"{% endif %}>Rechercher par email</option>    
+              </select>
+              </div>
+          </div>
+          </div>
+
+          <div class="col-lg-3 col-lg-push-7">
+          <div class="form-group">
+              <div class="input-group col-xs-12">
+                  <input type="text" class="form-control" placeholder="Search" name="search" value="{{ app.request.get('search') }}">
+                  <div class="input-group-btn">
+                      <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                  </div>
+              </div>
+          </div>
+          </div>
+
+      </form>
+    </div>
+
+      <table class="table table-striped table-condensed">
+        <thead>
+          <tr>
+            <th class="col-xs-1">Société</th>
+            <th class="col-xs-1">Prénom</th>                      
+            <th class="col-xs-5">Nom</th>
+            <th class="col-xs-1">Téléphone</th>
+            <th class="col-xs-1">Mobile</th>
+            <th class="col-xs-2">Email</th>
+            <th class="col-xs-1"></th>   
+          </tr>
+        </thead>
+        <tbody>
+        {% for client in clients %}
+          <tr>
+            <td>{{ client.societe }}</td>
+            <td>{{ client.prenom }}</td>
+            <td>{{ client.nom }}</td>
+            <td>{{ client.telephone }}</td>
+            <td>{{ client.mobile }}</td>
+            <td>{{ client.email }}</td>
+            <td>
+              <a title="Supprimer" href="{{ path('ep_delete_client', { 'id' : client.id }) }}" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+              <a title="Modifier" href="{{ path('ep_modify_client', {'id' : client.id }) }}" class="btn btn-info"><i class="fa fa-edit"></i></a>
+
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+
+
+  </div>
+
+</div>
+
+
+{% endblock %}
+
+
+
+
+{#
 
 <nav id="navbar" class="navbar" role="navigation">
     <form class="col-lg-10">
@@ -71,12 +154,12 @@
                     <tbody>
                     {% for client in clients %}
                       <tr>
-                      	<td>{{ client.societe }}</td>
-                      	<td>{{ client.prenom }}</td>
-                      	<td>{{ client.nom }}</td>
-                      	<td>{{ client.telephone }}</td>
-                      	<td>{{ client.mobile }}</td>
-                      	<td>{{ client.email }}</td>
+                        <td>{{ client.societe }}</td>
+                        <td>{{ client.prenom }}</td>
+                        <td>{{ client.nom }}</td>
+                        <td>{{ client.telephone }}</td>
+                        <td>{{ client.mobile }}</td>
+                        <td>{{ client.email }}</td>
                         <td>
                           <a title="Supprimer" href="{{ path('ep_delete_client', { 'id' : client.id }) }}" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
                           <a title="Modifier" href="{{ path('ep_modify_client', {'id' : client.id }) }}" class="btn btn-info"><i class="fa fa-edit"></i></a>
@@ -92,4 +175,4 @@
   </div>
 
 {% endif %}
-{% endblock %}
+#}

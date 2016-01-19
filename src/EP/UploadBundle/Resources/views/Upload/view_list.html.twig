@@ -2,18 +2,21 @@
 
 {% block body %}
 
-<h2>Vos fichiers</h2>
+<div class="box">
+    <div class="box-header">Vos Fichiers</div>
+    <div class="box-content">
+        {# searchbar pour la liste de documents #}
+        {% include "EPUploadBundle:Upload:navbar.html.twig" %}
 
-{# searchbar pour la liste de documents #}
-{% include "EPUploadBundle:Upload:navbar.html.twig" %}
+        {# liste des documents #}
+        {% include 'EPUploadBundle:Upload:list.html.twig' with { 'docs' : docs, } %}
 
-
-{# liste des documents #}
-{% include 'EPUploadBundle:Upload:list.html.twig' with { 'docs' : docs, } %}
-
-{# pagination #}
-<div class="navigation">
-    {{ knp_pagination_render(docs) }}
+        {# pagination #}
+        <div class="navigation">
+            {{ knp_pagination_render(docs) }}
+        </div>
+        <div class="clearfix"></div>
+    </div>
 </div>
 
 {% endblock %}
