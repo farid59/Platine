@@ -48,6 +48,7 @@ class FactureController extends Controller
 
 		        return $this->redirectToRoute("ep_show_client");
 		    } else {
+		    	var_dump($request->request);
 		    	return new Response("<body></body>");
 		    }
     	}

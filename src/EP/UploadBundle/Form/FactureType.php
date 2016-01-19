@@ -30,7 +30,8 @@ class FactureType extends AbstractType
             ->add('pourcentage')
             ->add('totalFacture', 'hidden')
             ->add('echeance', 'date', array(
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'format' => 'MM/dd/yyyy'
             ))
             ->add('commentaires')
             ->add('produits', 'collection', array(
