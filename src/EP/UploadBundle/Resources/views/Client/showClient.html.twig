@@ -8,32 +8,46 @@
 
 
 
-<nav id="navbar" class="navbar navbar-default" role="navigation">
-    <form class="navbar-form">
-      <label>Rechercher : </label>
-      <div class="input-group col-xs-2">
-        <select name="type" class="col-xs-12">
-          <option value="nom" {% if app.request.query.get('type') == "nom" %}selected="selected"{% endif %}>Un nom</option>
-          <option value="prenom" {% if app.request.query.get('type') == "prenom" %}selected="selected"{% endif %}>Un prénom</option>
-          <option value="societe" {% if app.request.query.get('type') == "societe" %}selected="selected"{% endif %}>Une société</option>
-          <option value="telephone" {% if app.request.query.get('type') == "telephone" %}selected="selected"{% endif %}>Un téléphone</option>
-          <option value="mobile" {% if app.request.query.get('type') == "mobile" %}selected="selected"{% endif %}>Un mobile</option>
-          <option value="email" {% if app.request.query.get('type') == "email" %}selected="selected"{% endif %}>Un email</option>
-        </select>
-      </div>
-      <div class="input-group col-xs-2">
-          <input type="text" class="form-control" placeholder="Search" name="search" value="{{ app.request.get('search') }}">
-          <div class="input-group-btn">
-              <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-          </div>
-      </div>
+<nav id="navbar" class="navbar" role="navigation">
+    <form class="col-lg-10">
+        
+        <div class="col-lg-3">
+        <div class="form-group">
+            <label for="type" class="control-label col-md-6">Rechercher : </label>
+            <div class="col-md-6">
+            <select name="type" class="form-control">
+                <option value="nom" {% if app.request.query.get('type') == "nom" %}selected="selected"{% endif %}>Par nom</option>
+                <option value="prenom" {% if app.request.query.get('type') == "prenom" %}selected="selected"{% endif %}>Par prénom</option>
+                <option value="societe" {% if app.request.query.get('type') == "societe" %}selected="selected"{% endif %}>Par société</option>
+                <option value="telephone" {% if app.request.query.get('type') == "telephone" %}selected="selected"{% endif %}>Par téléphone</option>
+                <option value="mobile" {% if app.request.query.get('type') == "mobile" %}selected="selected"{% endif %}>Par mobile</option>
+                <option value="email" {% if app.request.query.get('type') == "email" %}selected="selected"{% endif %}>Par email</option>    
+            </select>
+            </div>
+        </div>
+        </div>
 
+        <div class="col-lg-5">
+        <div class="form-group">
+            <div class="input-group col-xs-12">
+                <input type="text" class="form-control" placeholder="Search" name="search" value="{{ app.request.get('search') }}">
+                <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                </div>
+            </div>
+        </div>
+        </div>
 
-      <div class="navbar-right">
-        <a href="{{path("ep_edit_client")}}" class="btn btn-red" ><i class="fa fa-plus"></i> Nouveau client</a>
-      </div>
     </form>
+
+    <div class="col-lg-2">
+      <div class="col-lg-12">
+        
+          <a href="" class="btn btn-info">Ajouter un client</a>
+      </div>
+    </div>
 </nav>
+
 
 
 {% if clients is defined %}
@@ -64,8 +78,8 @@
                       	<td>{{ client.mobile }}</td>
                       	<td>{{ client.email }}</td>
                         <td>
-                          <a title="Supprimer" href="{{ path('ep_delete_client', { 'id' : client.id }) }}" class="btn btn-default"><i class="fa fa-trash-o"></i></a>
-                          <a title="Modifier" href="{{ path('ep_modify_client', {'id' : client.id }) }}" class="btn btn-default"><i class="fa fa-edit"></i></a>
+                          <a title="Supprimer" href="{{ path('ep_delete_client', { 'id' : client.id }) }}" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+                          <a title="Modifier" href="{{ path('ep_modify_client', {'id' : client.id }) }}" class="btn btn-info"><i class="fa fa-edit"></i></a>
 
                         </td>
                       </tr>
