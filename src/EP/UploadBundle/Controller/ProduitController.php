@@ -9,7 +9,11 @@ use EP\UploadBundle\Entity\Files;
 use EP\UploadBundle\Form\FilesType;
 use EP\UploadBundle\Entity\Produit;
 use EP\UploadBundle\Form\ProduitType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
+/**
+ * @Security("has_role('ACCESS_EDIT_FACTURE')")
+ */
 class ProduitController extends Controller
 {
     public function showAction() {
