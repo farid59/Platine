@@ -10,6 +10,7 @@ use EP\UploadBundle\Form\FactureProduitType;
 use EP\UploadBundle\Entity\Facture;
 use EP\UploadBundle\Form\FactureType;
 use EP\UploadBundle\Entity\Files;
+use Symfony\Component\HttpFoundation\File\File;
 
 
 use Knp\Snappy\Pdf;
@@ -50,7 +51,7 @@ class FactureController extends Controller
 		        }
 		        $em->flush();
 		        $this->generatePdf($facture,$listProduits);
-		        return $this->redirectToRoute("ep_show_client");
+		        return $this->redirectToRoute("ep_view_file");
 		    } else {
 		    	return new Response("<body></body>");
 		    }
@@ -83,8 +84,19 @@ class FactureController extends Controller
 		    $path.$fileName
 		);
 		
-		$file->setName($fileName);
-        $file->setExt('pdf');
+		// $file->setName($fileName);
+  //       $file->setExt('pdf');
+
+
+		$myfile= new File($path.$fileName);
+		// $myfile->setOriginalName($fileName);
+		// $myfile->setMimeType();
+		// $myfile->setSize();
+		// $myfile->setError();
+		// $myfile->setPathName($path.$fileName);
+		// $myfile->setFileName($path.$fileName); 
+
+		$file->setFile($myfile);
 
     	$em = $this->getDoctrine()->getManager();
     	$em->persist($file);

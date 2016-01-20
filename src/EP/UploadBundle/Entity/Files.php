@@ -85,7 +85,7 @@ class Files
     return $this->file;
     }
 
-    public function setFile(UploadedFile $file)
+    public function setFile($file)
     {
         $this->file = $file;
         // On vérifie si on avait déjà un fichier pour cette entité
@@ -107,8 +107,6 @@ class Files
     {
         // Si jamais il n'y a pas de fichier (champ facultatif)
         if (null === $this->file) {
-            $this->path = $this->getUploadRootDir().'/'.$this->getId().'_'.$this->getName();
-            die($this->path);
             return;
         }
 
@@ -116,7 +114,7 @@ class Files
         $this->ext = $this->file->guessExtension();
 
         // Et on génère l'attribut name de la balise <img>, à la valeur du nom du fichier sur le PC de l'internaute
-        $this->name = $this->file->getClientOriginalName();
+        $this->name = $this->file->getBasename();
         $this->path = $this->getUploadRootDir().'/'.$this->getId().'_'.$this->getName();
 
     }
@@ -177,13 +175,13 @@ class Files
     public function getUploadDir()
     {
         // On retourne le chemin relatif vers l'image pour un navigateur (relatif au répertoire /web donc)
-        return 'uploads/files';
+        return '../uploads/files';
     }
 
     public function getUploadRootDir()
     {
         // On retourne le chemin relatif vers l'image pour notre code PHP
-        return __DIR__.'/../../../../'.$this->getUploadDir();
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
     }
 
 
