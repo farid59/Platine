@@ -113,8 +113,11 @@ class Files
         // Le nom du fichier est son id, on doit juste stocker également son extension
         $this->ext = $this->file->guessExtension();
 
-        // Et on génère l'attribut name de la balise <img>, à la valeur du nom du fichier sur le PC de l'internaute
-        $this->name = $this->file->getBasename();
+        if ($this->file instanceof UploadedFile) {
+            $this->name = $this->file->getClientOriginalName();
+        } else {
+            $this->name = $this->file->getBasename();
+        }
         $this->path = $this->getUploadRootDir().'/'.$this->getId().'_'.$this->getName();
 
     }
