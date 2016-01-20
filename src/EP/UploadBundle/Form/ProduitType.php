@@ -16,6 +16,7 @@ class ProduitType extends AbstractType
     {
         $builder
             ->add('designation','text')
+            ->add('description','text')
             ->add('reference','text')
             ->add('montantUnitaireHT','number')
             ->add('tva', 'choice', array(

@@ -246,9 +246,9 @@ footer {
             {% for produit in produits %}
               <tr>
                 <td class="no">{{ loop.index }}</td>
-                <td class="desc"><h3>{{ produit.produit.designation }}}</h3>
+                <td class="desc"><h3>{{ produit.produit.designation }}</h3>
                   {% if produit.produit.description is defined %}{{ produit.produit.description }}{% endif %}</td>
-                <td class="unit">{{ produit.produit.montantUnitaireHT }}}</td>
+                <td class="unit">{{ produit.produit.montantUnitaireHT }}</td>
                 <td class="qty">{{ produit.quantite }}</td>
                 <td class="total">{{ produit.quantite * produit.produit.montantUnitaireHT }}</td>
               </tr>

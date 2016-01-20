@@ -30,10 +30,7 @@ class FactureController extends Controller
 		    if($form->handleRequest($request)->isValid()){		        
 		        $em = $this->getDoctrine()->getManager();
 		        $pem = $this->getDoctrine()->getManager()->getRepository("EPUploadBundle:Produit");
-		        // $em->persist(new Facture());
-		        // $id = $em->getConnection()->lastInsertId();
 
-		        // $facture->setId($id);
 		        $facture->setOwner($this->container->get('security.context')->getToken()->getUser());
 		        $listProduits = clone $facture->getProduits();
 		        
@@ -78,24 +75,13 @@ class FactureController extends Controller
 		            ));
 		$dat = $facture->getDate()->format('Y-m-d');
 		$path = $file->getUploadRootDir().'/';
-		// $path = '../uploads/tmp/'.$facture->getId().'_facture_'.$dat.'.pdf';
 		$fileName = $facture->getId().'_facture_'.$dat.'.pdf';
         $this->get('knp_snappy.pdf')->generateFromHtml(
 		    $html,
 		    $path.$fileName
 		);
-		
-		// $file->setName($fileName);
-  //       $file->setExt('pdf');
-
 
 		$myfile= new File($path.$fileName);
-		// $myfile->setOriginalName($fileName);
-		// $myfile->setMimeType();
-		// $myfile->setSize();
-		// $myfile->setError();
-		// $myfile->setPathName($path.$fileName);
-		// $myfile->setFileName($path.$fileName); 
 
 		$file->setFile($myfile);
 
@@ -103,19 +89,6 @@ class FactureController extends Controller
     	$em->persist($file);
     	$em->flush();
 
-
-		// $response =  new Response(
-		//     $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
-		//     200,
-		//     array(
-		//         'Content-Type'          => 'application/pdf',
-		//         'Content-Disposition'   => 'attachment; filename='.$path2
-		//     )
-		// );
-		// $pdf = $this->get('knp_snappy.pdf')->getOutputFromHtml($html);
-		
-		// return $response;
-		//$file->setFile($fichier);
     }
 
 }
