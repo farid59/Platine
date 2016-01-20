@@ -6,7 +6,7 @@
             <div class="box-header">
                 Profil de {{ user.username }}
                 <div class="box-icon">
-                    <a class="btn-setting" href="">Ajouter / Supprimer des droits</a>
+                    <a class="btn-setting" href="{{ path('ep_set_rights', { 'username' : user.username }) }}">Ajouter / Supprimer des droits</a>
                 </div>
             </div>
             <div class="box-content">
@@ -33,34 +33,38 @@
 
 
 
+{#
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content" id="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Ajouter / Supprimer des droits</h4>
+                </div>
+                    
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+#}
+
     <div class="modal fade" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Ajouter / Supprimer des droits</h4>
+                    <h4 class="modal-title">Supprimer un fichier</h4>
                 </div>
-                    {{ form_start(userForm) }}
-                <div class="modal-body">
-
-                    <div class="row">
-                        <div class="col-sm-8 col-sm-push-2">
-                            {{ form_label(userForm.canEditFacture, 'Editer des factures', { 'attr' : { 'class' : 'label-control' }}) }}
-                            <label class="switch switch-success pull-right">
-                               {{ form_widget(userForm.canEditFacture, { 'attr' : { 'class' : 'switch-input' }}) }}
-                                <span data-off="Off" data-on="On" class="switch-label"></span>
-                                <span class="switch-handle"></span>
-                            </label>
-                        </div>
-                    </div>                    
-
+                <div id="place_delete_form">
+                    
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
-                    {{ form_widget(userForm.Valider, { 'attr' : { 'class' : 'btn btn-info' }}) }}
-                </div>
-                    {{ form_end(userForm) }}
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+     <script type="text/javascript" src="{{ asset('js/pages/deleteFiles.js') }}"></script>
+
 {% endblock %}
