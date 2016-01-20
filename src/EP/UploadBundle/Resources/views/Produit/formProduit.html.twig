@@ -10,11 +10,18 @@
     	<div class="box">
       		<div class="box-header">Votre Produit</div>
       		<div class="box-content">
+          <div class="form-group">
+            {{ form_label(form.designation, "Désignation", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+            {{ form_errors(form.designation) }}
+            <div class="col-md-4">
+              {{ form_widget(form.designation, {'attr': {'class': 'form-control input-md','placeholder':'Nom du produit'}}) }}
+            </div>
+          </div>
 			    <div class="form-group">
-			      {{ form_label(form.designation, "Désignation", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
-			      {{ form_errors(form.designation) }}
+			      {{ form_label(form.description, "Description", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+			      {{ form_errors(form.description) }}
 			      <div class="col-md-4">
-			        {{ form_widget(form.designation, {'attr': {'class': 'form-control input-md','placeholder':'Nom du produit'}}) }}
+			        {{ form_widget(form.description, {'attr': {'class': 'form-control input-md','placeholder':'Description du produit'}}) }}
 			      </div>
 			    </div>
 			    <div class="form-group">

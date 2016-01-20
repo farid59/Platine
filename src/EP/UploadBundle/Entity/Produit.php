@@ -31,6 +31,13 @@ class Produit
     /**
      * @var string
      *
+     * @ORM\Column(name="Description", type="text")
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="reference", type="string", length=255)
      */
     private $reference;
@@ -189,5 +196,29 @@ class Produit
     public function getMontantUnitaireTTC()
     {
         return $this->montantUnitaireHT * (100 + $this->getTva()) / 100;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Produit
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }
