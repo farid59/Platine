@@ -7,7 +7,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use EP\UploadBundle\Entity\Client;
 use EP\UploadBundle\Form\ClientType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
+/**
+ * @Security("has_role('ACCESS_EDIT_FACTURE')")
+ */
 class ClientController extends Controller
 {
     public function showAction() 

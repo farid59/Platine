@@ -10,11 +10,12 @@ use EP\UploadBundle\Form\FactureProduitType;
 use EP\UploadBundle\Entity\Facture;
 use EP\UploadBundle\Form\FactureType;
 use EP\UploadBundle\Entity\Files;
-
-
 use Knp\Snappy\Pdf;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
-
+/**
+ * @Security("has_role('ACCESS_EDIT_FACTURE')")
+ */
 class FactureController extends Controller
 {
     public function editAction(Request $request) {
