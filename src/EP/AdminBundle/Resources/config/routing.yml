@@ -5,3 +5,7 @@ ep_admin_homepage:
 ep_admin_user_files:
     path:       /files/{username}
     defaults: { _controller: EPAdminBundle:Default:user }
+
+ep_set_rights:
+    path:       /setRights/{username}
+    defaults: { _controller: EPAdminBundle:Default:setRights }

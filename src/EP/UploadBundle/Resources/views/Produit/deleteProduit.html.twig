@@ -1,26 +1,22 @@
-{% extends "EPUploadBundle::layout.html.twig" %}
+<div class="modal-body" id="place_delete_form">
 
-{% block body %}
+        <p>
+          Le produit suivant va être supprimé :
+        </p>
+        
+        <p class="h2 center">
+          {{ produit.designation }}
+        </p>
 
+        <p>
+          Voulez-vous continuer ?
+        </p>                       
 
-  <h2>Supprimer un produit</h2>
+</div>
+<div class="modal-footer">
 
-  <p>
-    Etes-vous certain de vouloir supprimer le produit "{{ produit.designation }}" ?
-  </p>
-
-  {# On met l'id de l'annonce dans la route de l'action du formulaire #}
-  <form action="{{ path('ep_delete_produit', {'id': produit.id}) }}" method="post">
-
-    {# Ici j'ai écrit le bouton de soumission à la main #}
-    <input type="submit" value="Supprimer" class="btn btn-danger" />
-    {# Ceci va générer le champ CSRF #}
+    <form action="{{ path('ep_delete_produit', {'id': produit.id}) }}" method="post">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+        <button type="submit" class="btn btn-info">Valider</button>
     {{ form_rest(form) }}
-  </form>
-  <hr>
-  <a href="{{ app.request.headers.get('referer') }}" class="btn btn-default">
-        <i class="glyphicon glyphicon-chevron-left"></i>
-        Retour 
-    </a>
-
-{% endblock %}
+</div>

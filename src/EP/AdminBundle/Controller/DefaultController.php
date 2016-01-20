@@ -77,4 +77,20 @@ class DefaultController extends Controller
             'userForm' => $userForm->createView()
         ));
     }
+
+    public function setRightsAction($username, Request $request) {
+        $user = $this->container->get("fos_user_.user_manager")->findUserByUsername($username);
+        $userForm = $this->createForm(new UserGrantsType(), $user);
+
+        if ($userForm->handleRequest($request)->isValid()) {
+            $this->getDoctrine()->getManager()->persist($user);
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('ep_admin_user_files', array("username" => $username));
+        }
+
+        return $this->render("EPAdminBundle:Default:setRights.html.twig",array(
+            'userForm' => $userForm->createView()
+        ));
+    }
 }

@@ -64,7 +64,7 @@
                         <td>{{ produit.tva }} %</td>
                         <td>{{ produit.montantUnitaireTTC|number_format(2,'.') }} €</td>
                         <td>
-                          <a title="Supprimer" href="{{ path('ep_delete_produit', { 'id' : produit.id }) }}" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+                          <a title="Supprimer" href="{{ path('ep_delete_produit', { 'id' : produit.id }) }}" class="btn btn-danger btn-setting"><i class="fa fa-trash-o"></i></a>
                           <a title="Modifier" href="{{ path('ep_modify_produit', {'id' : produit.id }) }}" class="btn btn-info"><i class="fa fa-edit"></i></a>
                         </td>
                       </tr>
@@ -76,6 +76,27 @@
     </div>
 
 </div>
+
+
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Supprimer un produit</h4>
+                </div>
+                <div id="place_delete_form">
+                    
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+     <script type="text/javascript" src="{{ asset('js/pages/deleteFiles.js') }}"></script>
 
 {% endblock %}
 

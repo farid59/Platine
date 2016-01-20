@@ -8,6 +8,20 @@
 
 {% include 'EPUploadBundle:Upload:list.html.twig' with { 'docs' : docs, } %}
 
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Supprimer un fichier</h4>
+            </div>
+            <div id="place_delete_form">
+                
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 {% endblock %}
 
 
@@ -15,6 +29,7 @@
     {{ parent() }}
 
     <script src="{{asset('js/dropzone.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/pages/deleteFiles.js') }}"></script>
     <!-- // <script src="assets/js/pages/form-dropzone.js"></script> -->
 
     <script type="text/javascript">
