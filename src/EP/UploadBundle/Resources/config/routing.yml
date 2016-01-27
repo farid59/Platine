@@ -61,3 +61,15 @@ ep_delete_produit:
 ep_modify_produit:
     path: /produit/edit/{id}
     defaults: { _controller: EPUploadBundle:Produit:edit }
+
+ep_messages:
+    path:     /messages
+    defaults: { _controller: EPUploadBundle:Messages:messages }
+
+ep_send_message:
+    path:     /send
+    defaults: { _controller: EPUploadBundle:Messages:sendMessage }
+
+ep_view_message:
+    path:     /message/{id}
+    defaults: { _controller: EPUploadBundle:Messages:message }

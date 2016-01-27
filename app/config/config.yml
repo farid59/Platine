@@ -101,3 +101,9 @@ services:
        class: Twig_Extensions_Extension_Text
        tags:
            - { name: twig.extension }
+
+
+fos_message:
+    db_driver: orm
+    thread_class: EP\UploadBundle\Entity\Thread
+    message_class: EP\UploadBundle\Entity\Message
