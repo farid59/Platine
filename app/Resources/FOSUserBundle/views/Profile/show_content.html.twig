@@ -1,6 +1,36 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<div class="fos_user_user_show">
-    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
-    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
-</div>
+{% extends "::base.html.twig" %}
+
+{% block title %}
+{% endblock %}
+
+{% block menu %}
+    {% include "::menu-user.html.twig" %}
+{% endblock %}
+
+{% block layout_body %}
+    {% block body %}
+		<div class="fos_user_user_show">
+		    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
+		    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+		</div>
+{# 		<div>
+			{% if user.pictureName %}
+			    <img src="{{ asset(user.getWebPath()) }}" />
+			{% else %}
+			    Pas d'image de profil chargée !
+			{% endif %}
+
+			<h1>Charger une image de profil</h1>
+
+			<form action="#" method="post" {{ form_enctype(form) }}>
+			    {{ form_widget(form) }}
+
+			    <input type="submit" value="Uploader" />
+			</form>
+		</div> #}
+    {% endblock %}
+{% endblock %}
+
+
