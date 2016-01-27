@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    {% stylesheets filter='cssrewrite' output='css/compiled/login'
+        'css/bootstrap.min.css'
+        'css/style.min.css'
+        'css/retina.min.css'
+    %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+    <style type="text/css">body { background: url("{{ asset('img/bg-login.jpg') }}") !important; }</style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="login-box" style="width:800px">
+                <div class="icons">
+                    <a href="index.html"><i class="halflings-icon home"></i></a>
+                    <a href="login.html#"><i class="halflings-icon cog"></i></a>
+                </div>
+
+                {% block fos_user_content %}
+                {% endblock fos_user_content %}
+            
+            </div><!--/col-->
+        </div><!--/row-->
+    </div><!--/container-->
+
+
+{% javascripts output='js/compiled/login'
+'js/jquery-2.1.0.min.js'
+'js/jquery-migrate-1.2.1.min.js'
+'js/bootstrap.min.js'
+'js/custom.min.js'
+'js/core.min.js'
+%}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+</body>
+</html>
+
+
+
