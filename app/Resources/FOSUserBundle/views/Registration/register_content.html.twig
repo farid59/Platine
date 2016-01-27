@@ -10,29 +10,29 @@
         {{ form_errors(form.plainPassword.second) }}
         {{ form_errors(form.email) }}
     </div>
-<div class="col-lg-6">
+{# <div class="col-lg-6"> #}
     <div class="input-group" style="margin-bottom: 25px">
         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
         {{ form_widget(form.username, {'label': false, 'attr' : {'class' : 'form-control', 'placeholder' : 'form.username' }}) }}
     </div>
 
 
-    <div class="input-group" style="margin-bottom: 25px">
+{#     <div class="input-group" style="margin-bottom: 25px">
         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
         {{ form_widget(form.prenom, {'label': false, 'attr' : {'class' : 'form-control', 'placeholder' : 'Prénom' }}) }}
     </div>
 
-
+ #}
     <div class="input-group" style="margin-bottom: 25px">
         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
         {{ form_widget(form.nom, {'label': false, 'attr' : {'class' : 'form-control', 'placeholder' : 'Nom' }}) }}
     </div>
 
-    <div class="input-group" style="margin-bottom: 25px">
+{#     <div class="input-group" style="margin-bottom: 25px">
         <span class="input-group-addon"><i class="fa fa-suitcase"></i></span>
         {{ form_widget(form.societe, {'label': false, 'attr' : {'class' : 'form-control', 'placeholder' : 'Société' }}) }}
     </div>
-
+ #}
     <div class="input-group" style="margin-bottom: 25px">
         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
         {{ form_widget(form.plainPassword.first, {'label': false, 'attr' : {'class' : 'form-control', 'placeholder' : 'form.password' }}) }}
@@ -47,7 +47,7 @@
         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
         {{ form_widget(form.email, {'label': false, 'attr' : {'class' : 'form-control', 'placeholder' : 'form.email' }}) }}
     </div>
-</div>
+{# </div>
 <div class="col-lg-6">
     <div class="input-group" style="margin-bottom: 25px">
         <span class="input-group-addon"><i class="fa fa-home"></i></span>
@@ -74,7 +74,7 @@
     <div class="input-group" style="margin-bottom: 25px">
         <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
         {{ form_widget(form.telephone, {'label': false, 'attr' : {'class' : 'form-control', 'placeholder' : 'Numéro de téléphone' }}) }}
-    </div>    
+    </div>    #} 
 
 {#     <div class="input-group" style="margin-bottom: 25px">
         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
@@ -92,7 +92,7 @@
             <button type="submit" href="#" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-log-in"></i> S'enregistrer</button>                          
         </div>
     </div>
-</div>
+{# </div> #}
 <p>Vous avez un compte ? Alors il ne vous reste qu'a <a href="{{ path('fos_user_security_login') }}">vous connecter</a> avec !<p>
     
     

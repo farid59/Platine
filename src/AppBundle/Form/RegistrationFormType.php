@@ -11,16 +11,16 @@ public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
 
-        // add your custom field
+        // // add your custom field
         $builder->add('nom')
-                ->add('prenom')
-                ->add('societe')
-                ->add('adresse')
-                ->add('ville')
-                ->add('pays')
-                ->add('codepostal')
-                ->add('telephone')
-                // ->add('file')
+        //         ->add('prenom')
+        //         ->add('societe')
+        //         ->add('adresse')
+        //         ->add('ville')
+        //         ->add('pays')
+        //         ->add('codepostal')
+        //         ->add('telephone')
+        //         // ->add('file')
                 ;
     }
 

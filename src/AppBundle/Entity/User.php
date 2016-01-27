@@ -35,7 +35,7 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="Prenom", type="string", length=255)
+     * @ORM\Column(name="Prenom", type="string", length=255, nullable=true)
      * @Assert\Regex(pattern = "/\d/", match = false)
      */
     private $prenom;
@@ -43,30 +43,30 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @var boolean
      *
-     * @ORM\Column(name="Civilite", type="string", length=10)
+     * @ORM\Column(name="Civilite", type="string", length=10, nullable=true)
      */
     private $civilite;    
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Societe", type="string", length=255)
-     * @Assert\NotBlank()
-     */
-    private $societe;
+    // /**
+    //  * @var string
+    //  *
+    //  * @ORM\Column(name="Societe", type="string", length=255)
+    //  * @Assert\NotBlank()
+    //  */
+    // private $societe;
+
+    // /**
+    //  * @var string
+    //  *
+    //  * @ORM\Column(name="adresse", type="string", length=255)
+    //  * @Assert\NotBlank()
+    //  */
+    // private $adresse;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="adresse", type="string", length=255)
-     * @Assert\NotBlank()
-     */
-    private $adresse;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="codePostal", type="string", length=6)
+     * @ORM\Column(name="codePostal", type="string", length=6, nullable=true)
      * @Assert\Regex(pattern="/^\d{5,6}$/")
      */
     private $codePostal;
@@ -74,21 +74,21 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="ville", type="string", length=255)
+     * @ORM\Column(name="ville", type="string", length=255, nullable=true)
      */
     private $ville;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Pays", type="string", length=255)
+     * @ORM\Column(name="Pays", type="string", length=255, nullable=true)
      */
     private $pays;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="telephone", type="string", length=255)
+     * @ORM\Column(name="telephone", type="string", length=255, nullable=true)
      * @Assert\Regex(pattern="/^\d{10}$/")
      */
     private $telephone;
@@ -96,7 +96,7 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="mobile", type="string", length=255)
+     * @ORM\Column(name="mobile", type="string", length=255,nullable=true)
      * @Assert\Regex(pattern="/^\d{10}$/")
      */
     private $mobile;
@@ -104,7 +104,7 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="fax", type="string", length=255)
+     * @ORM\Column(name="fax", type="string", length=255,nullable=true)
      * @Assert\Regex(pattern="/^\d{10}$/")
      */
     private $fax;
@@ -112,12 +112,12 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="tva", type="string", length=255)
+     * @ORM\Column(name="tva", type="string", length=255,nullable=true)
      */
     private $tva;
     
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true,nullable=true)
      */
     public $pictureName;
 
