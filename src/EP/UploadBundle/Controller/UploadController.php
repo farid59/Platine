@@ -31,14 +31,26 @@ class UploadController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $this->container->get('security.context')->getToken()->getUser();
 
-        $clients = $em->getRepository("EPUploadBundle:Client")->findLast($user);
-        $produits = $em->getRepository("EPUploadBundle:Produit")->findLast($user);
-        $fichiers = $em->getRepository("EPUploadBundle:Files")->findLast($user);
+        $clients_repository = $em->getRepository("EPUploadBundle:Client");
+        $produits_repository = $em->getRepository("EPUploadBundle:Produit");
+        $fichiers_repository = $em->getRepository("EPUploadBundle:Files");
+        $factures_repository = $em->getRepository("EPUploadBundle:Facture");
+
+        $clients = $clients_repository->findLast($user);
+        $produits = $produits_repository->findLast($user);
+        $fichiers = $fichiers_repository->findLast($user);
+        
+        $count = array();
+        $count['clients'] = $clients_repository->count();
+        $count['produits'] = $produits_repository->count();
+        $count['fichiers'] = $fichiers_repository->count();
+        $count['factures'] = $factures_repository->count();
 
         return $this->render("EPUploadBundle:Upload:home.html.twig", array(
             "clients" => $clients,
             "produits" => $produits,
-            "fichiers" => $fichiers
+            "fichiers" => $fichiers,
+            "count" => $count
         ));
     }
 

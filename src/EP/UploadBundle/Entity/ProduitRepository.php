@@ -37,4 +37,10 @@ class ProduitRepository extends \Doctrine\ORM\EntityRepository
 
         return $queryBuilder->getQuery()->getResult();
     }
+
+    public function count(){
+        $queryBuilder = $this->createQueryBuilder('p')
+            ->select('count(p)');
+        return $queryBuilder->getQuery()->getSingleScalarResult();   
+    }
 }

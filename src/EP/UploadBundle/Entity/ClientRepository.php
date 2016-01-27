@@ -30,11 +30,18 @@ class ClientRepository extends \Doctrine\ORM\EntityRepository
 
     public function findLast($user)
     {
-        $queryBuilder = $this->createQueryBuilder('p')
-            ->andwhere("p.owner = :owner")
+        $queryBuilder = $this->createQueryBuilder('c')
+            ->andwhere("c.owner = :owner")
             ->setParameter("owner",$user)
             ->setMaxResults(5);
 
         return $queryBuilder->getQuery()->getResult();
+    }
+
+
+    public function count(){
+        $queryBuilder = $this->createQueryBuilder('c')
+            ->select('count(c)');
+        return $queryBuilder->getQuery()->getSingleScalarResult();   
     }
 }

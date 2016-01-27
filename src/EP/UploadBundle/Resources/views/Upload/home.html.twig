@@ -1,6 +1,56 @@
 {% extends "EPUploadBundle::layout.html.twig" %}
 
 {% block body %}
+
+    <div class="row">   
+        <div class="col-lg-12">
+            <div class="box ">
+                <div class="box-header">
+                    <h2><i class="fa fa-bar-chart-o"></i><span class="break"></span>Mes indicateurs</h2>
+                </div>
+                <div class="box-content">
+                    
+                    <div class="col-sm-2 col-sm-offset-2">
+                        <a class="quick-button">
+                            <i class="fa fa-group"></i>
+                            <p>Nombre de clients</p>
+                            <span class="notification blue">{{ count.clients }}</span>
+                        </a>
+                    </div>
+                    <div class="col-sm-2">
+                        <a class="quick-button">
+                            <i class="fa fa-shopping-cart"></i>
+                            <p>Nombre de produits</p>
+                            <span class="notification green">{{ count.produits }}</span>
+                        </a>
+                    </div>
+                    <div class="col-sm-2">
+                        <a class="quick-button">
+                            <i class="fa fa-file"></i>
+                            <p>Nombre de fichiers</p>
+                            <span class="notification red">{{ count.fichiers }}</span>
+                        </a>
+                    </div>
+                    <div class="col-sm-2">
+                        <a class="quick-button">
+                            <i class="fa fa-file"></i>
+                            <p>Nombre de factures</p>
+                            <span class="notification orange">{{ count.factures }}</span>
+                        </a>
+                    </div>
+                    <div class="clearfix">
+                    </div>
+                </div>  
+            </div>  
+        </div><!--/col-->
+        
+    </div><!--/row-->
+
+
+
+
+
+
     <div class="col-lg-4">
         <div class="box">
             <div class="box-header">
@@ -33,7 +83,7 @@
     <div class="col-lg-4">
         <div class="box">
             <div class="box-header">
-                <h2><i class="fa fa-user"></i><span class="break"></span>Derniers produits</h2>
+                <h2><i class="fa fa-shopping-cart"></i><span class="break"></span>Derniers produits</h2>
                 <div class="box-icon">
                     <a href="{{ path('ep_show_produit') }}" data-rel="tooltip" title="Voir plus"><i class="fa fa-eye"></i></a>
                 </div>
@@ -64,7 +114,7 @@
     <div class="col-lg-4">
         <div class="box">
             <div class="box-header">
-                <h2><i class="fa fa-user"></i><span class="break"></span>Derniers fichiers</h2>
+                <h2><i class="fa fa-file"></i><span class="break"></span>Derniers fichiers</h2>
                 <div class="box-icon">
                     <a href="{{ path('ep_view_file') }}" data-rel="tooltip" title="Voir plus"><i class="fa fa-eye"></i></a>
                 </div>

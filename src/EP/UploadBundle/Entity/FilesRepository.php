@@ -55,4 +55,11 @@ class FilesRepository extends \Doctrine\ORM\EntityRepository
 
         return $queryBuilder->getQuery()->getResult();
     }
+
+
+    public function count(){
+        $queryBuilder = $this->createQueryBuilder('f')
+            ->select('count(f)');
+        return $queryBuilder->getQuery()->getSingleScalarResult();   
+    }
 }
