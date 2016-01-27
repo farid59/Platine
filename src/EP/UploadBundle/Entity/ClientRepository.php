@@ -39,9 +39,11 @@ class ClientRepository extends \Doctrine\ORM\EntityRepository
     }
 
 
-    public function count(){
+    public function count($user){
         $queryBuilder = $this->createQueryBuilder('c')
-            ->select('count(c)');
+            ->select('count(c)')
+            ->andwhere("c.owner = :owner")
+            ->setParameter("owner",$user);
         return $queryBuilder->getQuery()->getSingleScalarResult();   
     }
 }

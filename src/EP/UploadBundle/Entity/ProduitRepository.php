@@ -38,9 +38,11 @@ class ProduitRepository extends \Doctrine\ORM\EntityRepository
         return $queryBuilder->getQuery()->getResult();
     }
 
-    public function count(){
+    public function count($user){
         $queryBuilder = $this->createQueryBuilder('p')
-            ->select('count(p)');
+            ->select('count(p)')
+            ->andwhere("p.owner = :owner")
+            ->setParameter("owner",$user);
         return $queryBuilder->getQuery()->getSingleScalarResult();   
     }
 }

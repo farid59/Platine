@@ -41,10 +41,10 @@ class UploadController extends Controller
         $fichiers = $fichiers_repository->findLast($user);
         
         $count = array();
-        $count['clients'] = $clients_repository->count();
-        $count['produits'] = $produits_repository->count();
-        $count['fichiers'] = $fichiers_repository->count();
-        $count['factures'] = $factures_repository->count();
+        $count['clients'] = $clients_repository->count($user);
+        $count['produits'] = $produits_repository->count($user);
+        $count['fichiers'] = $fichiers_repository->count($user);
+        $count['factures'] = $factures_repository->count($user);
 
         return $this->render("EPUploadBundle:Upload:home.html.twig", array(
             "clients" => $clients,

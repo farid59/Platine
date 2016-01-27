@@ -57,9 +57,11 @@ class FilesRepository extends \Doctrine\ORM\EntityRepository
     }
 
 
-    public function count(){
+    public function count($user){
         $queryBuilder = $this->createQueryBuilder('f')
-            ->select('count(f)');
+            ->select('count(f)')
+            ->andwhere("f.owner = :owner")
+            ->setParameter("owner",$user);
         return $queryBuilder->getQuery()->getSingleScalarResult();   
     }
 }
