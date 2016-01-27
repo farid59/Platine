@@ -47,21 +47,21 @@ class User extends BaseUser implements ParticipantInterface
      */
     private $civilite;    
 
-    // /**
-    //  * @var string
-    //  *
-    //  * @ORM\Column(name="Societe", type="string", length=255)
-    //  * @Assert\NotBlank()
-    //  */
-    // private $societe;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Societe", type="string", length=255)
+     * @Assert\NotBlank()
+     */
+    private $societe;
 
-    // /**
-    //  * @var string
-    //  *
-    //  * @ORM\Column(name="adresse", type="string", length=255)
-    //  * @Assert\NotBlank()
-    //  */
-    // private $adresse;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adresse", type="string", length=255)
+     * @Assert\NotBlank()
+     */
+    private $adresse;
 
     /**
      * @var string
