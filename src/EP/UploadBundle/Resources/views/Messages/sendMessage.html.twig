@@ -1,7 +1,7 @@
-{% extends "::base.html.twig" %}
+{% extends "EPUploadBundle::layout.html.twig" %}
 
 {% block title %}EPUploadBundle:MessagesController:sendMessage{% endblock %}
 
 {% block body %}
-<h1>Welcome to the MessagesController:sendMessage page</h1>
+    {{ form(form) }}
 {% endblock %}
