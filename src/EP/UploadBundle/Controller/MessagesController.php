@@ -12,12 +12,19 @@ class MessagesController extends Controller
 
         $threadsIn = $provider->getInboxThreads();
         $threadsOut = $provider->getSentThreads();
+
+        $threads = array();
+
+        foreach (array_merge($threadsIn, $threadsOut) as $key => $value) {
+            if (! in_array($value, $threads)) {
+                $threads[] = $value;
+            }
+        }
+
         $currentThread = null;
         
-        if (count($threadsIn) > 0) {
-            $currentThread = $provider->getThread($threadsIn[0]->getId());
-        } else if (count($threadsOut) > 0) {
-            $currentThread = $provider->getThread($threadsOut[0]->getId());
+        if (count($threads) > 0) {
+            $currentThread = $provider->getThread($threads[0]->getId());
         }
 
         $form = $this->createFormBuilder()
@@ -39,8 +46,7 @@ class MessagesController extends Controller
         }
 
         return $this->render('EPUploadBundle:Messages:messages.html.twig', array(
-            'threadsIn' => $threadsIn,
-            'threadsOut' => $threadsOut,
+            'threads' => $threads,
             'currentThread' => $currentThread,
             'form' => $form->createView()
         ));    

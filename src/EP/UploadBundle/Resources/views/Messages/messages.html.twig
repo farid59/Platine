@@ -53,9 +53,8 @@
             </div>
             <div class="box-content">
                 
-                <h2>Boite de réception</h2>
                 <ul class="messagesList">
-                    {% for thread in threadsIn %}
+                    {% for thread in threads %}
                         <a href="">
                             <li>
                                 <span class="from">{{ thread.createdBy.username }}</span>
@@ -70,22 +69,6 @@
                     {% endfor %}
                 </ul>
 
-                <h2>Boite d'envoi</h2>
-                <ul class="messagesList">
-                    {% for thread in threadsOut %}
-                        <a href="">
-                            <li>
-                                <span class="from">{{ thread.createdBy.username }}</span>
-                                <span class="title" {% if not fos_message_is_read(thread) %} style="font-weight: bold" {% endif %}>
-                                    {% if not fos_message_is_read(thread) %} <span class="label label-success">new!</span> {% endif %}
-                                    {{ thread.subject }}
-                                </span>
-                            </li>
-                        </a>
-                    {% else %}
-                        <span>Vous n'avez aucun message dans votre boite d'envoi !</span>
-                    {% endfor %}
-                </ul>
 
             </div>
         </div>
