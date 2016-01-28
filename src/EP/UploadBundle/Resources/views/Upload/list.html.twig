@@ -36,13 +36,7 @@
                     {% for doc in docs %}
                       <tr>
                         <td style="vertical-align: middle;">
-                                {% if doc.ext == "png" %} <i class="filetype png"></i>
-                                {% elseif doc.ext == "jpg" or doc.ext == "jpeg" %} <i class="filetype jpg"></i>
-                                {% elseif doc.ext == "doc" %} <i class="filetype doc"></i>
-                                {% elseif doc.ext == "ppt" %} <i class="filetype ppt"></i>
-                                {% elseif doc.ext == "txt" %} <i class="filetype txt"></i>
-                                {% else %} <i class="halflings file file-unknown"></i>
-                                {% endif %}
+                            <img src="{{ asset_if('img/filetypes/ico/' ~ doc.ext ~ '.ico', 'img/filetypes/ico/unknown.ico') }}" height="40px">
                             <span style="line-height: 100%; vertical-align: middle">{{doc.name}}</span>
                         </td>
 

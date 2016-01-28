@@ -12,18 +12,43 @@ class MessagesController extends Controller
 
         $threadsIn = $provider->getInboxThreads();
         $threadsOut = $provider->getSentThreads();
-        $currentThread = null;
 
-        
-        if (count($threadsIn) > 0) {
-            $currentThread = $provider->getThread($threadsIn[0]->getId());
-        } else if (count($threadsOut) > 0) {
-            $currentThread = $provider->getThread($threadsOut[0]->getId());
+        $threads = array();
+
+        foreach (array_merge($threadsIn, $threadsOut) as $key => $value) {
+            if (! in_array($value, $threads)) {
+                $threads[] = $value;
+            }
         }
+
+        $currentThread = null;
+        
+        if (count($threads) > 0) {
+            $currentThread = $provider->getThread($threads[0]->getId());
+        }
+
+        $form = $this->createFormBuilder()
+            ->add("Message","textarea")
+            ->add("Envoyer","submit")
+            ->getForm();
+
+        if ($form->handleRequest($this->getRequest())->isValid()) {
+            $formData = $form->getData();
+
+            $composer = $this->container->get('fos_message.composer');
+            $message = $composer->reply($currentThread)
+                ->setSender($this->container->get('security.context')->getToken()->getUser())
+                ->setBody($formData["Message"])
+                ->getMessage();
+
+            $sender = $this->container->get('fos_message.sender');
+            $sender->send($message);
+        }
+
         return $this->render('EPUploadBundle:Messages:messages.html.twig', array(
-            'threadsIn' => $threadsIn,
-            'threadsOut' => $threadsOut,
-            'currentThread' => $currentThread
+            'threads' => $threads,
+            'currentThread' => $currentThread,
+            'form' => $form->createView()
         ));    
     }
 
