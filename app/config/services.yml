@@ -7,3 +7,9 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+services:
+    twig.asset_if_extension:
+        class: AppBundle\Twig\Extension\ConditionalAssetExtension
+        arguments: ['@service_container']
+        tags:
+          - { name: twig.extension }
