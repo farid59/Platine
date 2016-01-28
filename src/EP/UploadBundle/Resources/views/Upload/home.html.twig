@@ -9,48 +9,69 @@
                     <h2><i class="fa fa-bar-chart-o"></i><span class="break"></span>Mes indicateurs</h2>
                 </div>
                 <div class="box-content">
-                    
-                    <div class="col-sm-2 col-sm-offset-2">
-                        <a class="quick-button">
-                            <i class="fa fa-group"></i>
-                            <p>Nombre de clients</p>
-                            <span class="notification blue">{{ count.clients }}</span>
-                        </a>
-                    </div>
-                    <div class="col-sm-2">
-                        <a class="quick-button">
-                            <i class="fa fa-shopping-cart"></i>
-                            <p>Nombre de produits</p>
-                            <span class="notification green">{{ count.produits }}</span>
-                        </a>
-                    </div>
-                    <div class="col-sm-2">
-                        <a class="quick-button">
-                            <i class="fa fa-file"></i>
-                            <p>Nombre de fichiers</p>
-                            <span class="notification red">{{ count.fichiers }}</span>
-                        </a>
-                    </div>
-                    <div class="col-sm-2">
-                        <a class="quick-button">
-                            <i class="fa fa-pencil-square"></i>
-                            <p>Nombre de factures</p>
-                            <span class="notification orange">{{ count.factures }}</span>
-                        </a>
-                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-6">
+                          <div class="panel widget bg-primary">
+                             <div class="row row-table">
+                                <div class="col-xs-4 text-center bg-primary-dark pv-lg">
+                                   <em class="fa fa-group fa-3x"></em>
+                                </div>
+                                <div class="col-xs-8 pv-lg">
+                                   <div class="h2 mt0">{{ count.clients }}</div>
+                                   <div class="text-uppercase">Clients</div>
+                                </div>
+                             </div>
+                          </div>
+                        </div>
+
+                        <div class="col-lg-3 col-sm-6">
+                          <div class="panel widget bg-purple">
+                             <div class="row row-table">
+                                <div class="col-xs-4 text-center bg-purple-dark pv-lg">
+                                   <em class="fa fa-shopping-cart fa-3x"></em>
+                                </div>
+                                <div class="col-xs-8 pv-lg">
+                                   <div class="h2 mt0">{{ count.produits }}</div>
+                                   <div class="text-uppercase">Produits</div>
+                                </div>
+                             </div>
+                          </div>
+                        </div>
+
+                        <div class="col-lg-3 col-sm-6">
+                          <div class="panel widget bg-green">
+                             <div class="row row-table">
+                                <div class="col-xs-4 text-center bg-green-dark pv-lg">
+                                   <em class="fa fa-file fa-3x"></em>
+                                </div>
+                                <div class="col-xs-8 pv-lg">
+                                   <div class="h2 mt0">{{ count.fichiers }}</div>
+                                   <div class="text-uppercase">Fichiers</div>
+                                </div>
+                             </div>
+                          </div>
+                        </div>
+
+                        <div class="col-lg-3 col-sm-6">
+                          <div class="panel widget bg-info">
+                             <div class="row row-table">
+                                <div class="col-xs-4 text-center bg-info-dark pv-lg">
+                                   <em class="fa fa-pencil-square fa-3x"></em>
+                                </div>
+                                <div class="col-xs-8 pv-lg">
+                                   <div class="h2 mt0">{{ count.factures }}</div>
+                                   <div class="text-uppercase">Factures</div>
+                                </div>
+                             </div>
+                          </div>
+                        </div>
+                    </div> <!-- /row -->
                     <div class="clearfix">
                     </div>
                 </div>  
             </div>  
         </div><!--/col-->
-        
     </div><!--/row-->
-
-
-
-
-
-
     <div class="col-lg-4">
         <div class="box">
             <div class="box-header">
