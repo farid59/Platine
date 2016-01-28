@@ -14,6 +14,7 @@
 		<div class="fos_user_user_show">
 		    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
 		    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+		    {# {{ dump(user)}} #}
 		</div>
 {# 		<div>
 			{% if user.pictureName %}
@@ -30,6 +31,154 @@
 			    <input type="submit" value="Uploader" />
 			</form>
 		</div> #}
+
+
+
+
+
+
+<div class="row">
+              <div class="col-lg-12 col-md-12">
+                <div class="widget_p no-margin">
+                  <div class="widget-header">
+                    <div class="title">
+                      Votre Profil
+                    </div>
+                    <span class="tools">
+                      <i class="fa fa-cogs"></i>
+                    </span>
+                  </div>
+                  <div class="widget-body">
+                    <div class="row">
+                      <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+                        <div class="thumbnail">
+                          <img alt="300x200" src="{{asset('img/profile.png')}}">
+                          <br>
+                          <h4 class="center-align-text">{{ user.username }}</h4>
+{#                           <p class="center-align-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porttitor a vulputate metus tristique vel orci quis sagittis.
+                          </p> #}
+                          <p class="btn-stack center-align-text">
+                            <a title="" data-original-title="" href="javascript:;" class="btn btn-info">
+                              <i class="fa fa-twitter"></i>
+                            </a>
+                            <a title="" data-original-title="" href="javascript:;" class="btn btn-primary">
+                              <i class="fa fa-facebook"></i>
+                            </a>
+                            <a title="" data-original-title="" href="javascript:;" class="btn btn-danger">
+                              <i class="fa fa-google-plus"></i>
+                            </a>
+                            <a title="" data-original-title="" href="javascript:;" class="btn btn-success">
+                              <i class="fa fa-pinterest"></i>
+                            </a>
+                            <a title="" data-original-title="" href="javascript:;" class="btn btn-warning">
+                              <i class="fa fa-youtube"></i>
+                            </a>
+                          </p>
+                        </div>
+                        <br>
+                      </div>
+                      <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+                        <form class="form-horizontal">
+                          <h5>
+                            Information de login
+                          </h5>
+                          <hr>
+                          <div class="form-group">
+                            <label for="emailId" class="col-sm-3 control-label">Email</label>
+                            <div class="col-sm-9">
+                              <input class="form-control" id="emailId" value="{{ user.email }}" type="email">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputPassword" class="col-sm-3 control-label">Password</label>
+                            <div class="col-sm-9">
+                              <input class="form-control" id="inputPassword" value="{{ user.password }}" type="password">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputPassword1" class="col-sm-3 control-label">Confirm Password</label>
+                            <div class="col-sm-9">
+                              <input class="form-control" id="inputPassword1" placeholder="Confirm Password" type="password">
+                            </div>
+                          </div>
+                          
+                          <br>
+                          <h5>
+                            Information personnelle
+                          </h5>
+                          <hr>
+                          <div class="form-group">
+                            <label for="name" class="col-sm-3 control-label">Nom</label>
+                            <div class="col-sm-9">
+                              <input class="form-control" id="name" value="{{ user.nom }}" type="text">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="prenom" class="col-sm-3 control-label">Prénom</label>
+                            <div class="col-sm-9">
+                              <input class="form-control" id="prenom" value="{{ user.prenom }}" type="text">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="location" class="col-sm-3 control-label">Adresse</label>
+                            <div class="col-sm-9">
+                              <input class="form-control" id="location" value="{{ user.adresse }}" type="text">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="codePostal" class="col-sm-3 control-label">Code Postal</label>
+                            <div class="col-sm-9">
+                              <input class="form-control" id="codePostal" value="{{ user.codePostal }}" type="text">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="ville" class="col-sm-3 control-label">Ville</label>
+                            <div class="col-sm-9">
+                              <input class="form-control" id="ville" value="{{ user.ville }}" type="text">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="pays" class="col-sm-3 control-label">Pays</label>
+                            <div class="col-sm-9">
+                              <input class="form-control" id="pays" value="{{ user.pays }}" type="text">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="webUrl" class="col-sm-3 control-label">Website Url</label>
+                            <div class="col-sm-9">
+                              <input class="form-control" id="webUrl" placeholder="Website Url" type="url">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="webUrl" class="col-sm-3 control-label">About</label>
+                            <div class="col-sm-9">
+                              <textarea class="form-control" rows="5"></textarea>
+                            </div>
+                          </div>
+                          <div class="form-actions">
+                            <button type="submit" class="btn btn-info pull-right">
+                              Save changes
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
     {% endblock %}
 {% endblock %}
 

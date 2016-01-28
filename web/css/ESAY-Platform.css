@@ -241,4 +241,59 @@ div.dz-default.dz-message {
 	color:#515253!important
 }
 /**************************\
+ Edition de la page profil
+\**************************/
+
+
+
+
+.widget_p {
+    background: #FFF none repeat scroll 0% 0%;
+    border: 1px solid #DBDBDB;
+    clear: both;
+    margin-top: 0px;
+    margin-bottom: 25px;
+    border-radius: 3px;
+}
+.no-margin {
+    margin: 0px !important;
+}
+.widget_p .widget-header {
+    background-color: #EDEDED;
+    background-image: -moz-linear-gradient(center top , #FFF, #EDEDED);
+    border-radius: 2px 2px 0px 0px;
+    border-bottom: 1px solid #DBDBDB;
+    height: 44px;
+    padding: 0px 15px;
+    line-height: 44px;
+}
+
+.widget_p .widget-body {
+    padding: 15px;
+    border-radius: 0px 0px 2px 2px;
+}
+
+.widget_p .widget-header {
+    line-height: 44px;
+}
+
+.widget_p .widget-header .title {
+    color: #333;
+    float: left;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.widget_p .widget-header span.tools {
+    padding: 0px;
+    float: right;
+    margin: 0px;
+}
+
+.center-align-text {
+    text-align: center !important;
+}
+
+
+/**************************\
 \**************************/
