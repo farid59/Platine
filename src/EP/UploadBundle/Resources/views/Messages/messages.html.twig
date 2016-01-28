@@ -5,7 +5,7 @@
 {% block layout_body %}
 
 <div class="row">
-    <div class="col-lg-7 col-md-7 col-sm-7">
+    <div class="col-lg- col-md-5 col-sm-5">
 
         <div class="box">
             <div class="box-header">
@@ -18,7 +18,7 @@
                 {% else %}
                     <ul class="chat">
                         {% for message in currentThread.messages %}                            
-                                <li class="{% if message.sender == app.user %}left{% else %}right{% endif %}">
+                                <li class="{% if message.sender == app.user %}right{% else %}left{% endif %}">
                                     <img class="avatar" src="http://lorempixel.com/48/48/"></img>
                                     <span class="message">
                                         <span class="arrow"></span>
@@ -28,6 +28,13 @@
                                 </li>
                         {% endfor %}                        
                     </ul>
+                    <div class="chat-form">
+                        {{ form_start(form) }}
+                            {{ form_widget(form.Message, { 'attr' : { 'style' : 'overflow: hidden; word-wrap: break-word; resize: horizontal; height: 80px;'}}) }}
+                            {{ form_widget(form.Envoyer, { 'attr' : { 'class' : 'btn btn-info'}}) }}
+
+                        {{ form_end(form)}}
+                    </div>
                 {% endif %}
 
             </div>
@@ -35,7 +42,7 @@
        
 
     </div>
-    <div class="col-lg-5 col-md-5 col-sm-5">
+    <div class="col-lg-7 col-md-7 col-sm-7">
 
         <div class="box">
             <div class="box-header">
@@ -49,7 +56,15 @@
                 <h2>Boite de réception</h2>
                 <ul class="messagesList">
                     {% for thread in threadsIn %}
-                        
+                        <a href="">
+                            <li>
+                                <span class="from">{{ thread.createdBy.username }}</span>
+                                <span class="title" {% if not fos_message_is_read(thread) %} style="font-weight: bold" {% endif %}>
+                                    {% if not fos_message_is_read(thread) %} <span class="label label-success">new!</span> {% endif %}
+                                    {{ thread.subject }}
+                                </span>
+                            </li>
+                        </a>
                     {% else %}
                         <span>Vous n'avez aucun message dans votre boite de réception !</span>
                     {% endfor %}

@@ -1,1 +1,8 @@
 <li><a href="{{ path('ep_admin_homepage') }}"><i class="fa fa-users"></i> Mes clients</a></li>
+<li><a href="{{ path('ep_messages') }}">
+    <i class="fa fa-envelope"></i>
+    <span class="hidden-sm"> Mes Messages</span>
+    {% if fos_message_nb_unread() != 0 %}
+        <span class="badge badge-important">{{ fos_message_nb_unread() }}</span>
+    {% endif %}
+</a></li>
