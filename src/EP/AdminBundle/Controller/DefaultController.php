@@ -80,12 +80,15 @@ class DefaultController extends Controller
 
     public function setRightsAction($username, Request $request) {
         $user = $this->container->get("fos_user_.user_manager")->findUserByUsername($username);
-        $userForm = $this->createForm(new UserGrantsType(), $user);
+        $userForm = $this->createForm(new UserGrantsType(), $user, array(
+            "action" => $this->generateUrl('ep_set_rights', array("username" => $username)),
+            "method" => "POST"
+        ));
 
-        if ($userForm->handleRequest($request)->isValid()) {
+        if ($request->isMethod("POST")) {
+            $userForm->handleRequest($request);
             $this->getDoctrine()->getManager()->persist($user);
             $this->getDoctrine()->getManager()->flush();
-
             return $this->redirectToRoute('ep_admin_user_files', array("username" => $username));
         }
 
