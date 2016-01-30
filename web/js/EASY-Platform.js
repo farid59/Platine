@@ -47,5 +47,12 @@ $(document).ready(function(){
 
             window.location.replace(newLocation);
         })
+    });
+
+    $("#nav-form input, #nav-form select").each(function(){
+        console.log($(this));
+        $(this).on("change", function(){
+            $("#nav-form").submit();
+        });
     })
 });
