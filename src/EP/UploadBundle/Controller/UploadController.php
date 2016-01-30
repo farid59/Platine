@@ -175,8 +175,8 @@ class UploadController extends Controller
       // on parse la requête pour savoir s'il y a des paramètres
       // de tri, de recherche, etc.
       $search = $request->query->get('search') or $search = "";
-      $orderby = $request->query->get('orderby') or $orderby = "name";
-      $order = $request->query->get('order') or $order = "ASC";
+      $orderby = $request->query->get('orderby') or $orderby = "date";
+      $order = $request->query->get('order') or $order = "DESC";
       $categoryFilter = $request->query->get("categoryFilter") or $categoryFilter = "";
       $extFilter = $request->query->get("extFilter") or $extFilter = "";
       $nbPerPage = $request->query->get("nbPerPage") or $nbPerPage = 5;
