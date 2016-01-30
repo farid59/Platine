@@ -2,7 +2,10 @@ $(document).ready(function(){
     $("th[data-sortby]").each(function(){
         $(this).click(function(){
             var sortby = $(this).attr("data-sortby");
-            var order = ($(this).hasClass("sorting_asc") ? "DESC" : "ASC");
+            var order = (
+                $(this).hasClass("sorting_asc") ? "DESC" :
+                $(this).hasClass("sorting_desc") ? "" : "ASC"
+            );
 
             var orderByIsSet = false;
             var orderIsSet = false;
@@ -14,32 +17,21 @@ $(document).ready(function(){
             var paramsSplits = paramsString.split("&");
             var params = [];
 
-            for (index in paramsSplits) {
-                var param = {
-                    "name" : paramsSplits[index].split('=')[0],
-                    "value": paramsSplits[index].split('=')[1]
+            if (paramsString !== "") {
+                for (index in paramsSplits) {
+                    if ((paramsSplits[index].split('=')[0] !== "orderby") && (paramsSplits[index].split('=')[0] !== "order")) {
+                        var param = {
+                            "name" : paramsSplits[index].split('=')[0],
+                            "value": paramsSplits[index].split('=')[1]
+                        }
+                        params.push(param);
+                    }
                 }
-
-                if (paramsSplits[index].split('=')[0] === "orderby") {
-                    param["value"] = sortby;
-                    orderByIsSet = true;
-                }
-                else if (paramsSplits[index].split('=')[0] === "order") {
-                    param["value"] = order;
-                    orderIsSet = true;
-                }
-
-                params.push(param);
             }
 
-            if (!orderByIsSet) {
+            if (order !== "") {
                 params.push({"name" : "orderby", "value" : sortby});
-                orderByIsSet = true;
-            }
-
-            if (!orderIsSet) {
                 params.push({"name" : "order", "value" : order});
-                orderIsSet = true;
             }
 
             var newLocation = origin+path+"?";
