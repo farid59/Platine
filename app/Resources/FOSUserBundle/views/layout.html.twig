@@ -16,19 +16,10 @@
 
     <div class="container">
         <div class="row">
-            <div class="login-box">
-                <div class="icons">
-                    <a href="index.html"><i class="halflings-icon home"></i></a>
-                    <a href="login.html#"><i class="halflings-icon cog"></i></a>
-                </div>
-
-                {% block fos_user_content %}
-                {% endblock fos_user_content %}
-            
-            </div><!--/col-->
+            {% block form_block %}
+            {% endblock %}
         </div><!--/row-->
     </div><!--/container-->
-
 
 {% javascripts output='js/compiled/login'
 'js/jquery-2.1.0.min.js'
