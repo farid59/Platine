@@ -69,3 +69,7 @@ ep_messages:
 ep_send_message:
     path:     /admin/send
     defaults: { _controller: EPUploadBundle:Messages:sendMessage }
+
+ep_download_untreated:
+    path: /download/untreated/{username}
+    defaults: { _controller: EPUploadBundle:Upload:downloadUntreated }

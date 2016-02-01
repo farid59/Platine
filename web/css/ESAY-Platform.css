@@ -296,4 +296,26 @@ div.dz-default.dz-message {
 
 
 /**************************\
+     LISTE DE MESSAGERIE
+\**************************/
+.messagesList li {
+    font-size: 14px;
+}
+
+.messagesList a li span {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.messagesList a:nth-child(2n) li span {
+    background-color: #f8f8f8;
+}
+
+.messagesList a:hover li span {
+    background-color: #f4f4f4;
+    color: black;
+}
+
+
+/**************************\
 \**************************/

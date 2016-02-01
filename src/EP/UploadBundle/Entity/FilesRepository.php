@@ -64,4 +64,13 @@ class FilesRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter("owner",$user);
         return $queryBuilder->getQuery()->getSingleScalarResult();   
     }
+
+
+    public function findAllUntreated($user){
+        $queryBuilder = $this->createQueryBuilder('f')
+            ->andwhere("f.owner = :owner")
+            ->andwhere("f.treated IS NULL")
+            ->setParameter("owner",$user);
+        return $queryBuilder->getQuery()->getResult();   
+    }
 }

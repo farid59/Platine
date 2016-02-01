@@ -228,4 +228,45 @@ class UploadController extends Controller
 
       return $response;
     }
+
+    public function downloadUntreatedAction($username, Request $request) {
+      $em = $this->getDoctrine()->getManager(); 
+      $user = $this->container->get("fos_user_.user_manager")->findUserByUsername($username);
+      $files = $em->getRepository("EPUploadBundle:Files")->findAllUntreated($user);
+
+      if (count($files) > 0) {
+
+          $oZip = new \ZipArchive();
+          $archiveName = $username."_files.zip";
+          $archivePath = $this->get('kernel')->getRootDir()."/../uploads/".$archiveName;
+
+          $oZip->open($archivePath, \ZipArchive::CREATE);
+
+
+          foreach ($files as $file) {
+            $oZip->addFromString($file->getWebName(), file_get_contents($file->getWebPath()));
+
+            if ($this->get('security.authorization_checker')->isGranted("ROLE_ADMIN")) {
+                $file->setTreated();
+                $em->persist($file);
+                $em->flush();
+            }
+
+          }
+
+          $oZip->close();
+          $response = new Response();
+          $response->setContent(file_get_contents($archivePath));
+          $response->headers->set('Content-Type', 'application/force-download');
+          $response->headers->set('Content-disposition', 'filename='.$archiveName);
+
+          unlink($archivePath);
+
+          return $response;
+      }
+
+      $request->getSession()->getFlashBag()->add('success', 'Tous les fichiers sont déjà traités');
+      return $this->redirectToRoute('ep_admin_user_files', array("username" => $username));
+      
+    }
 }

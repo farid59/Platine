@@ -20,7 +20,7 @@
 <body>
 
     {% include "::topbar.html.twig" %}
-    
+
     <div class="container">
         <div class="row">
             
@@ -75,6 +75,19 @@
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
+    
+    <script type="text/javascript">
+        {% for category, flashMessage in app.session.flashbag.all %}
+            {% for message in flashMessage %}
+                noty({
+                    'text' : '{{ message }}',
+                    'layout' : 'topRight',
+                    'type' : '{{ category }}'
+                });
+            {% endfor %}
+        {% endfor %}
+    </script>
+    
 {% endblock %}
 
 </body>

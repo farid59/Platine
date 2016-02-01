@@ -273,7 +273,11 @@ class Files
 
     public function getWebPath()
     {
-       return $this->getUploadDir().'/'.$this->getId().'_'.$this->getName();
+       return $this->getUploadDir().'/'.$this->getWebName();
+    }
+
+    public function getWebName() {
+        return $this->getId().'_'.$this->getName();
     }
 
     /**
