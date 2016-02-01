@@ -21,7 +21,7 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findOneByRole($role)
+    public function findOneByRole($role, $getQueryBuilder = false)
     {
         $qb = $this->_em->createQueryBuilder();
         $qb->select('u')
@@ -29,6 +29,24 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
             ->where('u.roles LIKE :roles')
             ->setParameter('roles', '%"'.$role.'"%');
 
+        if ($getQueryBuilder) {
+            return $qb;
+        }
+
         return $qb->getQuery()->getSingleResult();
+    }
+
+    public function findWithoutRole($role, $getQueryBuilder = false)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('u')
+            ->from($this->_entityName, 'u')
+            ->where('u.roles NOT LIKE :roles')
+            ->setParameter('roles', '%"'.$role.'"%');
+
+        if ($getQueryBuilder) {
+            return $qb;
+        }
+        return $qb->getQuery()->getResult();
     }
 }

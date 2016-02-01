@@ -63,13 +63,9 @@ ep_modify_produit:
     defaults: { _controller: EPUploadBundle:Produit:edit }
 
 ep_messages:
-    path:     /messages
-    defaults: { _controller: EPUploadBundle:Messages:messages }
+    path:     /messages/{id}
+    defaults: { _controller: EPUploadBundle:Messages:messages, id: null }
 
 ep_send_message:
-    path:     /send
+    path:     /admin/send
     defaults: { _controller: EPUploadBundle:Messages:sendMessage }
-
-ep_view_message:
-    path:     /message/{id}
-    defaults: { _controller: EPUploadBundle:Messages:message }

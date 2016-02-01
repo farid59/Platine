@@ -3,78 +3,71 @@
 namespace EP\UploadBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class MessagesController extends Controller
 {
-    public function messagesAction()
+    public function messagesAction($id)
     {
+
         $provider = $this->container->get('fos_message.provider');
 
-        $threadsIn = $provider->getInboxThreads();
-        $threadsOut = $provider->getSentThreads();
-
-        $threads = array();
-
-        foreach (array_merge($threadsIn, $threadsOut) as $key => $value) {
-            if (! in_array($value, $threads)) {
-                $threads[] = $value;
-            }
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            $threads = $provider->getSentThreads();
+        } else {
+            $threads = $provider->getInboxThreads();
         }
 
-        $currentThread = null;
-        
-        if (count($threads) > 0) {
-            $currentThread = $provider->getThread($threads[0]->getId());
-        }
-
-        $form = $this->createFormBuilder()
-            ->add("Message","textarea")
-            ->add("Envoyer","submit")
-            ->getForm();
-
-        if ($form->handleRequest($this->getRequest())->isValid()) {
-            $formData = $form->getData();
-
-            $composer = $this->container->get('fos_message.composer');
-            $message = $composer->reply($currentThread)
-                ->setSender($this->container->get('security.context')->getToken()->getUser())
-                ->setBody($formData["Message"])
-                ->getMessage();
-
-            $sender = $this->container->get('fos_message.sender');
-            $sender->send($message);
+        if ($id === null) {
+            $thread = count($threads) === 0 ? null : $threads[0];
+        } else {
+            $thread = $provider->getThread($id);
         }
 
         return $this->render('EPUploadBundle:Messages:messages.html.twig', array(
             'threads' => $threads,
-            'currentThread' => $currentThread,
-            'form' => $form->createView()
+            'thread' => $thread,
         ));    
     }
 
+    /**
+     * @Security("has_role('ROLE_ADMIN')")
+     */
     public function sendMessageAction()
     {
-        $form = $this->createFormBuilder()
+        $ur = $this->getDoctrine()->getManager()->getRepository("AppBundle:User");
+       $form = $this->createFormBuilder()
             ->add("Subject","text")
-            ->add("Body","text")
+            ->add("Body","hidden")
+            ->add("Destinataires","entity",array(
+                "class" => "AppBundle:User",
+                "choice_label" => "username",
+                "by_reference" => true,
+                "multiple" => true,
+                'query_builder' =>  $ur->findWithoutRole("ROLE_ADMIN",true)
+            ))
             ->add("Envoyer","submit")
             ->getForm();
 
 
         $form->handleRequest($this->getRequest());
+
         if ($form->isValid()) {
             $formData = $form->getData();
 
-            $from = $this->container->get('security.context')->getToken()->getUser();
-            $to = $this->getDoctrine()->getManager()->getRepository("AppBundle:User")->findOneByRole("ROLE_ADMIN");
-
+            $currentUser = $this->container->get('security.context')->getToken()->getUser();
             $composer = $this->container->get('fos_message.composer');
-            $message = $composer->newThread()
-                ->setSender($from)       // Envoyeur
-                ->addRecipient($to)    // Destinataire
-                ->setSubject($formData["Subject"])      // Sujet
-                ->setBody($formData["Body"])         // Contenu
-                ->getMessage();
+            
+            $messageBuilder = $composer->newThread()
+                ->setSender($currentUser)
+                ->setSubject($formData["Subject"])
+                ->setBody($formData["Body"]);
+
+            foreach ($formData["Destinataires"] as $user) {
+                $messageBuilder->addRecipient($user);
+            }
+
+            $message = $messageBuilder->getMessage();
 
             $sender = $this->container->get('fos_message.sender');
             $sender->send($message);
@@ -85,13 +78,6 @@ class MessagesController extends Controller
         return $this->render('EPUploadBundle:Messages:sendMessage.html.twig', array(
             'form' => $form->createView(),
         ));    
-    }
-
-    public function messageAction()
-    {
-        return $this->render('EPUploadBundle:Messages:message.html.twig', array(
-                // ...
-            ));    
     }
 
 }

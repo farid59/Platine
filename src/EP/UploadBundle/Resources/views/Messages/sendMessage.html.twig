@@ -1,7 +1,141 @@
-{% extends "EPUploadBundle::layout.html.twig" %}
+{% extends "EPAdminBundle::layout.html.twig" %}
 
 {% block title %}EPUploadBundle:MessagesController:sendMessage{% endblock %}
 
 {% block body %}
-    {{ form(form) }}
+    {{ form_start(form) }}
+
+    <div class="row" style="margin-bottom:20px">
+        <div class="col-lg-12">
+            <div class="col-lg-12">
+                {{ form_label(form.Subject, "Sujet", { 'attr' : { 'class' : 'form-label'}}) }}
+            </div>
+            <div class="col-lg-12">
+                {{ form_widget(form.Subject, { 'attr' : { 'class' : 'form-control'}}) }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="col-lg-12">
+                {{ form_label(form.Destinataires) }}
+            </div>
+            <div class="col-lg-12">
+            <div class="col-lg-5 btn btn-default" onclick="selectAll()">Sélectionner tout</div>
+            <div class="col-lg-5 col-lg-push-2 btn btn-default" onclick="unselectAll()">Désélectionner tout</div>
+            </div>
+            <div class="col-lg-12" style="margin-top: 20px;">
+                {{ form_widget(form.Destinataires, { 'attr' : { 'class' : 'form-control', 'style' : 'height: 260px;'}}) }}
+            </div>
+        </div>
+        <div class="col-lg-9">
+                <div class="form-group">
+                    <label class="control-label">Votre message</label>
+                    <div data-target=".editor" data-role="editor-toolbar" class="btn-toolbar">
+                        <div class="btn-group">
+                            <a title="Font" data-toggle="dropdown" class="btn dropdown-toggle"><i class="fa fa-font"></i><b class="caret"></b></a>
+                            <ul class="dropdown-menu"></ul>
+                        </div>
+                        <div class="btn-group">
+                            <a title="Font Size" data-toggle="dropdown" class="btn dropdown-toggle"><i class="fa fa-text-height"></i>&nbsp;<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a data-edit="fontSize 5"><font size="5">Huge</font></a></li>
+                                <li><a data-edit="fontSize 3"><font size="3">Normal</font></a></li>
+                                <li><a data-edit="fontSize 1"><font size="1">Small</font></a></li>
+                            </ul>
+                        </div>
+                        <div class="btn-group">
+                            <a title="Bold (Ctrl/Cmd+B)" data-edit="bold" class="btn"><i class="fa fa-bold"></i></a>
+                            <a title="Italic (Ctrl/Cmd+I)" data-edit="italic" class="btn"><i class="fa fa-italic"></i></a>
+                            <a title="Strikethrough" data-edit="strikethrough" class="btn"><i class="fa fa-strikethrough"></i></a>
+                            <a title="Underline (Ctrl/Cmd+U)" data-edit="underline" class="btn"><i class="fa fa-underline"></i></a>
+                        </div>
+                        <div class="btn-group">
+                            <a title="Bullet list" data-edit="insertunorderedlist" class="btn"><i class="fa fa-list-ul"></i></a>
+                            <a title="Number list" data-edit="insertorderedlist" class="btn"><i class="fa fa-list-ol"></i></a>
+                            <a title="Reduce indent (Shift+Tab)" data-edit="outdent" class="btn"><i class="fa fa-outdent"></i></a>
+                            <a title="Indent (Tab)" data-edit="indent" class="btn"><i class="fa fa-indent"></i></a>
+                        </div>
+                        <div class="btn-group">
+                            <a title="Align Left (Ctrl/Cmd+L)" data-edit="justifyleft" class="btn btn-info"><i class="fa fa-align-left"></i></a>
+                            <a title="Center (Ctrl/Cmd+E)" data-edit="justifycenter" class="btn"><i class="fa fa-align-center"></i></a>
+                            <a title="Align Right (Ctrl/Cmd+R)" data-edit="justifyright" class="btn"><i class="fa fa-align-right"></i></a>
+                            <a title="Justify (Ctrl/Cmd+J)" data-edit="justifyfull" class="btn"><i class="fa fa-align-justify"></i></a>
+                        </div>
+                        <div class="btn-group">
+                            <a title="Hyperlink" data-toggle="dropdown" class="btn dropdown-toggle"><i class="fa fa-link"></i></a>
+                            <div class="dropdown-menu input-append">
+                                <input type="text" data-edit="createLink" placeholder="URL" class="span2">
+                                <button type="button" class="btn">Add</button>
+                            </div>
+                            <a title="Remove Hyperlink" data-edit="unlink" class="btn"><i class="fa fa-cut"></i></a>
+
+                        </div>
+
+                        
+                        <div class="btn-group">
+                            <a title="Undo (Ctrl/Cmd+Z)" data-edit="undo" class="btn"><i class="fa fa-undo"></i></a>
+                            <a title="Redo (Ctrl/Cmd+Y)" data-edit="redo" class="btn"><i class="fa fa-repeat"></i></a>
+                        </div>
+                    </div>
+
+                    <div contenteditable="true" class="editor" id="editor">
+                          
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    {{ form_widget(form.Envoyer, { 'attr' : { 'class' : 'btn btn-info pull-right'}}) }}
+
+    {{ form_end(form) }}
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/jquery.maskedinput.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.hotkeys.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-wysiwyg.min.js') }}"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('.editor').wysiwyg();
+        // $('#editor').on("change", function(){
+        //     var value = $(this).html();
+        //     $("#form_Body").val(value);
+        // });
+        
+        $('#editor').bind("DOMSubtreeModified",function(){
+            var value = $(this).html();
+            $("#form_Body").val(value);
+
+            if (null !== $("#form_Body").val().match(/^(<br>|&nbsp;|\s)*$/)) {
+                $("#form_Envoyer").attr("disabled","disabled");
+            } else {
+                $("#form_Envoyer").removeAttr("disabled");
+            }
+        });
+
+        if (null !== $("#form_Body").val().match(/^(<br>|&nbsp;|\s)*$/)) {
+            $("#form_Envoyer").attr("disabled","disabled");
+        } else {
+            $("#form_Envoyer").removeAttr("disabled");
+        }
+    });
+
+    function selectAll() {
+        $("#form_Destinataires option").each(function(){
+            $(this).attr("selected","selected");
+        })
+    }
+
+
+    function unselectAll() {
+        $("#form_Destinataires option").each(function(){
+            $(this).removeAttr("selected");
+        })
+    }
+    </script>
 {% endblock %}

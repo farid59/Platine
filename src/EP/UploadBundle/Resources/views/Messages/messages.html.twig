@@ -11,80 +11,94 @@
 {% block layout_body %}
 
 <div class="row">
-    <div class="col-lg- col-md-5 col-sm-5">
-
-        <div class="box">
-            <div class="box-header">
-                <h2><i class="fa fa-comment"></i><span class="break"></span>Discussion active</h2>
-            </div>
-            <div class="box-content">
-                
-                {% if currentThread is null %}
-                    Aucune discussion ouverte pour le moment.
-                {% else %}
-                    <ul class="chat">
-                        {% for message in currentThread.messages %}                            
-                                <li class="{% if message.sender == app.user %}right{% else %}left{% endif %}">
-                                    <img class="avatar" src="http://lorempixel.com/48/48/"></img>
-                                    <span class="message">
-                                        <span class="arrow"></span>
-                                        <span class="from">{{ message.sender.username }}</span>
-                                        <span class="text">{{ message.body }}</span>
-                                    </span>
-                                </li>
-                        {% endfor %}                        
-                    </ul>
-                    <div class="chat-form">
-                        {{ form_start(form) }}
-                            {{ form_widget(form.Message, { 'attr' : { 'style' : 'overflow: hidden; word-wrap: break-word; resize: horizontal; height: 80px;'}}) }}
-                            {{ form_widget(form.Envoyer, { 'attr' : { 'class' : 'btn btn-info'}}) }}
-
-                        {{ form_end(form)}}
-                    </div>
-                {% endif %}
-
-            </div>
-        </div>
-       
-
-    </div>
     <div class="col-lg-7 col-md-7 col-sm-7">
 
-        <div class="box">
-            <div class="box-header">
-                <h2><i class="fa fa-envelope-o"></i><span class="break"></span>Mes discussions</h2>
-                <div class="box-icon">
-                    <a href="{{ path('ep_send_message') }}"><i class="fa fa-plus"></i> Nouvelle discussion</a>
-                </div>
-            </div>
-            <div class="box-content">
-                
-                <ul class="messagesList">
-                    {% for thread in threads %}
-                        <a href="">
+        <h1>
+            Boite de messages
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('ep_send_message') }}" class="btn btn-info pull-right"><i class="fa fa-plus"></i>  Nouveau</a> 
+            {% endif %}
+        </h1>
+        <ul class="messagesList">
+            {% for thread in threads %}
+                <a href="{{ path('ep_messages', { 'id' : thread.id }) }}">
+                    <li {% if not fos_message_is_read(thread) %} style="font-weight: bold" {% endif %}>
+                        <span class="from col-lg-2">
+                            {% if fos_message_is_read(thread) %} 
+                                <i class="fa fa-envelope-o"></i>
+                            {% else %}
+                                <i class="fa fa-envelope"></i>
+                            {% endif %}
+                            {{ thread.createdBy.username }}</span>
+                        <span class="title col-lg-8">
+                            {{ thread.subject }}
+                        </span>
+                        <span class="date col-lg-2">
+                            {% if ("now"|date('d/M/y')) == (thread.createdAt|date('d/M/y')) %}
+                                Aujourd'hui, à {{ thread.createdAt|date("h:m") }}
+                            {% elseif ("now"|date("y") == (thread.createdAt|date("y"))) %}
+                                {{ thread.createdAt|date("d M") }}
+                            {% else %}
+                                {{ thread.createdAt|date("d M y") }}
+                            {% endif %}
+                            
+                        </span>
+                    </li>
+                </a>
+            {% else %}
+                <span>Vous n'avez aucun message dans votre boite de réception !</span>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {% if thread is not null %}
+        <div class="col-lg-5 col-md-5 col-sm-5 dark"> 
+            <div class="message-view">
+                <div class="message">
+                    <div class="header">
+                        <h1>{{ thread.subject }}</h1>
+                        <div class="from"><i class="halflings user"></i> <b>{{ thread.createdBy }}</b> / {{ thread.createdBy.email }}</div>
+                        <div class="date"><i class="halflings time"></i> 
+                            {% if ("now"|date('d/M/y')) == (thread.createdAt|date('d/M/y')) %}
+                                Aujourd'hui, à {{ thread.createdAt|date("h:m") }}
+                            {% elseif ("now"|date("y") == (thread.createdAt|date("y"))) %}
+                                {{ thread.createdAt|date("d M") }}
+                            {% else %}
+                                {{ thread.createdAt|date("d M y") }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="content">
+                        {% for message in thread.messages %}
+                            {{ message.body | raw }}
+                        {% endfor %}
+                    </div>
+
+    <!--                     <div class="attachments">
+                        <ul>
                             <li>
-                                <span class="from">{{ thread.createdBy.username }}</span>
-                                <span class="title" {% if not fos_message_is_read(thread) %} style="font-weight: bold" {% endif %}>
-                                    {% if not fos_message_is_read(thread) %} <span class="label label-success">new!</span> {% endif %}
-                                    {{ thread.subject }}
+                                <span class="label label-important">zip</span> <b>bootstrap.zip</b> <i>(2,5MB)</i>
+                                <span class="quickMenu">
+                                    <a class="glyphicons search" href="page-inbox.html#"><i></i></a>
+                                    <a class="glyphicons share" href="page-inbox.html#"><i></i></a>
+                                    <a class="glyphicons cloud-download" href="page-inbox.html#"><i></i></a>
                                 </span>
                             </li>
-                        </a>
-                    {% else %}
-                        <span>Vous n'avez aucun message dans votre boite de réception !</span>
-                    {% endfor %}
-                </ul>
-
-
+                        </ul>       
+                    </div>
+    -->
+                </div>
             </div>
         </div>
+    {% endif %}
 
-    </div>
-    
 </div>
 
 
 
+{% endblock %}
 
-
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">$(window).on("load",function(){}).trigger("resize")</script>
 {% endblock %}
