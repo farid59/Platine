@@ -21,7 +21,6 @@ class FactureType extends AbstractType
                 'by_reference' => true ,
             ))    
             ->add('destinataire','text')
-            ->add('objet')
             ->add('conditionPaiement')
             // ->add('date')
             ->add('totalHT', 'hidden')
@@ -33,7 +32,9 @@ class FactureType extends AbstractType
                 'widget' => 'single_text',
                 'format' => 'MM/dd/yyyy'
             ))
-            ->add('commentaires')
+            ->add('commentaires', null, array(
+                "required" => false
+            ))
             ->add('produits', 'collection', array(
                 'type' => new FactureProduitType(),
                 'allow_add' => true,

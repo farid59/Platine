@@ -37,13 +37,6 @@ class Facture
     /**
      * @var string
      *
-     * @ORM\Column(name="Objet", type="text")
-     */
-    private $objet;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="conditionPaiement", type="text")
      */
     private $conditionPaiement;
@@ -100,7 +93,7 @@ class Facture
     /**
      * @var string
      *
-     * @ORM\Column(name="commentaires", type="text")
+     * @ORM\Column(name="commentaires", type="text", nullable=true)
      */
     private $commentaires;
 
