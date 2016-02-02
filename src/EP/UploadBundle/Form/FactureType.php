@@ -12,13 +12,24 @@ class FactureType extends AbstractType
      * @param FormBuilderInterface $builder
      * @param array $options
      */
+    private $loggedUser;
+
+    public function __construct($user) {
+        $this->loggedUser = $user;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('client', 'entity', array(
                 "class" => "EPUploadBundle:Client",
                 "choice_label" => "displayName",
-                'by_reference' => true ,
+                'by_reference' => true,
+                'query_builder' => function (\EP\UploadBundle\Entity\ClientRepository $er) {
+                    return $er->createQueryBuilder('c')
+                        ->andwhere('c.owner = :user')
+                        ->setParameter('user', $this->loggedUser);
+                },
             ))    
             ->add('destinataire','text')
             ->add('conditionPaiement')
@@ -36,7 +47,7 @@ class FactureType extends AbstractType
                 "required" => false
             ))
             ->add('produits', 'collection', array(
-                'type' => new FactureProduitType(),
+                'type' => new FactureProduitType($this->loggedUser),
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => true //Permet d'enregistrer un produit avec sa quantité avant la persistence de la facture, car on n'a toujours pas son id

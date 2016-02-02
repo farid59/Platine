@@ -8,6 +8,12 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class FactureProduitType extends AbstractType
 {
+    private $loggedUser;
+
+    public function __construct($user) {
+        $this->loggedUser = $user;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -21,6 +27,11 @@ class FactureProduitType extends AbstractType
                 "class" => "EPUploadBundle:Produit",
                 "choice_label" => "designation",
                 'by_reference' => true ,
+                'query_builder' => function (\EP\UploadBundle\Entity\ProduitRepository $er) {
+                    return $er->createQueryBuilder('p')
+                        ->andwhere('p.owner = :user')
+                        ->setParameter('user', $this->loggedUser);
+                },
             ))
         ;
     }

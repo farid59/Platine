@@ -21,7 +21,8 @@ class FactureController extends Controller
 {
     public function editAction(Request $request) {
     	$facture = new Facture();
-    	$form = $this->createForm(new FactureType(),$facture);
+        $user = $this->container->get('security.context')->getToken()->getUser();
+    	$form = $this->createForm(new FactureType($user),$facture);
         $produits = $this->getDoctrine()->getManager()->getRepository("EPUploadBundle:Produit")->findAll();
     	$clients = $this->getDoctrine()->getManager()->getRepository("EPUploadBundle:Client")->findAll();
 
@@ -31,7 +32,7 @@ class FactureController extends Controller
 		        $em = $this->getDoctrine()->getManager();
 		        $pem = $this->getDoctrine()->getManager()->getRepository("EPUploadBundle:Produit");
 
-		        $facture->setOwner($this->container->get('security.context')->getToken()->getUser());
+		        $facture->setOwner($user);
 		        $listProduits = clone $facture->getProduits();
 		        
 		        foreach ($facture->getProduits() as $p){
