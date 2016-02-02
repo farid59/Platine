@@ -1,6 +1,9 @@
 {% extends "EPAdminBundle::layout.html.twig" %}
 
-{% block title %}EPUploadBundle:MessagesController:sendMessage{% endblock %}
+{% block title %}
+    Nouveau message
+    {{ parent() }}
+{% endblock %}
 
 {% block body %}
     {{ form_start(form) }}

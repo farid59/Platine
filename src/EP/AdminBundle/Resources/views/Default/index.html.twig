@@ -1,5 +1,10 @@
 {% extends "EPAdminBundle::layout.html.twig" %}
 
+{% block title %}
+    Clients
+    {{ parent() }}
+{% endblock %}
+
 {% block body %}
     
     {% for user in users %}

@@ -1,5 +1,10 @@
 {% extends "EPUploadBundle::layout.html.twig" %}
 
+{% block title %}
+    Envoyer des fichiers
+    {{ parent() }}
+{% endblock %}
+
 {% block body %}
 
 {{ include('EPUploadBundle:Upload:form.html.twig') }}

@@ -1,6 +1,11 @@
 {% extends "EPUploadBundle::layout.html.twig" %}
 {% form_theme form 'EPUploadBundle:Facture:formProduit.html.twig' %}
 
+{% block title %}
+    Editer une facture
+    {{ parent() }}
+{% endblock %}
+
 {% block body %}
 
 <h2>Nouvelle facture</h2>

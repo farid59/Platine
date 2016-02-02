@@ -1,5 +1,10 @@
 {% extends "EPUploadBundle::layout.html.twig" %}
 
+{% block title %}
+    Nouveau produit
+    {{ parent() }}
+{% endblock %}
+
 {% block body %}
 
 {{ include('EPUploadBundle:Produit:formProduit.html.twig') }}

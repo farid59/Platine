@@ -1,5 +1,10 @@
 {% extends "EPUploadBundle::layout.html.twig" %}
 
+{% block title %}
+    Nouveau client
+    {{ parent() }}
+{% endblock %}
+
 {% block body %}
 
 {{ include('EPUploadBundle:Client:formClient.html.twig') }}

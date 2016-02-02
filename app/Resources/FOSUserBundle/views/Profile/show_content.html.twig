@@ -1,12 +1,15 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% extends "::base.html.twig" %}
+{% if is_granted('ROLE_ADMIN') %}
+    {% set layout = "EPAdminBundle::layout.html.twig" %}
+{% else %}
+    {% set layout = "EPUploadBundle::layout.html.twig" %}
+{% endif %}
+{% extends layout %}
 
 {% block title %}
-{% endblock %}
-
-{% block menu %}
-    {% include "::menu-user.html.twig" %}
+    Profil
+    {{ parent() }}
 {% endblock %}
 
 {% block layout_body %}
