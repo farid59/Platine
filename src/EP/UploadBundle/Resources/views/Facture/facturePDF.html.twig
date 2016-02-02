@@ -209,10 +209,10 @@ footer {
         <!-- <img src="logo.png"> -->
       </div>
       <div id="company">
-        <h2 class="name">Company Name</h2>
-        <div>455 Foggy Heights, AZ 85004, US</div>
-        <div>(602) 519-0450</div>
-        <div><a href="mailto:company@example.com">company@example.com</a></div>
+        <h2 class="name">{{ app.user.societe }}</h2>
+        <div>{{ app.user.adresse }}</div>
+        <div>{{ app.user.telephone }}</div>
+        <div><a href="mailto:{{ app.user.email }}">{{ app.user.email }}</a></div>
       </div>
       </div>
     </header>
