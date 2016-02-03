@@ -73,3 +73,7 @@ ep_send_message:
 ep_download_untreated:
     path: /download/untreated/{username}
     defaults: { _controller: EPUploadBundle:Upload:downloadUntreated }
+
+rest_create_client:
+    path: /rest/client/create
+    defaults: { _controller: EPUploadBundle:Client:createRest }

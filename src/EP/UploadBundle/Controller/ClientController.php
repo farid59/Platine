@@ -6,8 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use EP\UploadBundle\Entity\Client;
-use EP\UploadBundle\Form\ClientType;
+use EP\UploadBundle\Form\ClientRestType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @Security("has_role('ACCESS_EDIT_FACTURE')")
@@ -89,6 +90,55 @@ class ClientController extends Controller
       return $this->render('EPUploadBundle:Client:newClient.html.twig', array(
         "form" => $form->createView()
       ));      
+    }
+
+    public function createRestAction(Request $request) {
+
+        if ($request->isMethod('POST')) {
+            $data = $request->request->get('client');
+
+            $client = new Client();
+            $client->setNom($data['nom']);
+            $client->setPrenom($data['prenom']);
+            $client->setCivilite($data['civilite']);
+            $client->setSociete($data['societe']);
+            $client->setEmail($data['email']);
+            $client->setDestinataire($data['destinataire']);
+            $client->setAdresse($data['adresse']);
+            $client->setCodePostal($data['codePostal']);
+            $client->setVille($data['ville']);
+            $client->setPays($data['pays']);
+            $client->setTelephone($data['telephone']);
+            $client->setMobile($data['mobile']);
+            $client->setFax($data['fax']);
+            $client->setTva($data['tva']);
+            $client->setReference($data['reference']);
+            $client->setConditionPaiement($data['conditionsPaiement']);
+
+
+            $this->getDoctrine()->getManager()->persist($client);
+            $this->getDoctrine()->getManager()->flush();
+
+            $res = array(
+              "id" => $client->getId(),
+              "nom" => $client->getNom(),
+              "prenom" => $client->getPrenom(),
+              "destinataire" => $client->getDestinataire(),
+              "conditionsPaiement" => $client->getConditionPaiement(),
+            );
+
+            $response = new Response(json_encode($res));
+            $response->headers->set('Content-Type', 'application/json');
+
+            return $response;
+        } else if ($request->isMethod('GET')) {
+            $form = $this->createForm(new ClientRestType(), new Client());
+            return $this->render('EPUploadBundle:Client:formClientModal.html.twig', array(
+              "form" => $form->createView()
+            ));
+        }
+
+        throw new NotFoundHttpException("Cette page n'existe pas.");
     }
 
 }

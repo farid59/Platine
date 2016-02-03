@@ -1,0 +1,167 @@
+<div class="modal-body">
+
+{# <div class="well"> #}
+  {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+    {# Les erreurs générales du formulaire. #}
+    {{ form_errors(form) }}
+
+<div class="col-lg-4">
+    	<div class="box">
+      		<div class="box-header">Identité du client</div>
+      		<div class="box-content">
+			    <div class="form-group">
+			      {{ form_label(form.nom, "Nom", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+			      {{ form_errors(form.nom) }}
+			      <div class="col-md-8">
+			        {{ form_widget(form.nom, {'attr': {'class': 'form-control input-md','placeholder':'ex: Dupont'}}) }}
+			      </div>
+			    </div>
+			    <div class="form-group">
+			      {{ form_label(form.prenom, "Prenom", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+			      {{ form_errors(form.prenom) }}
+			      <div class="col-md-8">
+			        {{ form_widget(form.prenom, {'attr': {'class': 'form-control input-md','placeholder':'ex: Martin'}}) }}
+			      </div>
+			    </div>
+			    <div class="form-group">
+			      {{ form_label(form.civilite, "Civilité", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+			      {{ form_errors(form.civilite) }}
+			      <div class="col-md-8">
+			        {{ form_widget(form.civilite, {'attr': {'class': 'checkbox-inline'}}) }}
+			      </div>
+			    </div>
+
+			    <div class="form-group">
+			      {{ form_label(form.email, "Email", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+			      {{ form_errors(form.email) }}
+			      <div class="col-md-8">
+			        {{ form_widget(form.email, {'attr': {'class': 'form-control input-md','placeholder':'ex: martin.dupont@fai.fr'}}) }}
+			      </div>
+			    </div>
+			    <div class="form-group">
+			      {{ form_label(form.societe, "Société", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+			      {{ form_errors(form.societe) }}
+			      <div class="col-md-8">
+			        {{ form_widget(form.societe, {'attr': {'class': 'form-control input-md','placeholder':'ex: Google'}}) }}
+			      </div>
+			    </div>
+			    <div class="form-group">
+			      {{ form_label(form.destinataire, "À l\'intention de ", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+			      {{ form_errors(form.destinataire) }}
+			      <div class="col-md-8">
+			        {{ form_widget(form.destinataire, {'attr': {'class': 'form-control input-md','placeholder':'ex: Service comptable, ...'}}) }}
+			      </div>
+			    </div>
+			</div>
+      	</div>
+</div>
+<div class="col-lg-4">
+    	<div class="box">
+      		<div class="box-header">Coordonnées du client</div>
+      		<div class="box-content">
+			    <div class="form-group">
+			      {{ form_label(form.adresse, "Adresse", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+			      {{ form_errors(form.adresse) }}
+			      <div class="col-md-8">
+			        {{ form_widget(form.adresse, {'attr': {'class': 'form-control','placeholder':'ex: 17, rue du puits'}}) }}
+			      </div>
+			    </div>
+			    <div class="form-group">
+			      {{ form_label(form.codePostal, "Code postal", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+			      {{ form_errors(form.codePostal) }}
+			      <div class="col-md-8">
+			        {{ form_widget(form.codePostal, {'attr': {'class': 'form-control','placeholder':'ex: 59000'}}) }}
+			      </div>
+			    </div>
+			    <div class="form-group">
+			      {{ form_label(form.ville, "Ville", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+			      {{ form_errors(form.ville) }}
+			      <div class="col-md-8">
+			        {{ form_widget(form.ville, {'attr': {'class': 'form-control','placeholder':'ex: Lille'}}) }}
+			      </div>
+			    </div>
+
+			    <div class="form-group">
+			      {{ form_label(form.pays, "Pays", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+			      {{ form_errors(form.pays) }}
+			      <div class="col-md-8">
+			        {{ form_widget(form.pays, {'attr': {'class': 'form-control','placeholder':'ex: France'}}) }}
+			      </div>
+			    </div>
+			    <div class="form-group">
+			      {{ form_label(form.telephone, "Téléphone", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+			      {{ form_errors(form.telephone) }}
+			      <div class="col-md-8">
+			        {{ form_widget(form.telephone, {'attr': {'class': 'form-control','placeholder':'ex: 0123456789'}}) }}
+			      </div>
+			    </div>
+			    <div class="form-group">
+			      {{ form_label(form.mobile, "Mobile", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+			      {{ form_errors(form.mobile) }}
+			      <div class="col-md-8">
+			        {{ form_widget(form.mobile, {'attr': {'class': 'form-control','placeholder':'ex:0612345678'}}) }}
+			      </div>
+		    	</div>
+			</div>
+		</div>
+</div>
+    {# Idem pour un autre champ. #}
+
+
+
+<div class="col-lg-4">
+    	<div class="box">
+      		<div class="box-header">Informations complémentaires</div>
+      		<div class="box-content">
+			    <div class="form-group">
+			      {{ form_label(form.fax, "Fax", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+			      {{ form_errors(form.fax) }}
+			      <div class="col-md-8">
+			        {{ form_widget(form.fax, {'attr': {'class': 'form-control','placeholder':'ex:0123456789'}}) }}
+			      </div>
+			    </div>
+
+			    <div class="form-group">
+			      {{ form_label(form.tva, "Tva intracommunautaire", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+			      {{ form_errors(form.tva) }}
+			      <div class="col-md-8">
+			        {{ form_widget(form.tva, {'attr': {'class': 'form-control','placeholder':'ex: FRAB123456789'}}) }}
+			      </div>
+			    </div>
+			    <div class="form-group">
+			      {{ form_label(form.reference, "Référence", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+			      {{ form_errors(form.reference) }}
+			      <div class="col-md-8">
+			        {{ form_widget(form.reference, {'attr': {'class': 'form-control','placeholder':'Référence'}}) }}
+			      </div>
+			    </div>
+			    <div class="form-group">
+			      {{ form_label(form.conditionPaiement, "Conditions de paiement", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+			      {{ form_errors(form.conditionPaiement) }}
+			      <div class="col-md-8">
+			        {{ form_widget(form.conditionPaiement, {'attr': {'class': 'form-control','placeholder':'Conditions'}}) }}
+			      </div>
+			    </div>
+		    </div>
+		</div>
+</div>
+	<div class="clearfix"></div>
+</div>
+
+<div class="modal-footer">
+	
+
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+        <button type="submit" class="btn btn-info" onclick="createUser()" data-dismiss="modal">Valider</button>
+
+  {# Génération automatique des champs pas encore écrits.
+     Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+     et tous les champs cachés (type « hidden »). #}
+  {{ form_rest(form) }}
+  {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+  
+  {# Fermeture de la balise <form> du formulaire HTML #}
+  {{ form_end(form) }}
+{# </div> #}
+</div>
