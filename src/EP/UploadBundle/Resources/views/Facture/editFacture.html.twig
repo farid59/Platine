@@ -71,8 +71,9 @@
         <div class="box">
             <div class="box-header">
                 Produits
-                
-                
+                <div class="box-icon">
+                    <a class="btn-setting" href="{{ path('rest_create_produit') }}"><i class="fa fa-plus"></i> Nouveau produit</a>
+                </div>
             </div>
             <div class="box-content">
                     <div class="row">
@@ -227,6 +228,17 @@
 
 {# Voici le script en question : #}
 <script type="text/javascript">
+  var produits = {
+      {% for produit in produits %}
+          "{{ produit.id }}" : {
+              "prix" : "{{ produit.montantUnitaireHT }}",
+              "tva" : "{{ produit.tva }}"
+          }
+          {% if loop.index != loop.last %}
+          ,
+          {% endif %}
+      {% endfor %}
+  };
   $(document).ready(function() {
     // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
     var $container = $('div#ep_uploadbundle_facture_produits');
@@ -266,17 +278,6 @@
       var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g,(index+1) + " : ")
           .replace(/__name__/g, index));
 
-      var produits = {
-          {% for produit in produits %}
-              "{{ produit.id }}" : {
-                  "prix" : "{{ produit.montantUnitaireHT }}",
-                  "tva" : "{{ produit.tva }}"
-              }
-              {% if loop.index != loop.last %}
-              ,
-              {% endif %}
-          {% endfor %}
-      };
 
       $prototype.find("option").each(function(){
           var option = $(this);
@@ -451,6 +452,48 @@
                 updateClientFields();
             },
             error: function(errors) {
+                noty({
+                   'type' : 'error',
+                   'layout' : 'topRight',
+                   'text' : 'Une erreur est survenue lors de l\'ajout de votre client. Veuillez réessayer plus tard.'
+                })
+            }
+        })
+    }
+
+    function createProduit() {
+        $.ajax({
+            "url" : '{{ path("rest_create_produit") }}',
+            "method" : 'POST',
+            "data" : {
+                "produit" : {
+                    "designation" : $("#ep_uploadbundle_produit_designation").val(),
+                    "description" : $("#ep_uploadbundle_produit_description").val(),
+                    "reference" : $("#ep_uploadbundle_produit_reference").val(),
+                    "montantUnitaireHT" : $("#ep_uploadbundle_produit_montantUnitaireHT").val(),
+                    "tva" : $("#ep_uploadbundle_produit_tva").val()
+                }
+            },
+            success: function(data) {
+                var box_produits = $("#ep_uploadbundle_facture_produits");
+                var prototype = $(box_produits.attr("data-prototype"));
+
+                $(".row.new_product select").each(function(){
+                  var option = $("<option value='" + data.id + "' data-prix='" + data.prix + "' data-tva='" + data.tva + "'>" + data.designation + "</option>");
+                  $(this).append(option);
+                });
+
+                produits[""+ data.id] = { "prix" : ""+data.prix, "tva" : ""+data.tva };
+
+                prototype.find('select').each(function(){
+                  var option = $("<option value='" + data.id + "'>" + data.designation + "</option>");
+                  $(this).append(option);
+                  console.log(prototype);
+                });
+
+                $("#ep_uploadbundle_facture_produits").attr("data-prototype", prototype.prop("outerHTML"));
+            },
+            error: function(error) {
                 noty({
                    'type' : 'error',
                    'layout' : 'topRight',

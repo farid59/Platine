@@ -77,3 +77,8 @@ ep_download_untreated:
 rest_create_client:
     path: /rest/client/create
     defaults: { _controller: EPUploadBundle:Client:createRest }
+
+
+rest_create_produit:
+    path: /rest/produit/create
+    defaults: { _controller: EPUploadBundle:Produit:createRest }

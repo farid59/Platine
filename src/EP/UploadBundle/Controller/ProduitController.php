@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use EP\UploadBundle\Entity\Files;
 use EP\UploadBundle\Form\FilesType;
 use EP\UploadBundle\Entity\Produit;
-use EP\UploadBundle\Form\ProduitType;
+use EP\UploadBundle\Form\ProduitRestType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
@@ -92,6 +92,43 @@ class ProduitController extends Controller
         return $this->render('EPUploadBundle:Produit:newProduit.html.twig', array(
           "form" => $form->createView()
         ));      
+    }
+
+    public function createRestAction(Request $request) {
+        if ($request->isMethod('POST')) {
+            $data = $request->request->get('produit');
+
+            $produit = new Produit();
+            $produit->setOwner($this->container->get('security.context')->getToken()->getUser());
+            $produit->setDesignation($data['designation']);
+            $produit->setdescription($data['description']);
+            $produit->setReference($data['reference']);
+            $produit->setMontantUnitaireHT($data['montantUnitaireHT']);
+            $produit->setTva($data['tva']);
+
+            $this->getDoctrine()->getManager()->persist($produit);
+            $this->getDoctrine()->getManager()->flush();
+
+            $res = array(
+              "id" => $produit->getId(),
+              "designation" => $produit->getDesignation(),
+              "prix" => $produit->getMontantUnitaireHT(),
+              "tva" => $produit->getTva()
+            );
+
+            $response = new Response(json_encode($res));
+            $response->headers->set('Content-Type', 'application/json');
+
+            return $response;
+
+        } else if ($request->isMethod('GET')) {
+            $form = $this->createForm(new ProduitRestType(), new Produit());
+            return $this->render('EPUploadBundle:Produit:formProduitModal.html.twig', array(
+              "form" => $form->createView()
+            ));
+        } 
+
+        throw new NotFoundHttpException("Cette page n'existe pas.");
     }
 
 }
