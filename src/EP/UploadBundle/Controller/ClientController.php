@@ -99,6 +99,7 @@ class ClientController extends Controller
 
             $client = new Client();
             $client->setNom($data['nom']);
+            $client->setOwner($this->container->get('security.context')->getToken()->getUser());
             $client->setPrenom($data['prenom']);
             $client->setCivilite($data['civilite']);
             $client->setSociete($data['societe']);
