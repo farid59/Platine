@@ -15,7 +15,24 @@
                 </div>
             </div>
             <div class="box-content">
-
+                <div class="row">
+                    <div class="col-lg-2 col-lg-offset-2">
+                        <img alt="300x200" height="200px" src="{{asset('img/profile.png')}}">
+                    </div>
+                    <div class="col-lg-3">
+                        <b>Nom : </b><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ user.nom }}<br/>
+                        <b>Prénom : </b><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ user.prenom }}<br/>
+                        <b>Email : </b><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ user.email}}<br/>
+                        <b>Adresse : </b><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ user.adresse ~ ', ' ~ user.codePostal ~ ' ' ~ user.ville ~ ', ' ~ user.pays }}<br/>
+                        <b>Site web : </b><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% if user.website is null %}Aucun.{% else %}<a href="user.website" target="_blank">{{ user.website }}</a>{% endif %}
+                    </div>
+                    <div class="col-lg-3">
+                        <b>A Propos :</b>
+                        <span style="padding-left:25px">
+                            {{ user.about }}
+                        </span>
+                    </div>
+                </div>
                 
 
             </div>

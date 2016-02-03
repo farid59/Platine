@@ -122,6 +122,17 @@ class User extends BaseUser implements ParticipantInterface
     public $pictureName;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    public $website;
+
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    public $about;
+
+    /**
      * @Assert\File(maxSize="500k")
      */
     public $file;
@@ -495,5 +506,53 @@ class User extends BaseUser implements ParticipantInterface
     public function getPictureName()
     {
         return $this->pictureName;
+    }
+
+    /**
+     * Set website
+     *
+     * @param string $website
+     *
+     * @return User
+     */
+    public function setWebsite($website)
+    {
+        $this->website = $website;
+
+        return $this;
+    }
+
+    /**
+     * Get website
+     *
+     * @return string
+     */
+    public function getWebsite()
+    {
+        return $this->website;
+    }
+
+    /**
+     * Set about
+     *
+     * @param \about $about
+     *
+     * @return User
+     */
+    public function setAbout($about)
+    {
+        $this->about = $about;
+
+        return $this;
+    }
+
+    /**
+     * Get about
+     *
+     * @return \about
+     */
+    public function getAbout()
+    {
+        return $this->about;
     }
 }

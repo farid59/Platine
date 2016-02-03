@@ -24,20 +24,26 @@
         <ul class="messagesList">
             {% for thread in threads %}
                 <a href="{{ path('ep_messages', { 'id' : thread.id }) }}">
-                    <li {% if not fos_message_is_read(thread) %} style="font-weight: bold" {% endif %}>
+                    <li {% if not fos_message_is_read(thread) %} style="font-weight: bold !important" {% endif %}>
                         <span class="from col-lg-2">
                             {% if fos_message_is_read(thread) %} 
                                 <i class="fa fa-envelope-o"></i>
                             {% else %}
                                 <i class="fa fa-envelope"></i>
                             {% endif %}
-                            {{ thread.createdBy.username }}</span>
-                        <span class="title col-lg-8">
+                            {% if thread.messages[0].file is not null %}
+                                <span class="glyphicons paperclip"></span>
+                            {% else %}
+                                <span class="glyphicons empty"></span>
+                            {% endif %}
+                            {{ thread.createdBy.username }}
+                        </span>
+                        <span class="title col-lg-8" {% if not fos_message_is_read(thread) %} style="font-weight: bold !important" {% endif %}>
                             {{ thread.subject }}
                         </span>
                         <span class="date col-lg-2">
                             {% if ("now"|date('d/M/y')) == (thread.createdAt|date('d/M/y')) %}
-                                Aujourd'hui, à {{ thread.createdAt|date("h:m") }}
+                                {{ thread.createdAt|date("H:m") }}
                             {% elseif ("now"|date("y") == (thread.createdAt|date("y"))) %}
                                 {{ thread.createdAt|date("d M") }}
                             {% else %}
@@ -62,7 +68,7 @@
                         <div class="from"><i class="halflings user"></i> <b>{{ thread.createdBy }}</b> / {{ thread.createdBy.email }}</div>
                         <div class="date"><i class="halflings time"></i> 
                             {% if ("now"|date('d/M/y')) == (thread.createdAt|date('d/M/y')) %}
-                                Aujourd'hui, à {{ thread.createdAt|date("h:m") }}
+                                {{ thread.createdAt|date("H:m") }}
                             {% elseif ("now"|date("y") == (thread.createdAt|date("y"))) %}
                                 {{ thread.createdAt|date("d M") }}
                             {% else %}
