@@ -35,6 +35,12 @@ class Message extends BaseMessage
     protected $sender;
 
     /**
+     * 
+     * @ORM\OneToOne( targetEntity="EP\UploadBundle\Entity\Files" )
+     */
+    protected $file;
+
+    /**
      * @ORM\OneToMany(
      *   targetEntity="EP\UploadBundle\Entity\MessageMetadata",
      *   mappedBy="message",
@@ -76,5 +82,29 @@ class Message extends BaseMessage
     public function getMetadata()
     {
         return $this->metadata;
+    }
+
+    /**
+     * Set file
+     *
+     * @param \EP\UploadBundle\Entity\Files $file
+     *
+     * @return Message
+     */
+    public function setFile(\EP\UploadBundle\Entity\Files $file = null)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * Get file
+     *
+     * @return \EP\UploadBundle\Entity\Files
+     */
+    public function getFile()
+    {
+        return $this->file;
     }
 }

@@ -28,7 +28,7 @@
             <div class="col-lg-5 col-lg-push-2 btn btn-default" onclick="unselectAll()">Désélectionner tout</div>
             </div>
             <div class="col-lg-12" style="margin-top: 20px;">
-                {{ form_widget(form.Destinataires, { 'attr' : { 'class' : 'form-control', 'style' : 'height: 260px;'}}) }}
+                {{ form_widget(form.Destinataires, { 'attr' : { 'class' : 'form-control', 'style' : 'height: 330px;'}}) }}
             </div>
         </div>
         <div class="col-lg-9">
@@ -85,6 +85,11 @@
                     <div contenteditable="true" class="editor" id="editor">
                           
                     </div>
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.Attachment, "Joindre un fichier", { 'attr' : { 'class' : 'form-label' }})}}
+                    {{ form_widget(form.Attachment)}}
                 </div>
         </div>
     </div>

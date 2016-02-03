@@ -75,6 +75,22 @@
                             {{ message.body | raw }}
                         {% endfor %}
                     </div>
+                    
+                    {% if thread.messages[0].file is not null %}
+                        {% set file = thread.messages[0].file %}
+                        <div class="attachments">
+                            <ul>
+                                <li>
+                                    <img src="{{ asset_if('img/filetypes/ico/' ~ file.ext ~ '.ico', 'img/filetypes/ico/unknown.ico') }}" height="40px"> 
+                                    <b>{{ file.name }}</b>
+                                    <span class="quickMenu">
+                                        <a class="fa fa-download fa-2x" href="{{ path('ep_download_file', { 'fileId' : file.id}) }}"><i></i></a>
+                                    </span>
+                                </li>
+                            </ul>       
+                        </div>
+                    {% endif %}
+
 
     <!--                     <div class="attachments">
                         <ul>
