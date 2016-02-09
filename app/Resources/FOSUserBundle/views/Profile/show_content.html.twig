@@ -1,4 +1,4 @@
-{% trans_default_domain 'FOSUserBundle' %}
+  {% trans_default_domain 'FOSUserBundle' %}
 
 {% if is_granted('ROLE_ADMIN') %}
     {% set layout = "EPAdminBundle::layout.html.twig" %}
@@ -81,8 +81,8 @@
           </div>
           <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
 
-                        <div class="col-md-6" style="font-size:18px">
                             <h3>Information</h3>
+                        <div class="col-md-4" style="font-size:18px">
                             <dl class="dl-horizontal">
                                 <dt>Nom : </dt><dd>{{ user.nom }}</dd>
                                 <dt>Prénom: </dt><dd>{{ user.prenom }}</dd>
@@ -95,6 +95,7 @@
                                 <dt>Téléphone: </dt><dd>{{ user.telephone }}</dd>
                             </dl>
                         </div>
+                            <div id="carte" class="col-md-8" style="height : 400px;"></div>
 
           </div>
         </div>
@@ -120,3 +121,65 @@
 {% endblock %}
 
 
+{% block javascripts %}
+  {{ parent() }}
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
+  <script type="text/javascript">
+      $(document).ready(function(){
+                var adresse = {
+                    "adresse" : "{{ user.adresse }}",
+                    "code_postal" : "{{ user.codepostal }}",
+                    "ville" : "{{ user.ville }}",
+                    "pays" : "{{ user.pays }}",
+                    "lat" : null,
+                    "lng" : null
+                }
+
+                console.log(adresse["adresse"]+" "+adresse["ville"]);
+
+                $.ajax({
+                  "method" : "GET",
+                  "url" : "http://nominatim.openstreetmap.org/search",
+                  "data" : {
+                    "format" : "json",
+                    // Utilisation de $("<div/>").html(a_string).text() pour décoder les caractères html ( &#039; deviens ' )
+                    "q" : $("<div/>").html(adresse["adresse"]+" "+adresse["ville"]).text()
+                  },
+                  success: function(data) {
+                      if (data.length !== 1) {
+                          var carte = new google.maps.Map(document.getElementById("carte"), {
+                              center: new google.maps.LatLng(47.0805693,2.398932),
+                              zoom: 5,
+                              mapTypeId: google.maps.MapTypeId.ROADMAP
+                          });
+
+                          noty({
+                              'text' : 'Impossible de déterminer l\'emplacement de cette adresse',
+                              'layout' : 'topRight',
+                              'type' : 'error'
+                          });
+                      } else {
+
+                          var latlng = new google.maps.LatLng(parseFloat(data[0].lat), parseFloat(data[0].lon));
+                          var carte = new google.maps.Map(document.getElementById("carte"), {
+                              center: latlng,
+                              zoom: 15,
+                              mapTypeId: google.maps.MapTypeId.ROADMAP
+                          });
+                          var marqueur = new google.maps.Marker({
+                              position: latlng,
+                              map: carte
+                          });
+                      }
+
+                  },
+                  error: function(errors) {
+
+                  }
+                })
+
+      })
+
+        </script>
+
+{% endblock %}
