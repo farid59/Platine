@@ -14,28 +14,7 @@
 
 {% block layout_body %}
     {% block body %}
-		<div class="fos_user_user_show">
-		    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
-        <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
-		    <p>Nom : {{ user.nom }}</p>
-        <a href="{{ path('fos_user_profile_edit') }}"><i class="halflings user white"></i> Modifier</a>
-		    {# {{ dump(user)}} #}
-		</div>
-{# 		<div>
-			{% if user.pictureName %}
-			    <img src="{{ asset(user.getWebPath()) }}" />
-			{% else %}
-			    Pas d'image de profil chargée !
-			{% endif %}
 
-			<h1>Charger une image de profil</h1>
-
-			<form action="#" method="post" {{ form_enctype(form) }}>
-			    {{ form_widget(form) }}
-
-			    <input type="submit" value="Uploader" />
-			</form>
-		</div> #}
 
 
 <div class="row">
@@ -51,38 +30,10 @@
       </div>
       <div class="widget-body">
         <div class="row">
-          <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
-            <div class="thumbnail">
-              <img alt="300x200" src="{{asset('img/profile.png')}}">
-              <br>
-              <h4 class="center-align-text">{{ user.username }}</h4>
-{#                           <p class="center-align-text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porttitor a vulputate metus tristique vel orci quis sagittis.
-              </p> #}
-              <p class="btn-stack center-align-text">
-                <a title="" data-original-title="" href="javascript:;" class="btn btn-info">
-                  <i class="fa fa-twitter"></i>
-                </a>
-                <a title="" data-original-title="" href="javascript:;" class="btn btn-primary">
-                  <i class="fa fa-facebook"></i>
-                </a>
-                <a title="" data-original-title="" href="javascript:;" class="btn btn-danger">
-                  <i class="fa fa-google-plus"></i>
-                </a>
-                <a title="" data-original-title="" href="javascript:;" class="btn btn-success">
-                  <i class="fa fa-pinterest"></i>
-                </a>
-                <a title="" data-original-title="" href="javascript:;" class="btn btn-warning">
-                  <i class="fa fa-youtube"></i>
-                </a>
-              </p>
-            </div>
-            <br>
-          </div>
-          <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
 
+
+                        <div class="col-md-5" style="font-size:18px">
                             <h3>Information</h3>
-                        <div class="col-md-4" style="font-size:18px">
                             <dl class="dl-horizontal">
                                 <dt>Nom : </dt><dd>{{ user.nom }}</dd>
                                 <dt>Prénom: </dt><dd>{{ user.prenom }}</dd>
@@ -94,10 +45,12 @@
                                 <dt>Pays: </dt><dd>{{ user.pays }}</dd>
                                 <dt>Téléphone: </dt><dd>{{ user.telephone }}</dd>
                             </dl>
+                              <a class="btn btn-info" href="{{ path('fos_user_profile_edit') }}">
+                                Modifier
+                              </a>
                         </div>
-                            <div id="carte" class="col-md-8" style="height : 400px;"></div>
+                            <div id="carte" class="col-md-7" style="height : 400px;"></div>
 
-          </div>
         </div>
       </div>
     </div>
