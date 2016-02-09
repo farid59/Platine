@@ -32,36 +32,8 @@
             </div>
             <div class="widget-body">
               <div class="row">
-                <div class="col-lg-2 col-md-4 col-sm-12 col-xs-12">
-                  <div class="thumbnail">
-                    <img alt="300x200" src="{{asset('img/profile.png')}}">
-                    <br>
-                    <p class="btn-stack center-align-text">
-                      <a title="" data-original-title="" href="javascript:;" class="btn btn-info">
-                        <i class="fa fa-twitter"></i>
-                      </a>
-                      <a title="" data-original-title="" href="javascript:;" class="btn btn-primary">
-                        <i class="fa fa-facebook"></i>
-                      </a>
-                      <a title="" data-original-title="" href="javascript:;" class="btn btn-danger">
-                        <i class="fa fa-google-plus"></i>
-                      </a>
-                      <a title="" data-original-title="" href="javascript:;" class="btn btn-success">
-                        <i class="fa fa-pinterest"></i>
-                      </a>
-                      <a title="" data-original-title="" href="javascript:;" class="btn btn-warning">
-                        <i class="fa fa-youtube"></i>
-                      </a>
-                    </p>
-                  </div>
-                  <br>
-                </div>
                 <div class="col-lg-5 col-md-8 col-sm-12 col-xs-12">
                 {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit form-horizontal' } }) }}
-                 <h5>
-                      Information de login
-                </h5>
-                <hr>
 
             <div class="form-group">
               {{ form_label(form.username, "Nom d'utilisateur", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
@@ -141,14 +113,14 @@
             </div>
 
 
-            <div class="form-actions">
-              <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+            <div class="pull-right">
+              <input type="submit" class="btn btn-success" value="{{ 'profile.edit.submit'|trans }}" />
             </div>  
             {{ form_end(form) }} 
 
             </div>
 
-            <div class="col-lg-4" style="border:solid 1px red; height: 400px;" id="carte"></div>
+            <div class="col-lg-6" style="height: 500px;" id="carte"></div>
 
 
         </div>
