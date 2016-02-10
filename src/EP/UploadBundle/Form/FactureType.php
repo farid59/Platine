@@ -32,7 +32,9 @@ class FactureType extends AbstractType
                 },
             ))    
             ->add('destinataire','text')
-            ->add('conditionPaiement')
+            ->add('conditionPaiement', null, array(
+                "required" => false
+            ))
             // ->add('date')
             ->add('totalHT', 'hidden')
             ->add('montantTVA', 'hidden')

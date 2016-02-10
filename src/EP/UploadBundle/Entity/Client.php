@@ -141,7 +141,7 @@ class Client
     /**
      * @var string
      *
-     * @ORM\Column(name="conditionPaiement", type="text")
+     * @ORM\Column(name="conditionPaiement", type="text", nullable=true)
      */
     private $conditionPaiement;
 
