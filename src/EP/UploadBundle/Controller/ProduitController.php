@@ -17,6 +17,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
  */
 class ProduitController extends Controller
 {
+
+    /**
+      * Affiche la liste des produits
+      */
     public function showAction() {
       $repository = $this->getDoctrine()->getManager()->getRepository('EPUploadBundle:Produit');
       
@@ -36,6 +40,10 @@ class ProduitController extends Controller
     }
 
 
+    /**
+      * Permet la création d'un nouveau produit
+      * @param request : la requête envoyé
+      */
     public function createAction(Request $request){
       $produit = new Produit();
       $form = $this->createForm(new ProduitType(),$produit);
@@ -53,6 +61,11 @@ class ProduitController extends Controller
         ));      
     }
 
+    /**
+      * Permet la suppression d'un produit
+      * @param request : la requête envoyé
+      * @param id : l'identifiant du produit
+      */
     public function deleteAction($id, Request $request)
     {
         $produit = $this->getDoctrine()->getManager()->getRepository("EPUploadBundle:Produit")->findOneById($id);
@@ -76,6 +89,11 @@ class ProduitController extends Controller
         ));
     }
 
+    /**
+      * Permet la modification d'un produit
+      * @param request : la requête envoyé
+      * @param id : l'identifiant du produit
+      */
     public function editAction($id, Request $request)
     {
         $produit = $this->getDoctrine()->getManager()->getRepository("EPUploadBundle:Produit")->findOneById($id);
@@ -95,6 +113,11 @@ class ProduitController extends Controller
         ));      
     }
 
+    /**
+      * Permet la création d'un produit 
+      * Cette méthode est appelé lors de la création à la volée lors de l'édition de facture
+      * @param request : la requête envoyé
+      */
     public function createRestAction(Request $request) {
         if ($request->isMethod('POST')) {
             $data = $request->request->get('produit');

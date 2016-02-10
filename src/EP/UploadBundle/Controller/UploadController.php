@@ -11,21 +11,22 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class UploadController extends Controller
 {
-
+    /**
+      * Affiche la page d'authentification
+      */
     public function indexAction()
     {
         $authChecker = $this->get('security.authorization_checker');
         if ($authChecker->isGranted("ROLE_ADMIN")) {
-          // return $this->forward("EPAdminBundle:Default:index");
           return $this->redirectToRoute('ep_admin_homepage');
         } else {
           return $this->redirectToRoute('ep_user_homepage');
         }
-
-        // return $this->render('EPUploadBundle::layout.html.twig', array('name' => 'farid'));
-        // return new Response("Hello World !");
     }
 
+    /**
+      * Affiche la page d'accueil 
+      */
     public function homeAction()
     {
         $em = $this->getDoctrine()->getManager();
@@ -54,6 +55,10 @@ class UploadController extends Controller
         ));
     }
 
+    /**
+      * Permet l'envoi de fichier 
+      * @param request : la requête envoyé
+      */
     public function uploadAction(Request $request)
     {
       $em = $this->getDoctrine()->getManager();
@@ -118,6 +123,11 @@ class UploadController extends Controller
       ));
   	}
 
+    /**
+      * Permet la suppression d'un fichier
+      * @param request : la requête envoyé
+      * @param id : l'identifiant du fichier 
+      */
     public function deleteAction($id, Request $request)
     {
       $em = $this->getDoctrine()->getManager();
@@ -160,6 +170,10 @@ class UploadController extends Controller
       ));
     }
 
+    /**
+      * Affiche la liste des fichiers en tenant compte des filtres
+      * @param request : la requête envoyé
+      */
     public function listAction(Request $request){
       $repository = $this
         ->getDoctrine()
@@ -206,6 +220,11 @@ class UploadController extends Controller
 
     }
 
+    /**
+      * Permet le téléchargement d'un fichier
+      * @param request : la requête envoyé
+      * @param id : l'identifiant du fichier
+      */
     public function downloadAction($fileId, Request $request)
     {
       $em = $this->getDoctrine()->getManager();
@@ -229,6 +248,11 @@ class UploadController extends Controller
       return $response;
     }
 
+    /**
+      * Permet de télécharger tous les fichiers non traités 
+      * @param request : la requête envoyé
+      * @param username : le nom de l'utilisateur
+      */
     public function downloadUntreatedAction($username, Request $request) {
       $em = $this->getDoctrine()->getManager(); 
       $user = $this->container->get("fos_user_.user_manager")->findUserByUsername($username);

@@ -32,6 +32,10 @@ class MessagesController extends Controller
     }
 
     /**
+      * Permet l'envoi d'un message
+      * Avec fichier joint le cas échéant
+      */
+    /**
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function sendMessageAction()
@@ -61,7 +65,6 @@ class MessagesController extends Controller
             $messageContent = $formData["Body"];
 
             if ($formData["Attachment"] !== null) {
-                var_dump($formData["Attachment"]);
 
                 $file = new Files();
                 $file->setOwner($this->container->get('security.context')->getToken()->getUser());
@@ -69,10 +72,6 @@ class MessagesController extends Controller
                 $file->setFile($formData["Attachment"]);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($file);
-                // $em->flush();
-                // $messageContent .= $this->renderView("EPUploadBundle:Messages:attachment.html.twig", array(
-                //     "doc" => $file
-                // ));
             }
 
             $currentUser = $this->container->get('security.context')->getToken()->getUser();

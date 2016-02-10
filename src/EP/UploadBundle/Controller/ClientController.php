@@ -11,11 +11,16 @@ use EP\UploadBundle\Form\ClientRestType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+
 /**
  * @Security("has_role('ACCESS_EDIT_FACTURE')")
  */
 class ClientController extends Controller
 {
+
+    /**
+      * Affiche la liste des clients
+      */
     public function showAction() 
     {
       $repository = $this->getDoctrine()->getManager()->getRepository('EPUploadBundle:Client');
@@ -34,6 +39,10 @@ class ClientController extends Controller
         ));      
     }
 
+    /**
+     * Permet la création d'un nouveau client
+     * @param request : la requête envoyé
+     */
     public function createAction(Request $request){
       $client = new Client();
       $form = $this->createForm(new ClientType(),$client);
@@ -51,6 +60,11 @@ class ClientController extends Controller
         ));      
     }
 
+    /**
+      * Permet la suppression d'un client
+      * @param request : la requête envoyé
+      * @param id : l'identifiant du client à supprimer
+      */
     public function deleteAction($id, Request $request)
     {
       $client = $this->getDoctrine()->getManager()->getRepository("EPUploadBundle:Client")->findOneById($id);
@@ -74,6 +88,11 @@ class ClientController extends Controller
       ));
     }
 
+    /**
+      * Permet la modification des informations d'un client
+      * @param request : la requête envoyé
+      * @param id : l'identifiant du client
+      */
     public function editAction($id, Request $request)
     {
       $client = $this->getDoctrine()->getManager()->getRepository("EPUploadBundle:Client")->findOneById($id);
@@ -93,6 +112,11 @@ class ClientController extends Controller
       ));      
     }
 
+    /**
+      * Permet la création d'un client 
+      * Cette méthode est appelé lors de la création à la volée lors de l'édition de facture
+      * @param request : la requête envoyé
+      */
     public function createRestAction(Request $request) {
 
         if ($request->isMethod('POST')) {
