@@ -179,12 +179,18 @@ class User extends BaseUser implements ParticipantInterface
         return $this->id;
     }
 
-
+    /**
+      * @return : vrai si il a les droits d'édition de facture
+      */
     public function getCanEditFacture()
     {
         return in_array("ACCESS_EDIT_FACTURE", $this->getRoles());
     }
 
+    /**
+      * Ajoute ou supprime le droit d'édition de facture
+      * @param canEditFacture : si Vrai ajoute si faux supprime
+      */
     public function setCanEditFacture($canEditFacture)
     {
         if ($canEditFacture) {

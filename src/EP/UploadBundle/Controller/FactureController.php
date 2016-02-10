@@ -19,6 +19,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
  */
 class FactureController extends Controller
 {
+
+    /**
+      * Permet la création d'une facture
+      * @param request : la requête envoyé
+      */
     public function editAction(Request $request) {
     	$facture = new Facture();
         $user = $this->container->get('security.context')->getToken()->getUser();
@@ -63,6 +68,12 @@ class FactureController extends Controller
     	));
     }
     
+
+    /**
+      * Permet la génération en PDF d'une facture
+      * @param facture : la facture
+      * @param listProduits : la liste des produits présents dans la facture
+      */    
     public function generatePdf($facture , $listProduits){
         $category_comptable = $this->getDoctrine()->getManager()->getRepository("EPUploadBundle:Category")->findOneByName('Comptable');
 
