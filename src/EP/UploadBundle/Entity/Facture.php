@@ -37,7 +37,7 @@ class Facture
     /**
      * @var string
      *
-     * @ORM\Column(name="conditionPaiement", type="text")
+     * @ORM\Column(name="conditionPaiement", type="text", nullable=true)
      */
     private $conditionPaiement;
 
@@ -105,7 +105,7 @@ class Facture
     private $owner;
 
     /**
-     * @ORM\OneToMany(targetEntity="EP\UploadBundle\Entity\FactureProduit", mappedBy="facture")
+     * @ORM\OneToMany(targetEntity="EP\UploadBundle\Entity\FactureProduit", mappedBy="facture", cascade={"remove", "persist"})
      */
     private $produits;
 

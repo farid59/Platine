@@ -279,13 +279,15 @@ footer {
         </tfoot>
       </table>
       <div id="thanks">Merci pour votre commande !</div>
-      <div id="notices">
-        <div>Remarque :</div>
-        <div class="notice">{{ facture.commentaires }}</div>
-      </div>
+      {% if facture.commentaires is not null %}
+        <div id="notices">
+          <div>Remarque :</div>
+          <div class="notice">{{ facture.commentaires }}</div>
+        </div>
+      {% endif %}
     </main>
     <footer>
-      Conditions de paiement : paiement à réception de la facture, au plus tard à la date d'échéance.
+      Conditions de paiement : {% if facture.conditionPaiement is null %} Aucune. {% else %} {{ facture.conditionPaiement }} {% endif %}
     </footer>
   </body>
 </html>

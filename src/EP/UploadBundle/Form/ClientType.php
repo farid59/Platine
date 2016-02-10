@@ -39,7 +39,9 @@ class ClientType extends AbstractType
             ->add('fax')
             ->add('tva')
             ->add('reference')
-            ->add('conditionPaiement')
+            ->add('conditionPaiement', null, array(
+                "required" => false
+            ))
             ->add('valider','submit')
         ;
     }

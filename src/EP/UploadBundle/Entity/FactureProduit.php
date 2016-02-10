@@ -22,13 +22,13 @@ class FactureProduit
   private $quantite;
 
   /**
-   * @ORM\ManyToOne(targetEntity="EP\UploadBundle\Entity\Facture", inversedBy="produits")
+   * @ORM\ManyToOne(targetEntity="EP\UploadBundle\Entity\Facture", inversedBy="produits", cascade={"remove", "persist"})
    * @ORM\JoinColumn(nullable=false)
    */
   private $facture;
 
   /**
-   * @ORM\ManyToOne(targetEntity="EP\UploadBundle\Entity\Produit")
+   * @ORM\ManyToOne(targetEntity="EP\UploadBundle\Entity\Produit", cascade={"remove", "persist"})
    * @ORM\JoinColumn(nullable=false)
    */
   private $produit;
